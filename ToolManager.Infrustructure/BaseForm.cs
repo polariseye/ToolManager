@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolManager.Infrustructure
 {
+    using Autofac;
     using WeifenLuo.WinFormsUI.Docking;
 
     /// <summary>

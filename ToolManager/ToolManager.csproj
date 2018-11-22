@@ -138,6 +138,10 @@
       <Project>{e0487645-2c9c-4956-b39a-f4ac6d0628e2}</Project>
       <Name>ToolManager.Infrustructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ToolManager.Utility\ToolManager.Utility.csproj">
+      <Project>{0090865d-577c-43cd-85c7-3cbf3fd162ee}</Project>
+      <Name>ToolManager.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

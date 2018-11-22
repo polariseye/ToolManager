@@ -1,0 +1,63 @@
+﻿<#@ template language="C#" hostSpecific="true" debug="false" #>
+<#@ import namespace="Kalman" #>
+<#@ import namespace="Kalman.Extensions" #>
+<#@ import namespace="Kalman.Data" #>
+<#@ import namespace="Kalman.Data.SchemaObject" #>
+<#@ import namespace="Kalman.Data.DbSchemaProvider" #>
+<#@ import namespace="Kalman.Data.DbProvider" #>
+<#@ import namespace="Kalman.Utilities" #>
+<#@ import namespace="CodeGenerate.T4TemplateEngineHost" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.Common" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.Specialized" #>
+<#@ output extension=".cs" #>
+<# 
+	TableHost host = (TableHost)(Host);
+	SOTable table = host.Table;
+	List<SOColumn> colList = host.ColumnList;
+    int maxColumnNameLength=colList.Max(tmp=>tmp.Name.Length);
+    string className = CSharpHostHelper.GetCamelCaseName(table.Name);
+    string nameSpace = CSharpHostHelper.FirstLower(className);
+#>
+package <#= nameSpace #>
+
+// 模块名
+const ModuleName = "<#=className#>"
+
+// 调度日志
+type <#=className#> struct {
+<# foreach (SOColumn c in colList){ #>
+
+        // <#= c.Comment == "" ? c.Name : c.Comment.Replace("\r\n"," ") #>
+        <#= c.Name #> <#= TypeUtil.DbType2GolangTypeString(c.DataType) #> `gorm:"Column:<#=c.Name #><#=c.PrimaryKey?";PRIMARY_KEY":"" #>"`
+<# } #>
+}
+
+// 表名
+func (this *<#=className#>) TableName() string {
+	return "<#=table.Name #>"
+}
+
+// 新建调度模型对象
+func New<#=className#>() *<#=className#> {
+	return &<#=className#>{}
+}
+
+// 新建调度模型对象
+<#foreach(SOColumn item in colList) {#>
+// <#=item.Name.FirstLower() #>:<#=item.Comment #>
+<#}#>
+func New<#=className#>2(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",tmp.Name.FirstLower(),TypeUtil.DbType2GolangTypeString(tmp.DataType))))#>) *<#=className#> {
+	return &<#=className#>{
+<#foreach(SOColumn item in colList) {#>
+		<#=item.Name#>: <#=CSharpHostHelper.GetRepeatString(" ", maxColumnNameLength-item.Name.Length)#><#=item.Name.FirstLower()#>,
+<#}#>
+	}
+}
