@@ -16,6 +16,7 @@ namespace CodeGenerate
     using ToolManager.Infrustructure;
     using ToolManager.Utility.Alert;
 
+    [FormAttribute("代码生成", "按模板组生成代码")]
     public partial class GroupGenerateForm : BaseForm
     {
         /// <summary>

@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNewFileWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewFileWindow = new System.Windows.Forms.ToolStripSplitButton();
             this.btnOpenTextFile = new System.Windows.Forms.ToolStripSplitButton();
@@ -39,7 +40,7 @@
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.visualStudioToolStripExtender1 = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.vS2015BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme();
-            this.btnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImport = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +58,7 @@
             // 文件ToolStripMenuItem
             // 
             this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuImport,
             this.menuNewFileWindow,
             this.btnOpenFile});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
@@ -69,6 +71,13 @@
             this.menuNewFileWindow.Size = new System.Drawing.Size(180, 22);
             this.menuNewFileWindow.Text = "新建文档";
             this.menuNewFileWindow.Click += new System.EventHandler(this.btnNewFileWindow_ButtonClick);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(180, 22);
+            this.btnOpenFile.Text = "打开文档";
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenTextFile_ButtonClick);
             // 
             // toolStrip1
             // 
@@ -121,12 +130,11 @@
             // 
             this.visualStudioToolStripExtender1.DefaultRenderer = null;
             // 
-            // btnOpenFile
+            // menuImport
             // 
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(180, 22);
-            this.btnOpenFile.Text = "打开文档";
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenTextFile_ButtonClick);
+            this.menuImport.Name = "menuImport";
+            this.menuImport.Size = new System.Drawing.Size(180, 22);
+            this.menuImport.Text = "导入模块";
             // 
             // MainForm
             // 
@@ -163,6 +171,7 @@
         private System.Windows.Forms.ToolStripSplitButton btnNewFileWindow;
         private System.Windows.Forms.ToolStripSplitButton btnOpenTextFile;
         private System.Windows.Forms.ToolStripMenuItem btnOpenFile;
+        private System.Windows.Forms.ToolStripMenuItem menuImport;
     }
 }
 
