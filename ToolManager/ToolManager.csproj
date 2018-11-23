@@ -98,6 +98,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuleSettingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleSettingWindow.Designer.cs">
+      <DependentUpon>ModuleSettingWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Module\FormInfo.cs" />
     <Compile Include="Module\AssemblyInfo.cs" />
     <Compile Include="Module\ModuleInfo.cs" />
@@ -142,6 +148,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Kalman\Kalman.csproj">
+      <Project>{65FED08B-D2B2-4B49-9257-3DE1954D1675}</Project>
+      <Name>Kalman</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ToolManager.Infrustructure\ToolManager.Infrustructure.csproj">
       <Project>{e0487645-2c9c-4956-b39a-f4ac6d0628e2}</Project>
       <Name>ToolManager.Infrustructure</Name>

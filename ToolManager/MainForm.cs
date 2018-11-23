@@ -13,6 +13,8 @@ namespace ToolManager
     using Autofac;
     using System.IO;
     using ToolManager.Infrustructure;
+    using ToolManager.Module;
+    using ToolManager.Utility.Alert;
     using WeifenLuo.WinFormsUI.Docking;
 
     public partial class MainForm : Form
@@ -41,6 +43,9 @@ namespace ToolManager
             Singleton.Builder.RegisterInstance<IWindowContainer>(this);
             // 注册单例
             Singleton.Builder.RegisterInstance<IOutput>(outputWindow);
+
+            // 初始化
+            ModuleManager.Init(outputWindow, this);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -120,6 +125,35 @@ namespace ToolManager
 
                 // 显示
                 dummyDoc.Show(this.dockPanel1);
+            }
+        }
+
+        /// <summary>
+        /// 导入模块
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuImportModule_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+
+            openFile.InitialDirectory = Application.ExecutablePath;
+            openFile.Filter = "dll files(*.dll)|*.dll";
+            openFile.FilterIndex = 1;
+            openFile.RestoreDirectory = true;
+
+            var logObj = Singleton.Container.Resolve<IOutput>();
+            try
+            {
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+                    var name = Path.GetFileNameWithoutExtension(openFile.FileName);
+                    ModuleManager.Register(name, openFile.FileName, "", logObj, this);
+                }
+            }
+            catch (Exception e1)
+            {
+                MsgBox.ShowErrorMessage("导入失败，错误信息:" + e1.Message);
             }
         }
 

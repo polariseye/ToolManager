@@ -10,6 +10,9 @@ namespace ToolManager.Module
     using System.IO;
     using ToolManager.Infrustructure;
 
+    /// <summary>
+    /// 模块管理类
+    /// </summary>
     public class ModuleManager
     {
         /// <summary>
@@ -59,11 +62,11 @@ namespace ToolManager.Module
         /// <returns></returns>
         public static List<FormInfo> Register(String name, String filePath, String description, IOutput logObj, IWindowContainer windowContainer)
         {
-            var destPath = SaveToLocal(filePath);
+            // var destPath = SaveToLocal(filePath);
 
             try
             {
-                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = destPath, Description = description };
+                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, Description = description };
                 var result = LoadModule(moduleInfo, logObj, windowContainer);
 
                 // 添加到数据库
@@ -74,7 +77,7 @@ namespace ToolManager.Module
             }
             catch (Exception e1)
             {
-                File.Delete(destPath);
+                // File.Delete(destPath);
                 throw e1;
             }
         }

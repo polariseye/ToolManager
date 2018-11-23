@@ -75,8 +75,9 @@ namespace ToolManager
             this.Name = "DummySolutionExplorer";
             this.Padding = new System.Windows.Forms.Padding(0, 24, 0, 1);
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight;
-            this.TabText = "Solution Explorer";
-            this.Text = "Solution Explorer - WinFormsUI";
+            this.TabText = "Module Explorer";
+            this.Text = "Module Explorer";
+            this.Load += new System.EventHandler(this.DummySolutionExplorer_Load);
             this.ResumeLayout(false);
 
         }

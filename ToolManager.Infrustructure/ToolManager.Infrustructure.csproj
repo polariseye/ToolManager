@@ -51,6 +51,8 @@
     <Compile Include="BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormAttribute.cs" />
+    <Compile Include="IModule.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="IWindowContainer.cs" />
     <Compile Include="Singleton.cs" />
