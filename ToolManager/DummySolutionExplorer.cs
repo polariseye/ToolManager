@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace ToolManager
 {
+    using Autofac;
     using System.Collections.Generic;
     using System.Windows.Forms;
     using ToolManager.Infrustructure;
@@ -136,6 +137,32 @@ namespace ToolManager
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Ë«»÷´¦Àí
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            TreeView tv = sender as TreeView;
+            TreeNode tn = tv.GetNodeAt(e.X, e.Y);
+
+            if (tn == null)
+            {
+                return;
+            }
+
+            FormInfo formInfoObj = tn.Tag as FormInfo;
+            if (formInfoObj == null)
+            {
+                return;
+            }
+
+            var formObj = (BaseForm)Activator.CreateInstance(formInfoObj.FormType);
+            var container = Singleton.Container.Resolve<IWindowContainer>();
+            formObj.Show(container.GetMainView());
         }
     }
 }

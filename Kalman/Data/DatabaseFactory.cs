@@ -19,6 +19,13 @@ namespace Kalman.Data
     public static class DatabaseFactory
     {
         /// <summary>
+        /// 注册
+        /// </summary>
+        static DatabaseFactory()
+        {
+        }
+
+        /// <summary>
         /// 创建一个数据提供程序实例
         /// </summary>
         /// <param name="connectionStringName"></param>

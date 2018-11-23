@@ -148,7 +148,11 @@ namespace ToolManager
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
                     var name = Path.GetFileNameWithoutExtension(openFile.FileName);
-                    ModuleManager.Register(name, openFile.FileName, "", logObj, this);
+                    var formList = ModuleManager.Register(name, openFile.FileName, "", logObj, this);
+                    if (formList.Count > 0)
+                    {
+                        this.solutionExplorer.AddNodes(formList);
+                    }
                 }
             }
             catch (Exception e1)

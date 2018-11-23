@@ -94,7 +94,7 @@ namespace ToolManager.Module
             // 寻找模块中的所有窗口和模块初始化类型
             var moduleInterfaceType = typeof(IModule);
             Type moduleInitType = null;
-            var assemblyObj = Assembly.LoadFile(moduleInfo.ModulePath);
+            var assemblyObj = Assembly.LoadFrom(moduleInfo.ModulePath);
             foreach (var typeItem in assemblyObj.ExportedTypes)
             {
                 // 找到所有的窗口
@@ -117,7 +117,7 @@ namespace ToolManager.Module
             }
 
             // 调用初始化函数
-            if (moduleInitType == null)
+            if (moduleInitType != null)
             {
                 var initObj = (IModule)Activator.CreateInstance(moduleInitType);
                 initObj.Init(logObj, windowContainer);

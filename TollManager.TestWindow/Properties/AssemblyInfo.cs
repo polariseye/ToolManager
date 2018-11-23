@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("CodeGenerateTest")]
+[assembly: AssemblyTitle("TollManager.TestWindow")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CodeGenerateTest")]
+[assembly: AssemblyProduct("TollManager.TestWindow")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("d5cdfecb-4a2e-4e88-a7fe-78527acffb65")]
+[assembly: Guid("dde1fe19-c68d-473d-9818-bc0e61a2ed2a")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

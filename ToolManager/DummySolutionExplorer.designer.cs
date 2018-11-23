@@ -44,6 +44,7 @@ namespace ToolManager
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(245, 297);
             this.treeView1.TabIndex = 0;
+            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
             // 
             // imageList1
             // 
