@@ -30,7 +30,7 @@ namespace ToolManager.Module
         /// <summary>
         /// 初始化
         /// </summary>
-        public static void Init(IOutput logObj)
+        public static void Init(IOutput logObj, IWindowContainer windowContainer)
         {
             var dal = new ModuleInfoDAL();
             var moduleList = dal.FindAll();
@@ -39,7 +39,7 @@ namespace ToolManager.Module
             {
                 try
                 {
-                    LoadModule(item);
+                    LoadModule(item, logObj, windowContainer);
                 }
                 catch (Exception e1)
                 {
@@ -54,15 +54,17 @@ namespace ToolManager.Module
         /// <param name="name">模块名</param>
         /// <param name="filePath">需要注册的文件名</param>
         /// <param name="description">描述信息</param>
+        /// <param name="logObj">日志对象</param>
+        /// <param name="windowContainer">窗口容器</param>
         /// <returns></returns>
-        public static List<FormInfo> Register(String name, String filePath, String description)
+        public static List<FormInfo> Register(String name, String filePath, String description, IOutput logObj, IWindowContainer windowContainer)
         {
             var destPath = SaveToLocal(filePath);
 
             try
             {
                 var moduleInfo = new ModuleInfo() { Name = name, ModulePath = destPath, Description = description };
-                var result = LoadModule(moduleInfo);
+                var result = LoadModule(moduleInfo, logObj, windowContainer);
 
                 // 添加到数据库
                 var dal = new ModuleInfoDAL();
@@ -82,34 +84,51 @@ namespace ToolManager.Module
         /// </summary>
         /// <param name="moduleInfo">模块信息</param>
         /// <returns></returns>
-        private static List<FormInfo> LoadModule(ModuleInfo moduleInfo)
+        private static List<FormInfo> LoadModule(ModuleInfo moduleInfo, IOutput logObj, IWindowContainer windowContainer)
         {
             var result = new List<FormInfo>();
 
+            // 寻找模块中的所有窗口和模块初始化类型
+            var moduleInterfaceType = typeof(IModule);
+            Type moduleInitType = null;
             var assemblyObj = Assembly.LoadFile(moduleInfo.ModulePath);
             foreach (var typeItem in assemblyObj.ExportedTypes)
             {
                 // 找到所有的窗口
                 var attrItem = typeItem.GetCustomAttribute<FormAttribute>();
-                if (attrItem == null)
+                if (attrItem != null)
                 {
-                    continue;
+                    result.Add(new FormInfo() { AttributeInfo = attrItem, FormType = typeItem });
                 }
 
-                result.Add(new FormInfo() { AttributeInfo = attrItem, FormType = typeItem });
+                // 寻找模块初始化类
+                if (typeItem.IsSubclassOf(moduleInterfaceType))
+                {
+                    moduleInitType = typeItem;
+                }
             }
 
-            if (result.Count > 0)
+            if (moduleInitType == null && result.Count <= 0)
             {
-                lock (lockObj)
+                throw new Exception("这不是一个有效的插件:没有IModule的实现，也没有任何窗口");
+            }
+
+            // 调用初始化函数
+            if (moduleInitType == null)
+            {
+                var initObj = (IModule)Activator.CreateInstance(moduleInitType);
+                initObj.Init(logObj, windowContainer);
+            }
+
+            // 添加到程序集中
+            lock (lockObj)
+            {
+                moduleInfos.Add(new AssemblyInfo()
                 {
-                    moduleInfos.Add(new AssemblyInfo()
-                    {
-                        AssemblyObj = assemblyObj,
-                        FormInfoList = new List<FormInfo>(result),
-                        ModuleInfo = moduleInfo
-                    });
-                }
+                    AssemblyObj = assemblyObj,
+                    FormInfoList = new List<FormInfo>(result),
+                    ModuleInfo = moduleInfo,
+                });
             }
 
             return result;
