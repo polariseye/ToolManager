@@ -105,9 +105,13 @@ namespace ToolManager.Module
                 }
 
                 // 寻找模块初始化类
-                if (typeItem.IsSubclassOf(moduleInterfaceType))
+                if (moduleInitType == null)
                 {
-                    moduleInitType = typeItem;
+                    var tmpBaseModule = typeItem.FindInterfaces((tmp, a) => tmp == moduleInterfaceType, null);
+                    if (tmpBaseModule != null && tmpBaseModule.Length > 0)
+                    {
+                        moduleInitType = typeItem;
+                    }
                 }
             }
 

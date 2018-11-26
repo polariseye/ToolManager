@@ -36,7 +36,7 @@ namespace Kalman.Data
             DbConnDAL dal = new DbConnDAL();
 
             var model = dal.FindOne(connectionStringName);
-            
+
             if (model == null) throw new Exception(string.Format(Resources.Data.ConnectionStringNameNotFound, connectionStringName));
 
             string connectionString = model.ConnectionString;
@@ -44,7 +44,7 @@ namespace Kalman.Data
             Database db = new SqlServerDatabase(connectionString);
             DbProviderFactory providerFactory = null;
 
-            if(string.IsNullOrEmpty(providerName))return db;
+            if (string.IsNullOrEmpty(providerName)) return db;
 
             //if (css.ProviderName == "System.Data.OleDb")
             //{
@@ -111,7 +111,7 @@ namespace Kalman.Data
                 connectionStringName = ConfigurationManager.ConnectionStrings[i].Name;
             }
 
-            if(connectionStringName == string.Empty) throw new Exception(Resources.Data.ConnectionStringNotConfig);
+            if (connectionStringName == string.Empty) throw new Exception(Resources.Data.ConnectionStringNotConfig);
             return Create(connectionStringName);
         }
     }//end class
