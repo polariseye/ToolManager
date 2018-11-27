@@ -91,6 +91,10 @@ namespace CodeGenerate
         private void DatabaseSettingForm_Load(object sender, EventArgs e)
         {
             RefreshDatabase();
+
+            //todo: 因为没有实现其他驱动，所以暂时写死
+            this.cbProviderName.SelectedIndex = 1;
+            this.cbProviderName.Enabled = false;
         }
 
         private void cbConnectStringName_SelectedIndexChanged(object sender, EventArgs e)

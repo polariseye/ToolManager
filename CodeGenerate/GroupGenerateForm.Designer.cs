@@ -33,13 +33,13 @@
             this.cmbConnectionList = new System.Windows.Forms.ComboBox();
             this.btnSetConnection = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cmbTemplateGroup = new System.Windows.Forms.ComboBox();
+            this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cmbNameRule = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRemoveOne = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
@@ -100,21 +100,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "模版组:";
             // 
-            // comboBox2
+            // cmbTemplateGroup
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(518, 104);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(151, 20);
-            this.comboBox2.TabIndex = 7;
+            this.cmbTemplateGroup.FormattingEnabled = true;
+            this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 104);
+            this.cmbTemplateGroup.Name = "cmbTemplateGroup";
+            this.cmbTemplateGroup.Size = new System.Drawing.Size(151, 20);
+            this.cmbTemplateGroup.TabIndex = 7;
             // 
-            // comboBox3
+            // cmbLanguage
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(518, 78);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(151, 20);
-            this.comboBox3.TabIndex = 9;
+            this.cmbLanguage.FormattingEnabled = true;
+            this.cmbLanguage.Location = new System.Drawing.Point(518, 78);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(151, 20);
+            this.cmbLanguage.TabIndex = 9;
             // 
             // label3
             // 
@@ -150,16 +150,18 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "命名规则:";
             // 
-            // comboBox4
+            // cmbNameRule
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(518, 134);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(151, 20);
-            this.comboBox4.TabIndex = 14;
+            this.cmbNameRule.FormattingEnabled = true;
+            this.cmbNameRule.Location = new System.Drawing.Point(518, 134);
+            this.cmbNameRule.Name = "cmbNameRule";
+            this.cmbNameRule.Size = new System.Drawing.Size(151, 20);
+            this.cmbNameRule.TabIndex = 14;
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.btnRemoveOne);
             this.groupBox1.Controls.Add(this.btnRemoveAll);
             this.groupBox1.Controls.Add(this.btnSelectOne);
@@ -210,9 +212,12 @@
             // 
             // listBox2
             // 
+            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
             this.listBox2.Location = new System.Drawing.Point(232, 64);
+            this.listBox2.MinimumSize = new System.Drawing.Size(180, 196);
             this.listBox2.Name = "listBox2";
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox2.Size = new System.Drawing.Size(180, 196);
@@ -232,9 +237,12 @@
             // 
             // listBox1
             // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(12, 64);
+            this.listBox1.MinimumSize = new System.Drawing.Size(180, 196);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(180, 196);
@@ -273,14 +281,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(681, 358);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.cmbNameRule);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cmbLanguage);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cmbTemplateGroup);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSetConnection);
             this.Controls.Add(this.cmbConnectionList);
@@ -303,13 +311,13 @@
         private System.Windows.Forms.ComboBox cmbConnectionList;
         private System.Windows.Forms.Button btnSetConnection;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cmbTemplateGroup;
+        private System.Windows.Forms.ComboBox cmbLanguage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cmbNameRule;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label6;

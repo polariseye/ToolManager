@@ -11,8 +11,10 @@ using System.Windows.Forms;
 namespace CodeGenerate
 {
     using Kalman.Data;
+    using Kalman.Data.DbProvider;
     using Kalman.Data.SchemaObject;
     using Kalman.Database;
+    using MySql.Data.MySqlClient;
     using ToolManager.Infrustructure;
     using ToolManager.Utility.Alert;
 
@@ -93,19 +95,19 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void cmbConnectionList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var dal = new DbConnDAL();
-            var model = dal.FindOne(cmbConnectionList.SelectedItem.ToString());
+            //var dal = new DbConnDAL();
+            //var model = dal.FindOne(cmbConnectionList.SelectedItem.ToString());
 
-            var dbSchema = DbSchemaFactory.Create(model.Name);
+            //var dbSchema = DbSchemaFactory.Create(model.Name);
 
-            try
-            {
-                nowDb = dbSchema.GetDatabase(model.DefaultDb);
-            }
-            catch (Exception e1)
-            {
-                MsgBox.ShowErrorMessage("数据库打开失败:" + e1.Message);
-            }
+            //try
+            //{
+            //    nowDb = dbSchema.GetDatabase(model.DefaultDb);
+            //}
+            //catch (Exception e1)
+            //{
+            //    MsgBox.ShowErrorMessage("数据库打开失败:" + e1.Message);
+            //}
         }
 
         /// <summary>
@@ -218,7 +220,8 @@ namespace CodeGenerate
             nowConnectionName = connectionName;
             var dal = new DbConnDAL();
             var model = dal.FindOne(connectionName);
-            var dbSchema = DbSchemaFactory.Create(model.Name);
+
+            var dbSchema = DbSchemaFactory.Create(new MySqlDatabase(model.ConnectionString, MySqlClientFactory.Instance));
             try
             {
                 nowDb = dbSchema.GetDatabase(model.DefaultDb);
@@ -226,6 +229,7 @@ namespace CodeGenerate
             catch (Exception e1)
             {
                 MsgBox.ShowErrorMessage("数据库打开失败:" + e1.Message);
+                return;
             }
 
             // 加载表
