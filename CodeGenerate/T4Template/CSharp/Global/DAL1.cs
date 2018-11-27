@@ -32,7 +32,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+    #line 1 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class DAL : DALBase
     {
@@ -43,7 +43,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
         public virtual string TransformText()
         {
             
-            #line 20 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 20 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
  
 	TableHost host = (TableHost)(Host);
 	SOTable table = host.Table;
@@ -60,35 +60,35 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("//*******************************************************************************" +
                     "****\r\n// 文件名称：");
             
-            #line 31 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 31 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("DAL.cs\r\n// 功能描述：");
             
-            #line 32 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 32 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ")));
             
             #line default
             #line hidden
             this.Write("\r\n// 数据表：");
             
-            #line 33 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 33 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("\r\n// 作者：");
             
-            #line 34 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 34 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(authorName));
             
             #line default
             #line hidden
             this.Write("\r\n// 日期：");
             
-            #line 35 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 35 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DateTime.Now.ToDateTimeString()));
             
             #line default
@@ -96,7 +96,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("\r\n// 修改记录：\r\n//*******************************************************************" +
                     "****************\r\n\r\nusing System;\r\nusing System.Data;\r\n\r\nnamespace ");
             
-            #line 42 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 42 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nameSpace));
             
             #line default
@@ -104,14 +104,14 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("\r\n{\r\n    using MySql.Data.MySqlClient;\r\n    using Xingji.Util;\r\n\r\n    /// <summar" +
                     "y>\r\n    /// ");
             
-            #line 48 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 48 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ")));
             
             #line default
             #line hidden
             this.Write("\r\n    /// </summary>\r\n    internal class ");
             
-            #line 50 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 50 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
@@ -119,35 +119,35 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("DAL : GameBaseDAL\r\n    {\r\n        #region 属性\r\n\r\n        // 定义表的所有字段（以,  进行分隔）\r\n  " +
                     "      const String columns = @\"");
             
-            #line 55 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 55 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>tmp.Name))));
             
             #line default
             #line hidden
             this.Write("\";\r\n\r\n        // 定义此类所能用到的所有参数名称（以pn = ParameterName开始）；双引号内是@+字段名称\r\n");
             
-            #line 58 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 58 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("        const String pn");
             
-            #line 59 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 59 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" = \"@");
             
-            #line 59 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 59 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\";\r\n");
             
-            #line 60 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 60 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
@@ -169,84 +169,84 @@ foreach(SOColumn item in colList) {
         /// </summary>
         static ");
             
-            #line 76 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 76 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("DAL()\r\n        {\r\n            getAllCommand = String.Format(\"SELECT {0} FROM `");
             
-            #line 78 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 78 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("`;\", columns);\r\n            replaceCommand = \"REPLACE INTO `");
             
-            #line 79 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 79 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("` SET ");
             
-            #line 79 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 79 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("`{0}`=@{0}", tmp.Name)))));
             
             #line default
             #line hidden
             this.Write(" ;\";\r\n            insertCommand = \"INSERT INTO `");
             
-            #line 80 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 80 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("` (");
             
-            #line 80 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 80 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("`{0}`", tmp.Name)))));
             
             #line default
             #line hidden
             this.Write(") VALUES (");
             
-            #line 80 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 80 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("@{0}", tmp.Name)))));
             
             #line default
             #line hidden
             this.Write(");\";\r\n            updateCommand = \"UPDATE `");
             
-            #line 81 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 81 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("` SET ");
             
-            #line 81 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 81 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Where(tmp=>!tmp.PrimaryKey).Select(tmp=>String.Format("`{0}`=@{0}", tmp.Name)))));
             
             #line default
             #line hidden
             this.Write(" WHERE ");
             
-            #line 81 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 81 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Where(tmp=>tmp.PrimaryKey).Select(tmp=>String.Format("`{0}`=@{0}", tmp.Name)))));
             
             #line default
             #line hidden
             this.Write(";\";\r\n            deleteCommand = \"DELETE FROM `");
             
-            #line 82 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 82 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("` WHERE ");
             
-            #line 82 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 82 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Where(tmp=>tmp.PrimaryKey).Select(tmp=>String.Format("`{0}`=@{0}", tmp.Name)))));
             
             #line default
@@ -272,35 +272,35 @@ foreach(SOColumn item in colList) {
         /// </summary>
 ");
             
-            #line 101 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 101 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("        /// <param name=\"");
             
-            #line 102 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 102 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 102 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 102 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("</param>\r\n");
             
-            #line 103 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 103 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
             #line hidden
             this.Write("        /// <returns>受影响的行数</returns>\r\n        public static Int32 ReplaceInfo(");
             
-            #line 105 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 105 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))));
             
             #line default
@@ -308,28 +308,28 @@ foreach(SOColumn item in colList) {
             this.Write(")\r\n        {\r\n            //构造参数\r\n            MySqlParameter[] paramList = new My" +
                     "SqlParameter[]\r\n            {\r\n");
             
-            #line 110 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 110 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("                new MySqlParameter(pn");
             
-            #line 111 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 111 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 111 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 111 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 112 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 112 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
@@ -337,35 +337,35 @@ foreach(SOColumn item in colList) {
             this.Write("            };\r\n\r\n            return ExecuteNonQuery(replaceCommand, paramList);\r" +
                     "\n        }\r\n\r\n        /// <summary>\r\n        /// 插入数据\r\n        /// </summary>\r\n");
             
-            #line 121 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 121 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("        /// <param name=\"");
             
-            #line 122 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 122 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 122 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 122 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("</param>\r\n");
             
-            #line 123 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 123 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
             #line hidden
             this.Write("        /// <returns>受影响的行数</returns>\r\n        public static Int32 InsertInfo(");
             
-            #line 125 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 125 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))));
             
             #line default
@@ -373,28 +373,28 @@ foreach(SOColumn item in colList) {
             this.Write(")\r\n        {\r\n            //构造参数\r\n            MySqlParameter[] paramList = new My" +
                     "SqlParameter[]\r\n            {\r\n");
             
-            #line 130 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 130 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("                new MySqlParameter(pn");
             
-            #line 131 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 131 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 131 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 131 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 132 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 132 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
@@ -402,35 +402,35 @@ foreach(SOColumn item in colList) {
             this.Write("            };\r\n\r\n            return ExecuteNonQuery(insertCommand, paramList);\r\n" +
                     "        }\r\n\r\n        /// <summary>\r\n        /// 更新数据\r\n        /// </summary>\r\n");
             
-            #line 141 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 141 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("        /// <param name=\"");
             
-            #line 142 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 142 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 142 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 142 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("</param>\r\n");
             
-            #line 143 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 143 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
             #line hidden
             this.Write("        /// <returns>受影响的行数</returns>\r\n        public static Int32 UpdateInfo(");
             
-            #line 145 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 145 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))));
             
             #line default
@@ -438,28 +438,28 @@ foreach(SOColumn item in colList) {
             this.Write(")\r\n        {\r\n            //构造参数\r\n            MySqlParameter[] paramList = new My" +
                     "SqlParameter[]\r\n            {\r\n");
             
-            #line 150 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 150 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("                new MySqlParameter(pn");
             
-            #line 151 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 151 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 151 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 151 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 152 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 152 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
@@ -467,35 +467,35 @@ foreach(SOColumn item in colList) {
             this.Write("            };\r\n\r\n            return ExecuteNonQuery(updateCommand, paramList);\r\n" +
                     "        }\r\n\r\n        /// <summary>\r\n        /// 删除数据\r\n        /// </summary>\r\n");
             
-            #line 161 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 161 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList.Where(tmp=>tmp.PrimaryKey)) {
             
             #line default
             #line hidden
             this.Write("        /// <param name=\"");
             
-            #line 162 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 162 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 162 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 162 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("</param>\r\n");
             
-            #line 163 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 163 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
             #line hidden
             this.Write("        /// <returns>受影响的行数</returns>\r\n        public static Int32 DeleteInfo(");
             
-            #line 165 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 165 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Where(tmp=>tmp.PrimaryKey).Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))));
             
             #line default
@@ -503,28 +503,28 @@ foreach(SOColumn item in colList.Where(tmp=>tmp.PrimaryKey)) {
             this.Write(")\r\n        {\r\n            //构造参数\r\n            MySqlParameter[] paramList = new My" +
                     "SqlParameter[]\r\n            {\r\n");
             
-            #line 170 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 170 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 foreach(SOColumn item in colList.Where(tmp=>tmp.PrimaryKey)) {
             
             #line default
             #line hidden
             this.Write("                new MySqlParameter(pn");
             
-            #line 171 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 171 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 171 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 171 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 172 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
+            #line 172 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\DAL.tt"
 }
             
             #line default
