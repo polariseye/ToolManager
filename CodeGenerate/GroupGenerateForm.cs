@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace CodeGenerate
 {
+    using Autofac;
+    using CodeGenerate.TemplateMange;
     using Kalman.Data;
     using Kalman.Data.DbProvider;
     using Kalman.Data.SchemaObject;
@@ -30,6 +32,11 @@ namespace CodeGenerate
         /// 当前操作的数据库连接名
         /// </summary>
         String nowConnectionName;
+
+        /// <summary>
+        /// 模板管理对象
+        /// </summary>
+        private TemplateManager templateManager = new TemplateManager();
 
         /// <summary>
         /// 构造函数
@@ -180,7 +187,62 @@ namespace CodeGenerate
 
         }
 
+        /// <summary>
+        /// 语言下拉框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var language = this.cmbLanguage.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                MsgBox.Show("请选择语言", "提示");
+                return;
+            }
+
+            var groupList = this.LoadGroup(language);
+            this.cmbTemplateGroup.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// 模板组下拉框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbTemplateGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var language = this.cmbLanguage.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                MsgBox.Show("请选择模板", "提示");
+                return;
+            }
+
+            var groupName = this.cmbTemplateGroup.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                MsgBox.Show("请选择模板组", "提示");
+                return;
+            }
+
+            var groupList = this.LoadTemplate(language, groupName);
+            this.cmbTemplateGroup.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// 选择模板项
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion  事件处理
+
+        #region 连接处理
 
         /// <summary>
         /// 加载连接
@@ -295,5 +357,61 @@ namespace CodeGenerate
             }
         }
 
+        #endregion
+
+        #region 模板处理
+
+        /// <summary>
+        /// 加载语言
+        /// </summary>
+        private List<String> LoadLanguage()
+        {
+            var languageList = this.templateManager.GetLanguageList();
+
+            this.cmbLanguage.Items.Clear();
+            foreach (var item in languageList)
+            {
+                this.cmbLanguage.Items.Add(item);
+            }
+
+            return languageList;
+        }
+
+        /// <summary>
+        /// 加载组
+        /// </summary>
+        /// <param name="language"></param>
+        private List<String> LoadGroup(String language)
+        {
+            var groupList = this.templateManager.GetGroupList(language);
+
+            this.cmbTemplateGroup.Items.Clear();
+            foreach (var item in groupList)
+            {
+                this.cmbTemplateGroup.Items.Add(item);
+            }
+
+            return groupList;
+        }
+
+        /// <summary>
+        /// 加载模板
+        /// </summary>
+        /// <param name="language">语言</param>
+        private List<TemplateInfo> LoadTemplate(String language, String group)
+        {
+            var templateList = this.templateManager.GetGroupTemplate(language, group);
+
+            this.cmbTemplateGroup.Items.Clear();
+            this.cmbTemplateGroup.Items.Add("所有");
+            foreach (var item in templateList)
+            {
+                this.cmbTemplateGroup.Items.Add(item);
+            }
+
+            return templateList;
+        }
+
+        #endregion
     }
 }

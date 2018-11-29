@@ -38,8 +38,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbNameRule = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRemoveOne = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
@@ -109,6 +107,7 @@
             this.cmbTemplateGroup.Name = "cmbTemplateGroup";
             this.cmbTemplateGroup.Size = new System.Drawing.Size(151, 20);
             this.cmbTemplateGroup.TabIndex = 7;
+            this.cmbTemplateGroup.SelectedIndexChanged += new System.EventHandler(this.cmbTemplateGroup_SelectedIndexChanged);
             // 
             // cmbLanguage
             // 
@@ -117,6 +116,7 @@
             this.cmbLanguage.Name = "cmbLanguage";
             this.cmbLanguage.Size = new System.Drawing.Size(151, 20);
             this.cmbLanguage.TabIndex = 9;
+            this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -130,7 +130,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(453, 190);
+            this.label4.Location = new System.Drawing.Point(453, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 11;
@@ -138,27 +138,10 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(518, 187);
+            this.textBox1.Location = new System.Drawing.Point(518, 161);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(151, 21);
             this.textBox1.TabIndex = 12;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(453, 163);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 12);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "命名规则:";
-            // 
-            // cmbNameRule
-            // 
-            this.cmbNameRule.FormattingEnabled = true;
-            this.cmbNameRule.Location = new System.Drawing.Point(518, 159);
-            this.cmbNameRule.Name = "cmbNameRule";
-            this.cmbNameRule.Size = new System.Drawing.Size(151, 20);
-            this.cmbNameRule.TabIndex = 14;
             // 
             // groupBox1
             // 
@@ -222,7 +205,7 @@
             this.listBox2.MinimumSize = new System.Drawing.Size(180, 196);
             this.listBox2.Name = "listBox2";
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox2.Size = new System.Drawing.Size(180, 196);
+            this.listBox2.Size = new System.Drawing.Size(180, 220);
             this.listBox2.TabIndex = 23;
             this.listBox2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox2_MouseDoubleClick);
             // 
@@ -247,7 +230,7 @@
             this.listBox1.MinimumSize = new System.Drawing.Size(180, 196);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(180, 196);
+            this.listBox1.Size = new System.Drawing.Size(180, 220);
             this.listBox1.TabIndex = 21;
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
@@ -269,9 +252,9 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(455, 214);
+            this.btnGenerate.Location = new System.Drawing.Point(455, 188);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(214, 126);
+            this.btnGenerate.Size = new System.Drawing.Size(214, 152);
             this.btnGenerate.TabIndex = 10;
             this.btnGenerate.Text = "生成";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -284,6 +267,7 @@
             this.cmbTemplate.Name = "cmbTemplate";
             this.cmbTemplate.Size = new System.Drawing.Size(151, 20);
             this.cmbTemplate.TabIndex = 19;
+            this.cmbTemplate.SelectedIndexChanged += new System.EventHandler(this.cmbTemplate_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -302,8 +286,6 @@
             this.Controls.Add(this.cmbTemplate);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.cmbNameRule);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnGenerate);
@@ -337,8 +319,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbNameRule;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label6;

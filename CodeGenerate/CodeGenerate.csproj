@@ -90,39 +90,49 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BLL_List.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="T4Template\CSharp\Global\DAL1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DAL.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="T4Template\CSharp\Global\Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="T4Template\Golang\Model\Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="TemplateMange\TemplateInfo.cs" />
+    <Compile Include="TemplateMange\TemplateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="T4Template\CSharp\Global\BLL_List.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLL_List1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="T4Template\CSharp\Global\DAL.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DAL1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="T4Template\CSharp\Global\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="T4Template\Golang\Model\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -154,5 +164,6 @@
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
