@@ -44,6 +44,8 @@ namespace CodeGenerate
         public GroupGenerateForm()
         {
             InitializeComponent();
+
+            this.templateManager.Init();
         }
 
         #region 事件处理
@@ -56,6 +58,8 @@ namespace CodeGenerate
         private void GroupGenerateForm_Load(object sender, EventArgs e)
         {
             LoadConnection();
+
+            this.LoadLanguage();
         }
 
         /// <summary>
@@ -402,11 +406,11 @@ namespace CodeGenerate
         {
             var templateList = this.templateManager.GetGroupTemplate(language, group);
 
-            this.cmbTemplateGroup.Items.Clear();
-            this.cmbTemplateGroup.Items.Add("所有");
+            this.cmbTemplate.Items.Clear();
+            this.cmbTemplate.Items.Add("所有");
             foreach (var item in templateList)
             {
-                this.cmbTemplateGroup.Items.Add(item);
+                this.cmbTemplate.Items.Add(item);
             }
 
             return templateList;

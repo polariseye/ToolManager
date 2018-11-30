@@ -25,7 +25,7 @@ namespace CodeGenerate.TemplateMange
         /// </summary>
         public TemplateManager()
         {
-            templateDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "T4Template");
+            templateDir = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "T4Template");
         }
 
         public void Init()
@@ -35,10 +35,11 @@ namespace CodeGenerate.TemplateMange
 
             foreach (var languateDir in languateDirList)
             {
-                var language = Path.GetDirectoryName(languateDir);
+                var language = Path.GetFileNameWithoutExtension(languateDir);
+                
                 foreach (var groupPath in Directory.GetDirectories(languateDir))
                 {
-                    var groupName = Path.GetDirectoryName(groupPath);
+                    var groupName = Path.GetFileNameWithoutExtension(groupPath);
 
                     result.AddRange(LoadLanguageGroup(groupPath, language, groupName));
                 }
