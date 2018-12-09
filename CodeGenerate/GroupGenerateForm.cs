@@ -11,12 +11,17 @@ using System.Windows.Forms;
 namespace CodeGenerate
 {
     using Autofac;
+    using CodeGenerate.T4TemplateEngineHost;
     using CodeGenerate.TemplateMange;
     using Kalman.Data;
     using Kalman.Data.DbProvider;
     using Kalman.Data.SchemaObject;
     using Kalman.Database;
+    using Kalman.Utilities;
+    using Microsoft.VisualStudio.TextTemplating;
     using MySql.Data.MySqlClient;
+    using System.CodeDom.Compiler;
+    using System.IO;
     using ToolManager.Infrustructure;
     using ToolManager.Utility.Alert;
 
@@ -27,6 +32,11 @@ namespace CodeGenerate
         /// 当前操作的数据库
         /// </summary>
         SODatabase nowDb;
+
+        /// <summary>
+        /// 当前的数据库处理项
+        /// </summary>
+        DbSchema nowDbSchema;
 
         /// <summary>
         /// 当前操作的数据库连接名
@@ -182,16 +192,6 @@ namespace CodeGenerate
         }
 
         /// <summary>
-        /// 代码生成
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnGenerate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
         /// 语言下拉框
         /// </summary>
         /// <param name="sender"></param>
@@ -260,6 +260,70 @@ namespace CodeGenerate
             txtSavePath.Text = folderBrowserDialog1.SelectedPath;
         }
 
+        /// <summary>
+        /// 代码生成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            String language, groupName;
+            var templateList = GetSelectedTemplate(out language, out groupName);
+            if (templateList.Count <= 0)
+            {
+                MsgBox.Show("请先选择要使用的模块");
+                return;
+            }
+
+            var savePath = txtSavePath.Text;
+            if (String.IsNullOrWhiteSpace(savePath))
+            {
+                MsgBox.Show("请先选择存储目录");
+                return;
+            }
+
+            var arg = new GenerateInfo()
+            {
+                Language = language,
+                GroupName = groupName,
+                TemplateInfos = templateList,
+                SavePath = savePath
+            };
+            this.backgroundWorker1.RunWorkerAsync(new DoWorkEventArgs(arg));
+        }
+
+        /// <summary>
+        /// 代码生成信息
+        /// </summary>
+        class GenerateInfo
+        {
+            public String Language { get; set; }
+            public String GroupName { get; set; }
+            public List<TemplateInfo> TemplateInfos { get; set; }
+            public String SavePath { get; set; }
+        }
+
+        /// <summary>
+        /// 生成代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            this.UseWaitCursor = true;
+            this.Enabled = false;
+            try
+            {
+                var arg = e.Argument as GenerateInfo;
+                this.DoBuild(arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
+            }
+            finally
+            {
+                this.UseWaitCursor = false;
+                this.Enabled = true;
+            }
+        }
+
         #endregion  事件处理
 
         #region 连接处理
@@ -303,10 +367,10 @@ namespace CodeGenerate
             var dal = new DbConnDAL();
             var model = dal.FindOne(connectionName);
 
-            var dbSchema = DbSchemaFactory.Create(new MySqlDatabase(model.ConnectionString, MySqlClientFactory.Instance));
+            this.nowDbSchema = DbSchemaFactory.Create(new MySqlDatabase(model.ConnectionString, MySqlClientFactory.Instance));
             try
             {
-                nowDb = dbSchema.GetDatabase(model.DefaultDb);
+                nowDb = this.nowDbSchema.GetDatabase(model.DefaultDb);
             }
             catch (Exception e1)
             {
@@ -459,10 +523,99 @@ namespace CodeGenerate
             }
 
             // 获取选择项
-            var templateItem = this.templateManager.GetGroupTemplate(language, groupName, this.cmbTemplate.SelectedText);
+            var templateItem = this.templateManager.GetGroupTemplate(language, groupName, this.cmbTemplate.SelectedItem.ToString());
             return new List<TemplateInfo>() { templateItem };
         }
 
         #endregion
+
+        #region 代码生成
+
+        /// <summary>
+        /// 生成处理
+        /// </summary>
+        private void DoBuild(String language, String groupName, List<TemplateInfo> templateList, String savePath)
+        {
+            var logObj = Singleton.Container.Resolve<IOutput>();
+            Boolean isHaveError = false;
+
+            //遍历选中的表，一张表对应生成一个代码文件
+            foreach (object item in listBox2.Items)
+            {
+                SOTable table = item as SOTable;
+                foreach (var templateItem in templateList)
+                {
+                    var errMsg = BuildTable(table, templateItem, savePath);
+                    if (String.IsNullOrWhiteSpace(errMsg) == false)
+                    {
+                        isHaveError = true;
+                        logObj.PrintLine($"Table:{table.Name}  TemplateFile:{templateItem.FilePath} {Environment.NewLine} error:{errMsg}");
+                    }
+                }
+            }
+
+            if (isHaveError)
+            {
+                MsgBox.Show("代码生成出错，具体见输出内容");
+            }
+        }
+
+        /// <summary>
+        /// 生成一个表
+        /// </summary>
+        /// <param name="table">表对象</param>
+        /// <param name="templateItem">模板列表</param>
+        /// <param name="outputPath">保存到的目标位置</param>
+        private String BuildTable(SOTable table, TemplateInfo templateItem, String outputPath)
+        {
+            List<SOColumn> columnList = table.ColumnList;//可能传入的是从PDObject对象转换过来的SODatabase对象
+
+            if (columnList == null || columnList.Count == 0)
+            {
+                columnList = this.nowDbSchema.GetTableColumnList(table);
+            }
+
+            //生成代码文件
+            TableHost host = new TableHost();
+            host.Table = table;
+            host.ColumnList = columnList;
+            host.TemplateFile = templateItem.FilePath;
+            //host.SetValue("NameSpace", "asd");
+            //host.SetValue("ClassName", "asd");
+            //host.SetValue("TablePrefix", "asd");
+            //host.SetValue("ColumnPrefix", "asd");
+            //host.SetValue("PrefixLevel", "asd");
+
+            Engine engine = new Engine();
+            string templateContent = File.ReadAllText(templateItem.FilePath);
+            var outputContent = engine.ProcessTemplate(templateContent, host);
+            string outputFile = Path.Combine(outputPath, string.Format("{0}{1}", table.Name, host.FileExtention));
+            if (String.IsNullOrWhiteSpace(host.OutputFileName) == false)
+            {
+                outputFile = Path.Combine(outputPath, host.OutputFileName);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            if (host.ErrorCollection != null && host.ErrorCollection.HasErrors)
+            {
+                foreach (CompilerError err in host.ErrorCollection)
+                {
+                    sb.AppendLine(err.ToString());
+                }
+
+                return sb.ToString();
+            }
+
+            if (Directory.Exists(outputPath) == false)
+            {
+                Directory.CreateDirectory(outputPath);
+            }
+
+            File.WriteAllText(outputFile, outputContent, Encoding.UTF8);
+
+            return String.Empty;
+        }
+
+        #endregion 代码生成
     }
 }

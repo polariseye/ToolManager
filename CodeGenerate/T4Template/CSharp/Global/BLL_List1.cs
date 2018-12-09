@@ -32,7 +32,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+    #line 1 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class BLL_List : BLL_ListBase
     {
@@ -43,7 +43,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
         public virtual string TransformText()
         {
             
-            #line 20 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+            #line 20 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
  
 	TableHost host = (TableHost)(Host);
 	SOTable table = host.Table;
@@ -60,35 +60,35 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("//*******************************************************************************" +
                     "****\r\n// 文件名称：");
             
-            #line 31 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+            #line 31 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("BLL.cs\r\n// 功能描述：");
             
-            #line 32 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+            #line 32 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ")));
             
             #line default
             #line hidden
             this.Write("\r\n// 数据表：");
             
-            #line 33 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+            #line 33 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("\r\n// 作者：");
             
-            #line 34 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+            #line 34 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(authorName));
             
             #line default
             #line hidden
             this.Write("\r\n// 日期：");
             
-            #line 35 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
+            #line 35 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\BLL_List.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DateTime.Now.ToDateTimeString()));
             
             #line default

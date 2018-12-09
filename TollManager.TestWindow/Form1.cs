@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToolManager.Infrustructure;
+using Autofac;
+using CodeGenerate;
 
 namespace TollManager.TestWindow
 {
@@ -15,6 +18,15 @@ namespace TollManager.TestWindow
         public Form1()
         {
             InitializeComponent();
+
+            // 注册单例
+            Singleton.Builder.RegisterInstance<IOutput>(new Output());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GroupGenerateForm frm = new GroupGenerateForm();
+            frm.Show();
         }
     }
 }

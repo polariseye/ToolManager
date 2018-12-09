@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kalman", "Kalman\Kalman.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolManager.Utility", "ToolManager.Utility\ToolManager.Utility.csproj", "{0090865D-577C-43CD-85C7-3CBF3FD162EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TollManager.TestWindow", "TollManager.TestWindow\TollManager.TestWindow.csproj", "{DDE1FE19-C68D-473D-9818-BC0E61A2ED2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0090865D-577C-43CD-85C7-3CBF3FD162EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0090865D-577C-43CD-85C7-3CBF3FD162EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0090865D-577C-43CD-85C7-3CBF3FD162EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE1FE19-C68D-473D-9818-BC0E61A2ED2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE1FE19-C68D-473D-9818-BC0E61A2ED2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE1FE19-C68D-473D-9818-BC0E61A2ED2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE1FE19-C68D-473D-9818-BC0E61A2ED2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

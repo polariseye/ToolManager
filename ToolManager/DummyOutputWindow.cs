@@ -30,6 +30,10 @@ namespace ToolManager
             {
                 if (string.IsNullOrEmpty(txt)) return;
                 this.textBox1.AppendText(txt);
+                if (this.Visible==false)
+                {
+                    this.Visible = true;
+                }
             }
         }
         /// <summary>

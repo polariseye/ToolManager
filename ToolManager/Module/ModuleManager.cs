@@ -94,7 +94,7 @@ namespace ToolManager.Module
             // 寻找模块中的所有窗口和模块初始化类型
             var moduleInterfaceType = typeof(IModule);
             Type moduleInitType = null;
-            var assemblyObj = Assembly.LoadFrom(moduleInfo.ModulePath);
+            var assemblyObj = LoadDirDll(moduleInfo.ModulePath, logObj);
             foreach (var typeItem in assemblyObj.ExportedTypes)
             {
                 // 找到所有的窗口
@@ -136,6 +136,43 @@ namespace ToolManager.Module
                     FormInfoList = new List<FormInfo>(result),
                     ModuleInfo = moduleInfo,
                 });
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 加载指定目录的所有dll
+        /// (因为有些插件内部是动态加载dll的，而对应的工作目录不对，导致有些功能运行失败)
+        /// </summary>
+        /// <param name="filePath">文件目录</param>
+        /// <returns></returns>
+        private static Assembly LoadDirDll(String filePath, IOutput logObj)
+        {
+            var targetFileName = Path.GetFileName(filePath).ToLower();
+            var targetDir = Path.GetDirectoryName(filePath);
+            var fls = Directory.GetFiles(targetDir, "*.dll");
+            Assembly result = null;
+            foreach (var item in fls)
+            {
+                try
+                {
+                    var tmpFileName = Path.GetFileName(item).ToLower();
+                    if (targetFileName == tmpFileName)
+                    {
+                        // 如果是当前程序集，则加载相应直接依赖项
+                        result = Assembly.LoadFrom(item);
+                    }
+                    else
+                    {
+                        // 如果不是当前主要程序集，则只加载这个DLL
+                        Assembly.LoadFile(item);
+                    }
+                }
+                catch (Exception e1)
+                {
+                    logObj.PrintLine($"dll加载失败: {e1.Message}");
+                }
             }
 
             return result;

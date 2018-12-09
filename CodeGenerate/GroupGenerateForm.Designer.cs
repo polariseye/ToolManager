@@ -52,6 +52,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,7 +147,7 @@
             // 
             this.txtSavePath.Location = new System.Drawing.Point(518, 159);
             this.txtSavePath.Name = "txtSavePath";
-            this.txtSavePath.Size = new System.Drawing.Size(142, 21);
+            this.txtSavePath.Size = new System.Drawing.Size(151, 21);
             this.txtSavePath.TabIndex = 12;
             // 
             // groupBox1
@@ -259,7 +261,7 @@
             // 
             this.btnGenerate.Location = new System.Drawing.Point(455, 187);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(255, 153);
+            this.btnGenerate.Size = new System.Drawing.Size(255, 124);
             this.btnGenerate.TabIndex = 10;
             this.btnGenerate.Text = "生成";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -294,11 +296,23 @@
             this.btnSelectFile.UseVisualStyleBackColor = true;
             this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(455, 312);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(255, 23);
+            this.progressBar1.TabIndex = 21;
+            // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 358);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnSelectFile);
             this.Controls.Add(this.cmbTemplate);
             this.Controls.Add(this.label7);
@@ -350,5 +364,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnSelectFile;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

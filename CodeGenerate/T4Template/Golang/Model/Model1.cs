@@ -32,7 +32,7 @@ namespace CodeGenerate.T4Template.Golang.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+    #line 1 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class Model : ModelBase
     {
@@ -43,7 +43,7 @@ namespace CodeGenerate.T4Template.Golang.Model
         public virtual string TransformText()
         {
             
-            #line 21 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 21 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
  
 	TableHost host = (TableHost)(Host);
 	SOTable table = host.Table;
@@ -57,194 +57,194 @@ namespace CodeGenerate.T4Template.Golang.Model
             #line hidden
             this.Write("package ");
             
-            #line 29 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 29 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n// 模块名\r\nconst ModuleName = \"");
             
-            #line 32 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 32 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("\"\r\n\r\n// 调度日志\r\ntype ");
             
-            #line 35 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 35 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write(" struct {\r\n");
             
-            #line 36 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 36 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
  foreach (SOColumn c in colList){ 
             
             #line default
             #line hidden
             this.Write("\r\n        // ");
             
-            #line 38 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 38 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(c.Comment == "" ? c.Name : c.Comment.Replace("\r\n"," ")));
             
             #line default
             #line hidden
             this.Write("\r\n        ");
             
-            #line 39 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 39 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(c.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 39 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 39 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TypeUtil.DbType2GolangTypeString(c.DataType)));
             
             #line default
             #line hidden
             this.Write(" `gorm:\"Column:");
             
-            #line 39 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 39 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(c.Name));
             
             #line default
             #line hidden
             
-            #line 39 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 39 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(c.PrimaryKey?";PRIMARY_KEY":""));
             
             #line default
             #line hidden
             this.Write("\"`\r\n");
             
-            #line 40 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 40 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
  } 
             
             #line default
             #line hidden
             this.Write("}\r\n\r\n// 表名\r\nfunc (this *");
             
-            #line 44 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 44 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write(") TableName() string {\r\n\treturn \"");
             
-            #line 45 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 45 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("\"\r\n}\r\n\r\n// 新建调度模型对象\r\nfunc New");
             
-            #line 49 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 49 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("() *");
             
-            #line 49 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 49 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write(" {\r\n\treturn &");
             
-            #line 50 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 50 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("{}\r\n}\r\n\r\n// 新建调度模型对象\r\n");
             
-            #line 54 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 54 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("// ");
             
-            #line 55 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 55 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write(":");
             
-            #line 55 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 55 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 56 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 56 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
 }
             
             #line default
             #line hidden
             this.Write("func New");
             
-            #line 57 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 57 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("2(");
             
-            #line 57 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 57 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",tmp.Name.FirstLower(),TypeUtil.DbType2GolangTypeString(tmp.DataType))))));
             
             #line default
             #line hidden
             this.Write(") *");
             
-            #line 57 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 57 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write(" {\r\n\treturn &");
             
-            #line 58 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 58 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("{\r\n");
             
-            #line 59 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 59 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("\t\t");
             
-            #line 60 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 60 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(": ");
             
-            #line 60 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 60 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CSharpHostHelper.GetRepeatString(" ", maxColumnNameLength-item.Name.Length)));
             
             #line default
             #line hidden
             
-            #line 60 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 60 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 61 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
+            #line 61 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\Golang\Model\Model.tt"
 }
             
             #line default

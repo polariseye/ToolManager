@@ -32,7 +32,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+    #line 1 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class Model : ModelBase
     {
@@ -43,7 +43,7 @@ namespace CodeGenerate.T4Template.CSharp.Global
         public virtual string TransformText()
         {
             
-            #line 21 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 21 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
  
 	TableHost host = (TableHost)(Host);
 	SOTable table = host.Table;
@@ -60,35 +60,35 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("//*******************************************************************************" +
                     "****\r\n// 文件名称：");
             
-            #line 32 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 32 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write(".cs\r\n// 功能描述：");
             
-            #line 33 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 33 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ")));
             
             #line default
             #line hidden
             this.Write("\r\n// 数据表：");
             
-            #line 34 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 34 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(table.Name));
             
             #line default
             #line hidden
             this.Write("\r\n// 作者：");
             
-            #line 35 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 35 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(authorName));
             
             #line default
             #line hidden
             this.Write("\r\n// 日期：");
             
-            #line 36 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 36 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DateTime.Now.ToDateTimeString()));
             
             #line default
@@ -96,49 +96,49 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("\r\n// 修改记录：\r\n//*******************************************************************" +
                     "****************\r\n\r\nusing System;\r\nusing System.Data;\r\n\r\nnamespace ");
             
-            #line 43 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 43 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nameSpace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    /// <summary>\r\n    /// 充值日志\r\n    /// </summary>\r\n    public class ");
             
-            #line 48 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 48 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        #region 属性\r\n");
             
-            #line 51 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 51 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
  foreach (SOColumn c in colList){ 
             
             #line default
             #line hidden
             this.Write("\r\n        /// <summary>\r\n        /// ");
             
-            #line 54 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 54 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(c.Comment == "" ? c.Name : c.Comment.Replace("\r\n"," ")));
             
             #line default
             #line hidden
             this.Write("\r\n        /// </summary>\r\n        public ");
             
-            #line 56 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 56 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TypeUtil.DbType2CSharpTypeString(c.DataType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 56 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 56 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(c.Name));
             
             #line default
             #line hidden
             this.Write(" { get; set; }\t\t\r\n");
             
-            #line 57 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 57 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
  } 
             
             #line default
@@ -146,70 +146,70 @@ namespace CodeGenerate.T4Template.CSharp.Global
             this.Write("\r\n        #endregion\r\n\r\n        #region 构造函数\r\n\r\n        /// <summary>\r\n        //" +
                     "/ 构造函数\r\n        /// </summary>\r\n");
             
-            #line 66 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 66 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("        /// <param name=\"");
             
-            #line 67 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 67 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 67 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 67 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("</param>\r\n");
             
-            #line 68 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 68 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 }
             
             #line default
             #line hidden
             this.Write("        public ");
             
-            #line 69 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 69 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 69 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 69 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n");
             
-            #line 71 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 71 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("            this.");
             
-            #line 72 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 72 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 72 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 72 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 73 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 73 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 }
             
             #line default
@@ -217,42 +217,42 @@ foreach(SOColumn item in colList) {
             this.Write("        }\r\n\r\n        /// <summary>\r\n        /// 构造函数\r\n        /// </summary>\r\n   " +
                     "     /// <param name=\"dr\">DataRow</param>\r\n        public ");
             
-            #line 80 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 80 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
             
             #line default
             #line hidden
             this.Write("(DataRow dr)\r\n        {\r\n");
             
-            #line 82 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 82 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("            this.");
             
-            #line 83 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 83 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" = Convert.To");
             
-            #line 83 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 83 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TypeUtil.DbType2CSharpTypeString(item.DataType)));
             
             #line default
             #line hidden
             this.Write("(dr[GamePropertyName.");
             
-            #line 83 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 83 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("]);\r\n");
             
-            #line 84 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 84 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 }
             
             #line default
@@ -260,63 +260,63 @@ foreach(SOColumn item in colList) {
             this.Write("        }\r\n\r\n        #endregion\r\n\r\n        #region 方法\r\n\r\n        /// <summary>\r\n " +
                     "       /// 构造函数\r\n        /// </summary>\r\n");
             
-            #line 94 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 94 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("        /// <param name=\"");
             
-            #line 95 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 95 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 95 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 95 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Comment));
             
             #line default
             #line hidden
             this.Write("</param>\r\n");
             
-            #line 96 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 96 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 }
             
             #line default
             #line hidden
             this.Write("        public void ConstructObject(");
             
-            #line 97 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 97 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n");
             
-            #line 99 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 99 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 foreach(SOColumn item in colList) {
             
             #line default
             #line hidden
             this.Write("            this.");
             
-            #line 100 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 100 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 100 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 100 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name.FirstLower()));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 101 "E:\cust\开源项目\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
+            #line 101 "E:\testcode\csharp\ToolManager\CodeGenerate\T4Template\CSharp\Global\Model.tt"
 }
             
             #line default

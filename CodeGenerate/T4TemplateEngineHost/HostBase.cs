@@ -81,7 +81,10 @@ namespace CodeGenerate.T4TemplateEngineHost
         /// <param name="namespaceName"></param>
         public void AddNamespace(string namespaceName)
         {
-            if (namespaceList.Contains(namespaceName)) return;
+            if (namespaceList.Contains(namespaceName))
+            {
+                return;
+            }
             namespaceList.Add(namespaceName);
         }
 
