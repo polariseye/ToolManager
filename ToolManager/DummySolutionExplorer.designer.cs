@@ -35,14 +35,16 @@ namespace ToolManager
             // 
             // treeView1
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Indent = 19;
-            this.treeView1.Location = new System.Drawing.Point(0, 24);
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(245, 297);
+            this.treeView1.Size = new System.Drawing.Size(245, 321);
             this.treeView1.TabIndex = 0;
             this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
             // 
@@ -77,7 +79,7 @@ namespace ToolManager
             this.Padding = new System.Windows.Forms.Padding(0, 24, 0, 1);
             this.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight;
             this.TabText = "Module Explorer";
-            this.Text = "Module Explorer";
+            this.Text = "Ä£¿éÁÐ±í";
             this.Load += new System.EventHandler(this.DummySolutionExplorer_Load);
             this.ResumeLayout(false);
 

@@ -52,6 +52,37 @@ namespace ToolManager.Module
         }
 
         /// <summary>
+        /// 获取所有模块
+        /// </summary>
+        /// <returns></returns>
+        public static List<AssemblyInfo> GetAllModule()
+        {
+            lock (lockObj)
+            {
+                return new List<AssemblyInfo>(moduleInfos);
+            }
+        }
+
+        /// <summary>
+        /// 获取所有窗口
+        /// </summary>
+        /// <returns></returns>
+        public static List<FormInfo> GetAllFormInfos()
+        {
+            var result = new List<FormInfo>();
+
+            lock (lockObj)
+            {
+                foreach (var item in moduleInfos)
+                {
+                    result.AddRange(item.FormInfoList);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 注册一个新模块
         /// </summary>
         /// <param name="name">模块名</param>
@@ -62,10 +93,18 @@ namespace ToolManager.Module
         /// <returns></returns>
         public static List<FormInfo> Register(String name, String filePath, String description, IOutput logObj, IWindowContainer windowContainer)
         {
-            // var destPath = SaveToLocal(filePath);
-
             try
             {
+                if (ExistName(name))
+                {
+                    throw new Exception($"存在重复的模块名:{name}");
+                }
+
+                if (ExistPath(filePath))
+                {
+                    throw new Exception($"存在重复的模块加载:{filePath}");
+                }
+
                 var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, Description = description };
                 var result = LoadModule(moduleInfo, logObj, windowContainer);
 
@@ -77,7 +116,6 @@ namespace ToolManager.Module
             }
             catch (Exception e1)
             {
-                // File.Delete(destPath);
                 throw e1;
             }
         }
@@ -179,22 +217,20 @@ namespace ToolManager.Module
         }
 
         /// <summary>
-        /// 获取所有窗口
+        /// 删除模块
         /// </summary>
-        /// <returns></returns>
-        public static List<FormInfo> GetAllFormInfos()
+        /// <param name="deleteModuleList">待删除的模块列表</param>
+        public static void DeleteModule(List<AssemblyInfo> deleteModuleList)
         {
-            var result = new List<FormInfo>();
-
             lock (lockObj)
             {
-                foreach (var item in moduleInfos)
+                moduleInfos.RemoveAll(tmp1 => deleteModuleList.Any(tmp2 => tmp2 == tmp1));
+                foreach (var item in deleteModuleList)
                 {
-                    result.AddRange(item.FormInfoList);
+                    var dal = new ModuleInfoDAL();
+                    dal.Delete(item.ModuleInfo.Name);
                 }
             }
-
-            return result;
         }
 
         /// <summary>

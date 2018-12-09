@@ -33,6 +33,8 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNewFileWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.模块管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImportModule = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewFileWindow = new System.Windows.Forms.ToolStripSplitButton();
             this.btnOpenTextFile = new System.Windows.Forms.ToolStripSplitButton();
@@ -40,8 +42,7 @@
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.visualStudioToolStripExtender1 = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.vS2015BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme();
-            this.模块管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuImportModule = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemManageModule = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -69,16 +70,32 @@
             // menuNewFileWindow
             // 
             this.menuNewFileWindow.Name = "menuNewFileWindow";
-            this.menuNewFileWindow.Size = new System.Drawing.Size(180, 22);
+            this.menuNewFileWindow.Size = new System.Drawing.Size(124, 22);
             this.menuNewFileWindow.Text = "新建文档";
             this.menuNewFileWindow.Click += new System.EventHandler(this.btnNewFileWindow_ButtonClick);
             // 
             // btnOpenFile
             // 
             this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(180, 22);
+            this.btnOpenFile.Size = new System.Drawing.Size(124, 22);
             this.btnOpenFile.Text = "打开文档";
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenTextFile_ButtonClick);
+            // 
+            // 模块管理ToolStripMenuItem
+            // 
+            this.模块管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuImportModule,
+            this.menuItemManageModule});
+            this.模块管理ToolStripMenuItem.Name = "模块管理ToolStripMenuItem";
+            this.模块管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.模块管理ToolStripMenuItem.Text = "模块管理";
+            // 
+            // menuImportModule
+            // 
+            this.menuImportModule.Name = "menuImportModule";
+            this.menuImportModule.Size = new System.Drawing.Size(180, 22);
+            this.menuImportModule.Text = "导入模块";
+            this.menuImportModule.Click += new System.EventHandler(this.menuImportModule_Click);
             // 
             // toolStrip1
             // 
@@ -131,20 +148,12 @@
             // 
             this.visualStudioToolStripExtender1.DefaultRenderer = null;
             // 
-            // 模块管理ToolStripMenuItem
+            // menuItemManageModule
             // 
-            this.模块管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuImportModule});
-            this.模块管理ToolStripMenuItem.Name = "模块管理ToolStripMenuItem";
-            this.模块管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.模块管理ToolStripMenuItem.Text = "模块管理";
-            // 
-            // menuImportModule
-            // 
-            this.menuImportModule.Name = "menuImportModule";
-            this.menuImportModule.Size = new System.Drawing.Size(180, 22);
-            this.menuImportModule.Text = "导入模块";
-            this.menuImportModule.Click += new System.EventHandler(this.menuImportModule_Click);
+            this.menuItemManageModule.Name = "menuItemManageModule";
+            this.menuItemManageModule.Size = new System.Drawing.Size(180, 22);
+            this.menuItemManageModule.Text = "模块管理";
+            this.menuItemManageModule.Click += new System.EventHandler(this.menuItemManageModule_Click);
             // 
             // MainForm
             // 
@@ -158,6 +167,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -183,6 +193,7 @@
         private System.Windows.Forms.ToolStripMenuItem btnOpenFile;
         private System.Windows.Forms.ToolStripMenuItem 模块管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuImportModule;
+        private System.Windows.Forms.ToolStripMenuItem menuItemManageModule;
     }
 }
 

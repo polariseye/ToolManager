@@ -8,6 +8,7 @@ namespace ToolManager
     using System.Windows.Forms;
     using ToolManager.Infrustructure;
     using ToolManager.Module;
+    using ToolManager.Utility.Alert;
 
     public partial class DummySolutionExplorer : BaseForm
     {
@@ -64,12 +65,12 @@ namespace ToolManager
             var groupedData = formList.GroupBy(tmp => tmp.AttributeInfo.GroupTitle);
             foreach (var groupObj in groupedData)
             {
-                var tmpGroupNodes = this.treeView1.Nodes.Find(groupObj.Key, false);
-                TreeNode groupNode = null;
-                if (tmpGroupNodes == null || tmpGroupNodes.Length <= 0)
+                var groupNode = this.FindGroupNode(groupObj.Key);
+                if (groupNode == null)
                 {
                     // 直接添加新组
-                    groupNode = this.treeView1.Nodes.Add(groupObj.Key);
+                    groupNode = new TreeNode(groupObj.Key);
+                    this.treeView1.Nodes.Add(groupNode);
 
                     // 添加子节点
                     var groupItemList = groupObj.OrderBy(tmp => tmp.AttributeInfo.Title).ToList();
@@ -85,8 +86,6 @@ namespace ToolManager
                 else
                 {
                     // 往已有的组中添加项
-                    groupNode = tmpGroupNodes[0];
-
                     // 添加子节点
                     var groupItemList = groupObj.OrderBy(tmp => tmp.AttributeInfo.Title).ToList();
                     foreach (var item in groupItemList)
@@ -118,21 +117,29 @@ namespace ToolManager
         {
             foreach (var formItem in formList)
             {
-                var tmpGroupNodes = this.treeView1.Nodes.Find(formItem.AttributeInfo.Title, false);
-                if (tmpGroupNodes == null || tmpGroupNodes.Length <= 0)
+                var tmpSameNodes = this.FindNode(formItem.AttributeInfo.Title);
+                if (tmpSameNodes == null || tmpSameNodes.Count <= 0)
                 {
                     continue;
                 }
 
                 // 移除对应的节点
-                foreach (var node in tmpGroupNodes)
+                foreach (var node in tmpSameNodes)
                 {
                     if (node.Tag == formItem)
                     {
-                        node.Parent.Nodes.Remove(node);
-                        if (node.Parent.Nodes.Count <= 0)
+                        var parent = node.Parent;
+                        parent.Nodes.Remove(node);
+                        if (parent != null && parent.Nodes.Count <= 0)
                         {
-                            node.Parent.Parent.Nodes.Remove(node.Parent);
+                            if (parent.Parent != null)
+                            {
+                                parent.Parent.Nodes.Remove(parent);
+                            }
+                            else
+                            {
+                                this.treeView1.Nodes.Remove(parent);
+                            }
                         }
                     }
                 }
@@ -146,9 +153,14 @@ namespace ToolManager
         /// <param name="e"></param>
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left)
+            {
+                // 只处理鼠标左键
+                return;
+            }
+
             TreeView tv = sender as TreeView;
             TreeNode tn = tv.GetNodeAt(e.X, e.Y);
-
             if (tn == null)
             {
                 return;
@@ -163,6 +175,60 @@ namespace ToolManager
             var formObj = (BaseForm)Activator.CreateInstance(formInfoObj.FormType);
             var container = Singleton.Container.Resolve<IWindowContainer>();
             formObj.Show(container.GetMainView());
+        }
+
+        /// <summary>
+        /// 按照文本查找项
+        /// </summary>
+        /// <param name="text">文本</param>
+        /// <returns></returns>
+        private List<TreeNode> FindNode(String text)
+        {
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            foreach (TreeNode item in this.treeView1.Nodes)
+            {
+                queue.Enqueue(item);
+            }
+
+            var result = new List<TreeNode>();
+            while (true)
+            {
+                if (queue.Count <= 0)
+                {
+                    break;
+                }
+
+                var nowItem = queue.Dequeue();
+                if (nowItem.Text == text)
+                {
+                    result.Add(nowItem);
+                }
+
+                foreach (TreeNode item in nowItem.Nodes)
+                {
+                    queue.Enqueue(item);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 查找组节点
+        /// </summary>
+        /// <param name="text">查找文本</param>
+        /// <returns></returns>
+        private TreeNode FindGroupNode(String text)
+        {
+            foreach (TreeNode item in this.treeView1.Nodes)
+            {
+                if (item.Text == text)
+                {
+                    return item;
+                }
+            }
+
+            return null;
         }
     }
 }

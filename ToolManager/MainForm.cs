@@ -182,5 +182,35 @@ namespace ToolManager
                 }
             }
         }
+
+        /// <summary>
+        /// 模块管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuItemManageModule_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ModuleSettingWindow frm = new ModuleSettingWindow();
+                var result = frm.ShowDialog();
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+
+                var frmList = new List<FormInfo>();
+                foreach (var moduleItem in frm.DeleteList)
+                {
+                    frmList.AddRange(moduleItem.FormInfoList);
+                }
+
+                this.solutionExplorer.RemoveNodes(frmList);
+            }
+            catch (Exception e1)
+            {
+                MsgBox.Show($"模块管理出错:{e1.Message}");
+            }
+        }
     }
 }
