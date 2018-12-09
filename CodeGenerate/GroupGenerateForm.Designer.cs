@@ -37,7 +37,7 @@
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSavePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRemoveOne = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
@@ -50,6 +50,8 @@
             this.btnGenerate = new System.Windows.Forms.Button();
             this.cmbTemplate = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnSelectFile = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +76,7 @@
             // 
             // cmbConnectionList
             // 
+            this.cmbConnectionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConnectionList.FormattingEnabled = true;
             this.cmbConnectionList.Location = new System.Drawing.Point(84, 19);
             this.cmbConnectionList.Name = "cmbConnectionList";
@@ -102,19 +105,21 @@
             // 
             // cmbTemplateGroup
             // 
+            this.cmbTemplateGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTemplateGroup.FormattingEnabled = true;
             this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 105);
             this.cmbTemplateGroup.Name = "cmbTemplateGroup";
-            this.cmbTemplateGroup.Size = new System.Drawing.Size(151, 20);
+            this.cmbTemplateGroup.Size = new System.Drawing.Size(192, 20);
             this.cmbTemplateGroup.TabIndex = 7;
             this.cmbTemplateGroup.SelectedIndexChanged += new System.EventHandler(this.cmbTemplateGroup_SelectedIndexChanged);
             // 
             // cmbLanguage
             // 
+            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(518, 78);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(151, 20);
+            this.cmbLanguage.Size = new System.Drawing.Size(192, 20);
             this.cmbLanguage.TabIndex = 9;
             this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
             // 
@@ -130,18 +135,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(453, 164);
+            this.label4.Location = new System.Drawing.Point(453, 163);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 11;
             this.label4.Text = "输出目录:";
             // 
-            // textBox1
+            // txtSavePath
             // 
-            this.textBox1.Location = new System.Drawing.Point(518, 161);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 21);
-            this.textBox1.TabIndex = 12;
+            this.txtSavePath.Location = new System.Drawing.Point(518, 159);
+            this.txtSavePath.Name = "txtSavePath";
+            this.txtSavePath.Size = new System.Drawing.Size(142, 21);
+            this.txtSavePath.TabIndex = 12;
             // 
             // groupBox1
             // 
@@ -252,9 +257,9 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(455, 188);
+            this.btnGenerate.Location = new System.Drawing.Point(455, 187);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(214, 152);
+            this.btnGenerate.Size = new System.Drawing.Size(255, 153);
             this.btnGenerate.TabIndex = 10;
             this.btnGenerate.Text = "生成";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -262,10 +267,11 @@
             // 
             // cmbTemplate
             // 
+            this.cmbTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTemplate.FormattingEnabled = true;
             this.cmbTemplate.Location = new System.Drawing.Point(518, 132);
             this.cmbTemplate.Name = "cmbTemplate";
-            this.cmbTemplate.Size = new System.Drawing.Size(151, 20);
+            this.cmbTemplate.Size = new System.Drawing.Size(192, 20);
             this.cmbTemplate.TabIndex = 19;
             this.cmbTemplate.SelectedIndexChanged += new System.EventHandler(this.cmbTemplate_SelectedIndexChanged);
             // 
@@ -278,15 +284,26 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "模版:";
             // 
+            // btnSelectFile
+            // 
+            this.btnSelectFile.Location = new System.Drawing.Point(668, 158);
+            this.btnSelectFile.Name = "btnSelectFile";
+            this.btnSelectFile.Size = new System.Drawing.Size(42, 23);
+            this.btnSelectFile.TabIndex = 20;
+            this.btnSelectFile.Text = "浏览";
+            this.btnSelectFile.UseVisualStyleBackColor = true;
+            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
+            // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 358);
+            this.ClientSize = new System.Drawing.Size(722, 358);
+            this.Controls.Add(this.btnSelectFile);
             this.Controls.Add(this.cmbTemplate);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSavePath);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.cmbLanguage);
@@ -318,7 +335,7 @@
         private System.Windows.Forms.ComboBox cmbLanguage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSavePath;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label6;
@@ -331,5 +348,7 @@
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.ComboBox cmbTemplate;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnSelectFile;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

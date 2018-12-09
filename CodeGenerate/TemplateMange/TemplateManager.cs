@@ -36,7 +36,7 @@ namespace CodeGenerate.TemplateMange
             foreach (var languateDir in languateDirList)
             {
                 var language = Path.GetFileNameWithoutExtension(languateDir);
-                
+
                 foreach (var groupPath in Directory.GetDirectories(languateDir))
                 {
                     var groupName = Path.GetFileNameWithoutExtension(groupPath);
@@ -82,6 +82,33 @@ namespace CodeGenerate.TemplateMange
                 if (ifTriggerException)
                 {
                     throw new Exception($"未找到language={language} groupname={groupName}的模板文件");
+                }
+
+                return result;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 获取模板列表
+        /// </summary>
+        /// <param name="language">模板语言</param>
+        /// <param name="groupName">组名</param>
+        /// <param name="templateName">模板名</param>
+        /// <param name="ifTriggerException">是否触发异常</param>
+        /// <returns></returns>
+        public TemplateInfo GetGroupTemplate(String language, String groupName, String templateName, Boolean ifTriggerException = true)
+        {
+            var result = this.templateInfos.FirstOrDefault(tmp =>
+                tmp.Language == language &&
+                tmp.GroupName == groupName &&
+                tmp.TemplateName == templateName);
+            if (result == null)
+            {
+                if (ifTriggerException)
+                {
+                    throw new Exception($"未找到language={language} groupname={groupName} TemplateName={templateName} 的模板文件");
                 }
 
                 return result;

@@ -219,7 +219,7 @@ namespace CodeGenerate
             var language = this.cmbLanguage.SelectedItem.ToString();
             if (String.IsNullOrWhiteSpace(language))
             {
-                MsgBox.Show("请选择模板", "提示");
+                MsgBox.Show("请选择语言", "提示");
                 return;
             }
 
@@ -231,7 +231,7 @@ namespace CodeGenerate
             }
 
             var groupList = this.LoadTemplate(language, groupName);
-            this.cmbTemplateGroup.SelectedIndex = 0;
+            this.cmbTemplate.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -242,6 +242,22 @@ namespace CodeGenerate
         private void cmbTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// 选择文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSelectFile_Click(object sender, EventArgs e)
+        {
+            var result = folderBrowserDialog1.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            txtSavePath.Text = folderBrowserDialog1.SelectedPath;
         }
 
         #endregion  事件处理
@@ -414,6 +430,37 @@ namespace CodeGenerate
             }
 
             return templateList;
+        }
+
+        /// <summary>
+        /// 获取所有选择的模板
+        /// </summary>
+        /// <returns></returns>
+        private List<TemplateInfo> GetSelectedTemplate(out String language, out String groupName)
+        {
+            var result = new List<TemplateInfo>();
+
+            language = this.cmbLanguage.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                groupName = String.Empty;
+                return result;
+            }
+
+            groupName = this.cmbTemplateGroup.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                return result;
+            }
+
+            if (this.cmbTemplate.SelectedIndex <= 0)
+            {
+                return this.templateManager.GetGroupTemplate(language, groupName);
+            }
+
+            // 获取选择项
+            var templateItem = this.templateManager.GetGroupTemplate(language, groupName, this.cmbTemplate.SelectedText);
+            return new List<TemplateInfo>() { templateItem };
         }
 
         #endregion
