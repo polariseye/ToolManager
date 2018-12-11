@@ -54,6 +54,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnOpenFolder = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,7 +138,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(453, 163);
+            this.label4.Location = new System.Drawing.Point(453, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 11;
@@ -147,7 +148,7 @@
             // 
             this.txtSavePath.Location = new System.Drawing.Point(518, 159);
             this.txtSavePath.Name = "txtSavePath";
-            this.txtSavePath.Size = new System.Drawing.Size(151, 21);
+            this.txtSavePath.Size = new System.Drawing.Size(192, 21);
             this.txtSavePath.TabIndex = 12;
             // 
             // groupBox1
@@ -259,9 +260,9 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(455, 187);
+            this.btnGenerate.Location = new System.Drawing.Point(455, 214);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(255, 124);
+            this.btnGenerate.Size = new System.Drawing.Size(255, 97);
             this.btnGenerate.TabIndex = 10;
             this.btnGenerate.Text = "生成";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -288,9 +289,9 @@
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(668, 158);
+            this.btnSelectFile.Location = new System.Drawing.Point(518, 185);
             this.btnSelectFile.Name = "btnSelectFile";
-            this.btnSelectFile.Size = new System.Drawing.Size(42, 23);
+            this.btnSelectFile.Size = new System.Drawing.Size(92, 23);
             this.btnSelectFile.TabIndex = 20;
             this.btnSelectFile.Text = "浏览";
             this.btnSelectFile.UseVisualStyleBackColor = true;
@@ -307,11 +308,22 @@
             this.progressBar1.Size = new System.Drawing.Size(255, 23);
             this.progressBar1.TabIndex = 21;
             // 
+            // btnOpenFolder
+            // 
+            this.btnOpenFolder.Location = new System.Drawing.Point(616, 185);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(94, 23);
+            this.btnOpenFolder.TabIndex = 22;
+            this.btnOpenFolder.Text = "打开";
+            this.btnOpenFolder.UseVisualStyleBackColor = true;
+            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 358);
+            this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnSelectFile);
             this.Controls.Add(this.cmbTemplate);
@@ -366,5 +378,6 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btnOpenFolder;
     }
 }

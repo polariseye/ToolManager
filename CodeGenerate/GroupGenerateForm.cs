@@ -11,6 +11,7 @@ using System.Windows.Forms;
 namespace CodeGenerate
 {
     using Autofac;
+    using CodeGenerate.Config;
     using CodeGenerate.T4TemplateEngineHost;
     using CodeGenerate.TemplateMange;
     using Kalman.Data;
@@ -21,6 +22,7 @@ namespace CodeGenerate
     using Microsoft.VisualStudio.TextTemplating;
     using MySql.Data.MySqlClient;
     using System.CodeDom.Compiler;
+    using System.Diagnostics;
     using System.IO;
     using ToolManager.Infrustructure;
     using ToolManager.Utility.Alert;
@@ -49,6 +51,11 @@ namespace CodeGenerate
         private TemplateManager templateManager = new TemplateManager();
 
         /// <summary>
+        /// 配置对象业务处理类
+        /// </summary>
+        private GenerateConfigBLL configBllObj = new GenerateConfigBLL();
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         public GroupGenerateForm()
@@ -67,6 +74,13 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void GroupGenerateForm_Load(object sender, EventArgs e)
         {
+            // 初始化存储路径
+            var savePath = configBllObj.GetData().SavePath;
+            if (String.IsNullOrWhiteSpace(savePath) == false)
+            {
+                this.txtSavePath.Text = savePath;
+            }
+
             LoadConnection();
 
             this.LoadLanguage();
@@ -258,6 +272,10 @@ namespace CodeGenerate
             }
 
             txtSavePath.Text = folderBrowserDialog1.SelectedPath;
+
+            // 更新配置
+            configBllObj.GetData().SavePath = txtSavePath.Text;
+            configBllObj.Save();
         }
 
         /// <summary>
@@ -267,6 +285,17 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            var tableList = new List<SOTable>();
+            foreach (var item in listBox2.Items)
+            {
+                tableList.Add((SOTable)item);
+            }
+            if (tableList.Count <= 0)
+            {
+                MsgBox.Show("请先选择要生成的表");
+                return;
+            }
+
             String language, groupName;
             var templateList = GetSelectedTemplate(out language, out groupName);
             if (templateList.Count <= 0)
@@ -287,8 +316,15 @@ namespace CodeGenerate
                 Language = language,
                 GroupName = groupName,
                 TemplateInfos = templateList,
+                TableList = tableList,
                 SavePath = savePath
             };
+
+            this.UseWaitCursor = true;
+            this.Enabled = false;
+            this.progressBar1.Minimum = 0;
+            this.progressBar1.Value = 0;
+            this.progressBar1.Maximum = templateList.Count * arg.TableList.Count;
             this.backgroundWorker1.RunWorkerAsync(new DoWorkEventArgs(arg));
         }
 
@@ -297,9 +333,29 @@ namespace CodeGenerate
         /// </summary>
         class GenerateInfo
         {
+            /// <summary>
+            /// 语言
+            /// </summary>
             public String Language { get; set; }
+
+            /// <summary>
+            /// 组名
+            /// </summary>
             public String GroupName { get; set; }
+
+            /// <summary>
+            /// 模板列表
+            /// </summary>
             public List<TemplateInfo> TemplateInfos { get; set; }
+
+            /// <summary>
+            /// 要生成的表列表
+            /// </summary>
+            public List<SOTable> TableList { get; set; }
+
+            /// <summary>
+            /// 保存路径
+            /// </summary>
             public String SavePath { get; set; }
         }
 
@@ -310,18 +366,33 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.UseWaitCursor = true;
-            this.Enabled = false;
             try
             {
                 var arg = e.Argument as GenerateInfo;
-                this.DoBuild(arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
+                this.DoBuild(arg.TableList, arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
+                MsgBox.Show("生成成功", "提示");
             }
             finally
             {
                 this.UseWaitCursor = false;
                 this.Enabled = true;
             }
+        }
+
+        /// <summary>
+        /// 打开生成目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOpenFolder_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(this.txtSavePath.Text))
+            {
+                MsgBox.Show("主先选择生成的目录");
+                return;
+            }
+
+            Process.Start("explorer.exe", this.txtSavePath.Text);
         }
 
         #endregion  事件处理
@@ -534,15 +605,14 @@ namespace CodeGenerate
         /// <summary>
         /// 生成处理
         /// </summary>
-        private void DoBuild(String language, String groupName, List<TemplateInfo> templateList, String savePath)
+        private void DoBuild(List<SOTable> tableList, String language, String groupName, List<TemplateInfo> templateList, String savePath)
         {
             var logObj = Singleton.Container.Resolve<IOutput>();
             Boolean isHaveError = false;
 
             //遍历选中的表，一张表对应生成一个代码文件
-            foreach (object item in listBox2.Items)
+            foreach (SOTable table in tableList)
             {
-                SOTable table = item as SOTable;
                 foreach (var templateItem in templateList)
                 {
                     var errMsg = BuildTable(table, templateItem, savePath);
@@ -551,6 +621,7 @@ namespace CodeGenerate
                         isHaveError = true;
                         logObj.PrintLine($"Table:{table.Name}  TemplateFile:{templateItem.FilePath} {Environment.NewLine} error:{errMsg}");
                     }
+                    this.progressBar1.Value += 1;
                 }
             }
 

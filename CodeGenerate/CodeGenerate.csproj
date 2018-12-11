@@ -213,12 +213,15 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\GenerateConfigBLL.cs" />
+    <Compile Include="Config\GenerateConfigDAL.cs" />
     <Compile Include="DatabaseSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DatabaseSettingForm.designer.cs">
       <DependentUpon>DatabaseSettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Config\GenerateConfig.cs" />
     <Compile Include="GeneratorHelp.cs" />
     <Compile Include="GroupGenerateForm.cs">
       <SubType>Form</SubType>
