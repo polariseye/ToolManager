@@ -215,6 +215,7 @@
   <ItemGroup>
     <Compile Include="Config\GenerateConfigBLL.cs" />
     <Compile Include="Config\GenerateConfigDAL.cs" />
+    <Compile Include="Config\TemplateParamConfig.cs" />
     <Compile Include="DatabaseSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +231,12 @@
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetTemplateParamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetTemplateParamForm.Designer.cs">
+      <DependentUpon>SetTemplateParamForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="T4TemplateEngineHost\CommandHost.cs" />
     <Compile Include="T4TemplateEngineHost\CSharpHostHelper.cs" />
     <Compile Include="T4TemplateEngineHost\DatabaseHost.cs" />
@@ -313,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GroupGenerateForm.resx">
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetTemplateParamForm.resx">
+      <DependentUpon>SetTemplateParamForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

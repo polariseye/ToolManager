@@ -22,11 +22,17 @@ namespace CodeGenerate.Config
         public String SavePath { get; set; }
 
         /// <summary>
+        /// 模板参数配置
+        /// </summary>
+        public List<TemplateParamConfig> TemplateParamConfigData { get; set; }
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         public GenerateConfig()
         {
             this.SavePath = String.Empty;
+            this.TemplateParamConfigData = new List<TemplateParamConfig>();
         }
     }
 }

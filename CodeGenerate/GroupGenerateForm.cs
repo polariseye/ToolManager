@@ -395,6 +395,34 @@ namespace CodeGenerate
             Process.Start("explorer.exe", this.txtSavePath.Text);
         }
 
+        /// <summary>
+        /// 设置模板参数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSetArg_Click(object sender, EventArgs e)
+        {
+            var language = this.cmbLanguage.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                MsgBox.Show("请选择语言", "提示");
+                return;
+            }
+
+            var groupName = this.cmbTemplateGroup.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(language))
+            {
+                MsgBox.Show("请选择模板组", "提示");
+                return;
+            }
+
+            SetTemplateParamForm setForm = new SetTemplateParamForm(language, groupName);
+            setForm.ShowDialog();
+
+            // 刷新配置
+            configBllObj.Refresh();
+        }
+
         #endregion  事件处理
 
         #region 连接处理

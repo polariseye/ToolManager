@@ -55,6 +55,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.btnSetArg = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,7 +113,7 @@
             this.cmbTemplateGroup.FormattingEnabled = true;
             this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 105);
             this.cmbTemplateGroup.Name = "cmbTemplateGroup";
-            this.cmbTemplateGroup.Size = new System.Drawing.Size(192, 20);
+            this.cmbTemplateGroup.Size = new System.Drawing.Size(137, 20);
             this.cmbTemplateGroup.TabIndex = 7;
             this.cmbTemplateGroup.SelectedIndexChanged += new System.EventHandler(this.cmbTemplateGroup_SelectedIndexChanged);
             // 
@@ -318,11 +319,22 @@
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
+            // btnSetArg
+            // 
+            this.btnSetArg.Location = new System.Drawing.Point(656, 104);
+            this.btnSetArg.Name = "btnSetArg";
+            this.btnSetArg.Size = new System.Drawing.Size(54, 23);
+            this.btnSetArg.TabIndex = 23;
+            this.btnSetArg.Text = "参数";
+            this.btnSetArg.UseVisualStyleBackColor = true;
+            this.btnSetArg.Click += new System.EventHandler(this.btnSetArg_Click);
+            // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 358);
+            this.Controls.Add(this.btnSetArg);
             this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnSelectFile);
@@ -379,5 +391,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnOpenFolder;
+        private System.Windows.Forms.Button btnSetArg;
     }
 }
