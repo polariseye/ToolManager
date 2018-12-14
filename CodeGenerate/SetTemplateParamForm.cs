@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToolManager.Utility.Alert;
 
 namespace CodeGenerate
 {
@@ -53,10 +54,15 @@ namespace CodeGenerate
             this.lbTemplateGroup.Text = this.TemplateGroupName;
 
             paramConfigData = configBllObj.GetParamConfigItem(language, templateGroupName, false);
-            if (paramConfigData != null)
+            if (paramConfigData == null)
             {
-                paramList = new BindingList<ParamItem>(paramConfigData.ParamData);
+                paramConfigData = new TemplateParamConfig();
+                paramConfigData.Language = language;
+                paramConfigData.TemplateGroupName = templateGroupName;
+                paramConfigData.ParamData = new List<ParamItem>();
             }
+
+            paramList = new BindingList<ParamItem>(paramConfigData.ParamData);
         }
 
         /// <summary>
@@ -76,6 +82,50 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (paramList.Any(tmp => String.IsNullOrWhiteSpace(tmp.ParamName)))
+            {
+                MsgBox.Show("存在空的参数名，请确认", "提示");
+                return;
+            }
+
+            if (paramList.Select(tmp => tmp.ParamName.ToLower()).Distinct().Count() != this.paramList.Count)
+            {
+                MsgBox.Show("存在重复的参数项", "提示");
+                return;
+            }
+
+            try
+            {
+                paramConfigData.ParamData = paramList.ToList();
+                var resultIndex = configBllObj.GetData().TemplateParamConfigData.FindIndex(tmp => tmp.Language == this.Langugage && tmp.TemplateGroupName == this.TemplateGroupName);
+                if (resultIndex < 0)
+                {
+                    configBllObj.GetData().TemplateParamConfigData.Add(paramConfigData);
+                }
+
+                // 保存数据
+                configBllObj.Save();
+
+                this.Close();
+            }
+            catch (Exception e1)
+            {
+                MsgBox.ShowExceptionDialog(e1, "数据存在出错");
+            }
+        }
+
+        private void paramGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void paramGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var rowItem = this.paramList[e.RowIndex];
+            if (e.ColumnIndex == 0)
+            {
+                //确保key不重复
+            }
 
         }
     }
