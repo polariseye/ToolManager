@@ -325,7 +325,7 @@ namespace CodeGenerate
             this.progressBar1.Minimum = 0;
             this.progressBar1.Value = 0;
             this.progressBar1.Maximum = templateList.Count * arg.TableList.Count;
-            this.backgroundWorker1.RunWorkerAsync(new DoWorkEventArgs(arg));
+            this.backgroundWorker1.RunWorkerAsync(arg);
         }
 
         /// <summary>
