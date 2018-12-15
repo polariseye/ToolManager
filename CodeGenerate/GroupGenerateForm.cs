@@ -374,8 +374,11 @@ namespace CodeGenerate
             }
             finally
             {
-                this.UseWaitCursor = false;
-                this.Enabled = true;
+                this.BeginInvoke(new Action(() =>
+                {
+                    this.UseWaitCursor = false;
+                    this.Enabled = true;
+                }));
             }
         }
 
