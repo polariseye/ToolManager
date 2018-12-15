@@ -679,11 +679,16 @@ namespace CodeGenerate
             host.Table = table;
             host.ColumnList = columnList;
             host.TemplateFile = templateItem.FilePath;
-            //host.SetValue("NameSpace", "asd");
-            //host.SetValue("ClassName", "asd");
-            //host.SetValue("TablePrefix", "asd");
-            //host.SetValue("ColumnPrefix", "asd");
-            //host.SetValue("PrefixLevel", "asd");
+
+            // 额外参数追加
+            var paramList = this.configBllObj.GetParamConfigItem(templateItem.Language, templateItem.GroupName, false);
+            if (paramList != null && paramList.ParamData.Count > 0)
+            {
+                foreach (var item in paramList.ParamData)
+                {
+                    host.SetValue(item.ParamName, item.ParamValue);
+                }
+            }
 
             Engine engine = new Engine();
             string templateContent = File.ReadAllText(templateItem.FilePath);
