@@ -25,6 +25,9 @@
     int maxColumnNameLength=colList.Max(tmp=>tmp.Name.Length);
     string className = CSharpHostHelper.GetCamelCaseName(table.Name);
     string nameSpace = CSharpHostHelper.FirstLower(className);
+    
+    // 设置输出文件名
+    host.OutputFileName=className + ".go";
 #>
 package <#= nameSpace #>
 

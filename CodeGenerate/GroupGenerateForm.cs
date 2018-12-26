@@ -416,6 +416,12 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void btnSetArg_Click(object sender, EventArgs e)
         {
+            if (this.cmbLanguage.SelectedItem == null)
+            {
+                MsgBox.Show("请选择模块项");
+                return;
+            }
+
             var language = this.cmbLanguage.SelectedItem.ToString();
             if (String.IsNullOrWhiteSpace(language))
             {

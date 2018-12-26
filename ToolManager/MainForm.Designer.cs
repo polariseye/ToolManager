@@ -35,6 +35,7 @@
             this.btnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.模块管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuImportModule = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemManageModule = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewFileWindow = new System.Windows.Forms.ToolStripSplitButton();
             this.btnOpenTextFile = new System.Windows.Forms.ToolStripSplitButton();
@@ -42,7 +43,6 @@
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.visualStudioToolStripExtender1 = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.vS2015BlueTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme();
-            this.menuItemManageModule = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             this.模块管理ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1140, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -93,9 +93,16 @@
             // menuImportModule
             // 
             this.menuImportModule.Name = "menuImportModule";
-            this.menuImportModule.Size = new System.Drawing.Size(180, 22);
+            this.menuImportModule.Size = new System.Drawing.Size(124, 22);
             this.menuImportModule.Text = "导入模块";
             this.menuImportModule.Click += new System.EventHandler(this.menuImportModule_Click);
+            // 
+            // menuItemManageModule
+            // 
+            this.menuItemManageModule.Name = "menuItemManageModule";
+            this.menuItemManageModule.Size = new System.Drawing.Size(124, 22);
+            this.menuItemManageModule.Text = "模块管理";
+            this.menuItemManageModule.Click += new System.EventHandler(this.menuItemManageModule_Click);
             // 
             // toolStrip1
             // 
@@ -104,7 +111,7 @@
             this.btnOpenTextFile});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1140, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -130,9 +137,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 672);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1140, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -141,25 +148,18 @@
             this.dockPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockPanel1.Location = new System.Drawing.Point(0, 50);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.Size = new System.Drawing.Size(800, 378);
+            this.dockPanel1.Size = new System.Drawing.Size(1140, 622);
             this.dockPanel1.TabIndex = 2;
             // 
             // visualStudioToolStripExtender1
             // 
             this.visualStudioToolStripExtender1.DefaultRenderer = null;
             // 
-            // menuItemManageModule
-            // 
-            this.menuItemManageModule.Name = "menuItemManageModule";
-            this.menuItemManageModule.Size = new System.Drawing.Size(180, 22);
-            this.menuItemManageModule.Text = "模块管理";
-            this.menuItemManageModule.Click += new System.EventHandler(this.menuItemManageModule_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1140, 694);
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);

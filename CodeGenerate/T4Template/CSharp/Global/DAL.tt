@@ -22,13 +22,16 @@
 	SOTable table = host.Table;
 	List<SOColumn> colList = host.ColumnList;
 	string nameSpace = host.GetString("NameSpace");
-	string className = host.GetString("ClassName");
 	string authorName = host.GetString("Author");
 	if(string.IsNullOrEmpty(nameSpace))nameSpace = "Entity";
-	if(string.IsNullOrEmpty(className))className = table.Name;
+
+        String className = String.Format("Global{0}DAL", CSharpHostHelper.GetCamelCaseName(table.Name.Substring(2,table.Name.Length-2)));
+
+    // 设置输出文件名
+    host.OutputFileName = className + ".cs";
 #>
 //***********************************************************************************
-// 文件名称：<#= className #>DAL.cs
+// 文件名称：<#= className #>.cs
 // 功能描述：<#= table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ") #>
 // 数据表：<#= table.Name #>
 // 作者：<#= authorName #>
@@ -47,7 +50,7 @@ namespace <#= nameSpace #>
     /// <summary>
     /// <#= table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ") #>
     /// </summary>
-    internal class <#= className#>DAL : GameBaseDAL
+    internal class <#= className#> : GameBaseDAL
     {
         #region 属性
 
@@ -73,7 +76,7 @@ namespace <#= nameSpace #>
         /// <summary>
         /// 初始化此类所能用到的所有sql语句
         /// </summary>
-        static <#= className#>DAL()
+        static <#= className#>()
         {
             getAllCommand = String.Format("SELECT {0} FROM `<#=table.Name#>`;", columns);
             replaceCommand = "REPLACE INTO `<#=table.Name#>` SET <#=String.Join(", ", colList.Select(tmp=>String.Format("`{0}`=@{0}", tmp.Name)))#> ;";
