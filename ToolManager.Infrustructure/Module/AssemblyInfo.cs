@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolManager.Module
+namespace ToolManager.Infrustructure
 {
     /// <summary>
     /// 模块信息
@@ -20,7 +20,12 @@ namespace ToolManager.Module
         /// <summary>
         /// 程序集
         /// </summary>
-        public Assembly AssemblyObj { get; set; }
+        public IModuleProxy ProxyObj { get; set; }
+
+        /// <summary>
+        /// 模块所在应用程序域
+        /// </summary>
+        public AppDomain TargetDomain { get; set; }
 
         /// <summary>
         /// 窗口列表

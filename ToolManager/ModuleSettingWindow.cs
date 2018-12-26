@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace ToolManager
 {
+    using ToolManager.Infrustructure;
     using ToolManager.Module;
 
     public partial class ModuleSettingWindow : Form

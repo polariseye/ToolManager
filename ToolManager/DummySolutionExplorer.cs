@@ -172,9 +172,12 @@ namespace ToolManager
                 return;
             }
 
-            var formObj = (BaseForm)Activator.CreateInstance(formInfoObj.FormType);
-            var container = Singleton.Container.Resolve<IWindowContainer>();
-            formObj.Show(container.GetMainView());
+            var assemblyItem = ModuleManager.GetAssembly(formInfoObj.ModuleName);
+            assemblyItem.ProxyObj.Show(assemblyItem.ModuleInfo.ModulePath, formInfoObj.TypeString);
+            //var formObj = (BaseForm)Activator.CreateInstance(formInfoObj.FormType);
+            //var container = Singleton.Container.Resolve<IWindowContainer>();
+            //formObj.Show(container.GetMainView());
+
         }
 
         /// <summary>

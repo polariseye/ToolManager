@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolManager.Module
+namespace ToolManager.Infrustructure
 {
-    using System.Reflection;
-    using ToolManager.Infrustructure;
-
     /// <summary>
     /// 窗口信息
     /// </summary>
+    [Serializable]
     public class FormInfo
     {
         /// <summary>
-        /// 所在程序集
+        /// 所对应的模块名
         /// </summary>
-        public Assembly AssemblyInfo { get; set; }
+        public String ModuleName { get; set; }
 
         /// <summary>
         /// 自定义信息
@@ -25,8 +23,8 @@ namespace ToolManager.Module
         public FormAttribute AttributeInfo { get; set; }
 
         /// <summary>
-        /// 窗口的类型
+        /// 类型字符串(用于类型反射)
         /// </summary>
-        public Type FormType { get; set; }
+        public String TypeString { get; set; }
     }
 }

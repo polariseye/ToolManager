@@ -96,9 +96,6 @@
     <Compile Include="ModuleSettingWindow.Designer.cs">
       <DependentUpon>ModuleSettingWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Module\FormInfo.cs" />
-    <Compile Include="Module\AssemblyInfo.cs" />
-    <Compile Include="Module\ModuleInfo.cs" />
     <Compile Include="Module\ModuleInfoDAL.cs" />
     <Compile Include="Module\ModuleManager.cs" />
     <Compile Include="Program.cs" />

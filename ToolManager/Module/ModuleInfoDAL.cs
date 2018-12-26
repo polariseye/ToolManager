@@ -9,6 +9,7 @@ namespace ToolManager.Module
     using Kalman;
     using Kalman.Database;
     using LiteDB;
+    using ToolManager.Infrustructure;
 
     /// <summary>
     /// 模块信息数据库访问类

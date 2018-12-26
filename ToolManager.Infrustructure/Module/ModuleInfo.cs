@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToolManager.Module
+namespace ToolManager.Infrustructure
 {
     /// <summary>
     /// 模块信息

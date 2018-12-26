@@ -9,6 +9,7 @@ namespace ToolManager.Module
 {
     using System.IO;
     using ToolManager.Infrustructure;
+    using ToolManager.Utility;
 
     /// <summary>
     /// 模块管理类
@@ -83,6 +84,30 @@ namespace ToolManager.Module
         }
 
         /// <summary>
+        /// 按照模块名获取模块对象
+        /// </summary>
+        /// <param name="moduleName">模块名</param>
+        /// <returns></returns>
+        public static AssemblyInfo GetAssembly(String moduleName, Boolean ifTriggerException = true)
+        {
+            lock (lockObj)
+            {
+                var result = moduleInfos.FirstOrDefault(tmp => tmp.ModuleInfo.Name == moduleName);
+                if (result == null)
+                {
+                    if (ifTriggerException)
+                    {
+                        throw new Exception($"模块不存在 ModuleName:{moduleName}");
+                    }
+
+                    return null;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
         /// 注册一个新模块
         /// </summary>
         /// <param name="name">模块名</param>
@@ -126,54 +151,53 @@ namespace ToolManager.Module
         /// <param name="moduleInfo">模块信息</param>
         /// <returns></returns>
         private static List<FormInfo> LoadModule(ModuleInfo moduleInfo, IOutput logObj, IWindowContainer windowContainer)
-        {            
-            var result = new List<FormInfo>();
-
-            // 寻找模块中的所有窗口和模块初始化类型
-            var moduleInterfaceType = typeof(IModule);
-            Type moduleInitType = null;
-            var assemblyObj = LoadDirDll(moduleInfo.ModulePath, logObj);
-            foreach (var typeItem in assemblyObj.ExportedTypes)
+        {
+            // 配置即将创建的应用程序域
+            AppDomainSetup domainSetup = new AppDomainSetup();
+            domainSetup.ApplicationName = "Module_" + moduleInfo.Name;
+            domainSetup.ApplicationBase = Path.GetDirectoryName(moduleInfo.ModulePath);
+            //// 子目录（相对形式）在AppDomainSetup中加入外部程序集的所在目录，多个目录用分号间隔
+            domainSetup.PrivateBinPath = Path.GetDirectoryName(moduleInfo.ModulePath);
+            //// 设置缓存目录
+            //domainSetup.CachePath = domainSetup.ApplicationBase;
+            //// 获取或设置指示影像复制是打开还是关闭
+            //domainSetup.ShadowCopyFiles = "true";
+            //// 获取或设置目录的名称，这些目录包含要影像复制的程序集
+            //domainSetup.ShadowCopyDirectories = domainSetup.ApplicationBase;
+            domainSetup.DisallowBindingRedirects = false;
+            domainSetup.DisallowCodeDownload = true;
+            //// 配置文件
+            var configFilePath = moduleInfo.ModulePath + ".config";
+            if (File.Exists(configFilePath))
             {
-                // 找到所有的窗口
-                var attrItem = typeItem.GetCustomAttribute<FormAttribute>();
-                if (attrItem != null)
-                {
-                    result.Add(new FormInfo() { AttributeInfo = attrItem, FormType = typeItem });
-                }
-
-                // 寻找模块初始化类
-                if (moduleInitType == null)
-                {
-                    var tmpBaseModule = typeItem.FindInterfaces((tmp, a) => tmp == moduleInterfaceType, null);
-                    if (tmpBaseModule != null && tmpBaseModule.Length > 0)
-                    {
-                        moduleInitType = typeItem;
-                    }
-                }
+                domainSetup.ConfigurationFile = configFilePath;
             }
+            var moduleDomain = AppDomain.CreateDomain(domainSetup.ApplicationName, AppDomain.CurrentDomain.Evidence, domainSetup);
 
-            if (moduleInitType == null && result.Count <= 0)
-            {
-                throw new Exception("这不是一个有效的插件:没有IModule的实现，也没有任何窗口");
-            }
+            // 创建代理类实例
+            var proxyType = typeof(DefaultModuleProxy);
+            var proxyObj = (IModuleProxy)moduleDomain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 
-            // 调用初始化函数
-            if (moduleInitType != null)
+            // 加载模块
+            var result = proxyObj.LoadModule(moduleInfo.ModulePath, logObj, windowContainer);
+
+            // 创建程序集
+            var assemblyInfo = new AssemblyInfo()
             {
-                var initObj = (IModule)Activator.CreateInstance(moduleInitType);
-                initObj.Init(logObj, windowContainer);
+                TargetDomain = moduleDomain,
+                ProxyObj = proxyObj,
+                FormInfoList = new List<FormInfo>(result),
+                ModuleInfo = moduleInfo,
+            };
+            foreach (var item in result)
+            {
+                item.ModuleName = assemblyInfo.ModuleInfo.Name;
             }
 
             // 添加到程序集中
             lock (lockObj)
             {
-                moduleInfos.Add(new AssemblyInfo()
-                {
-                    AssemblyObj = assemblyObj,
-                    FormInfoList = new List<FormInfo>(result),
-                    ModuleInfo = moduleInfo,
-                });
+                moduleInfos.Add(assemblyInfo);
             }
 
             return result;

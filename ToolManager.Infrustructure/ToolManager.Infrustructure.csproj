@@ -49,18 +49,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Module\AssemblyInfo.cs" />
     <Compile Include="BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAttribute.cs" />
-    <Compile Include="IModule.cs" />
+    <Compile Include="Module\FormAttribute.cs" />
+    <Compile Include="Module\FormInfo.cs" />
+    <Compile Include="Module\IModule.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="IWindowContainer.cs" />
+    <Compile Include="Module\IModuleProxy.cs" />
+    <Compile Include="Module\ModuleInfo.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,7 @@ namespace ToolManager.Infrustructure
     /// 窗口的自定义特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [Serializable]
 
     public class FormAttribute : Attribute
     {
