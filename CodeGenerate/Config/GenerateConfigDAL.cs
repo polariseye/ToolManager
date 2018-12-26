@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CodeGenerate.Config
 {
-    using Kalman;
-    using Kalman.Database;
     using LiteDB;
+    using ToolManager.Infrustructure;
+    using ToolManager.Utility.LiteDbHelper;
 
     /// <summary>
     /// 生成配置文件
@@ -25,7 +25,7 @@ namespace CodeGenerate.Config
         public int Insert(GenerateConfig model)
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<GenerateConfig>(TABLE_NAME);
@@ -52,7 +52,7 @@ namespace CodeGenerate.Config
         public int Delete()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<GenerateConfig>(TABLE_NAME);
@@ -68,7 +68,7 @@ namespace CodeGenerate.Config
         public IEnumerable<GenerateConfig> FindAll()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<GenerateConfig>(TABLE_NAME);
@@ -84,7 +84,7 @@ namespace CodeGenerate.Config
         public int Count()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<GenerateConfig>(TABLE_NAME);
@@ -99,7 +99,7 @@ namespace CodeGenerate.Config
         public static void Init()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<GenerateConfig>(TABLE_NAME);

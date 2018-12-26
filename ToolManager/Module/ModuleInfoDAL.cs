@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ToolManager.Module
 {
-    using Kalman;
-    using Kalman.Database;
     using LiteDB;
+    using ToolManager.Infrustructure;
+    using ToolManager.Utility.LiteDbHelper;
 
     /// <summary>
     /// 模块信息数据库访问类
@@ -24,8 +24,8 @@ namespace ToolManager.Module
         /// <returns></returns>
         public int Insert(ModuleInfo model)
         {
-            // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            // Open database (or create if not exits)            
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
@@ -54,7 +54,7 @@ namespace ToolManager.Module
         public bool Exists(string name)
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
@@ -71,7 +71,7 @@ namespace ToolManager.Module
         public int Delete(string name)
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
@@ -88,7 +88,7 @@ namespace ToolManager.Module
         public ModuleInfo FindOne(string name)
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
@@ -104,7 +104,7 @@ namespace ToolManager.Module
         public IEnumerable<ModuleInfo> FindAll()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
@@ -120,7 +120,7 @@ namespace ToolManager.Module
         public int Count()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
@@ -135,7 +135,7 @@ namespace ToolManager.Module
         public static void Init()
         {
             // Open database (or create if not exits)
-            using (var db = new LiteDatabase(NormalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
                 var col = db.GetCollection<ModuleInfo>(TABLE_NAME);
