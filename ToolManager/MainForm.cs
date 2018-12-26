@@ -153,6 +153,7 @@ namespace ToolManager
                     if (targetPath != currentPath)
                     {
                         MsgBox.Show("只能导入当前目录的文件");
+                        return;
                     }
 
                     var formList = ModuleManager.Register(name, openFile.FileName, "", logObj, this);
