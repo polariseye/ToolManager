@@ -9,8 +9,8 @@ namespace CodeGenerate.T4TemplateEngineHost
     /// <summary>
     /// T4模板引擎基类
     /// </summary>
-    [Serializable]
-    public abstract class HostBase
+    //[Serializable]
+    public abstract class HostBase : MarshalByRefObject
     {
         IList<string> assemblyLocationList = new List<string>(); //程序集的引用路径列表
         IList<string> namespaceList = new List<string>();        //命名空间列表
@@ -54,7 +54,7 @@ namespace CodeGenerate.T4TemplateEngineHost
         /// </summary>
         public IList<string> AssemblyLocationList
         {
-            get { return assemblyLocationList;}
+            get { return assemblyLocationList; }
         }
 
         /// <summary>

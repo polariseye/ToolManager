@@ -13,7 +13,7 @@ namespace CodeGenerate.T4TemplateEngineHost
     /// <summary>
     /// T4模板处理引擎，提供数据库表的架构数据
     /// </summary>
-    [Serializable]
+    //[Serializable]
     public class TableHost : HostBase, ITextTemplatingEngineHost
     {
         /// <summary>

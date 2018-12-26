@@ -125,7 +125,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,6 +142,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeGenerate\CodeGenerate.csproj">
+      <Project>{e5c76f21-e453-457c-89ca-1573a71365c7}</Project>
+      <Name>CodeGenerate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kalman\Kalman.csproj">
       <Project>{65FED08B-D2B2-4B49-9257-3DE1954D1675}</Project>
       <Name>Kalman</Name>

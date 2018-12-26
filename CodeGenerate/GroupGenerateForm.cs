@@ -369,8 +369,15 @@ namespace CodeGenerate
             try
             {
                 var arg = e.Argument as GenerateInfo;
-                this.DoBuild(arg.TableList, arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
-                MsgBox.Show("生成成功", "提示");
+                Boolean isError = this.DoBuild(arg.TableList, arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
+                if (isError)
+                {
+                    MsgBox.Show("代码生成出错，具体见输出内容");
+                }
+                else
+                {
+                    MsgBox.Show("生成成功", "提示");
+                }
             }
             catch (Exception e1)
             {
@@ -640,7 +647,7 @@ namespace CodeGenerate
         /// <summary>
         /// 生成处理
         /// </summary>
-        private void DoBuild(List<SOTable> tableList, String language, String groupName, List<TemplateInfo> templateList, String savePath)
+        private Boolean DoBuild(List<SOTable> tableList, String language, String groupName, List<TemplateInfo> templateList, String savePath)
         {
             var logObj = Singleton.Container.Resolve<IOutput>();
             Boolean isHaveError = false;
@@ -664,10 +671,7 @@ namespace CodeGenerate
                 }
             }
 
-            if (isHaveError)
-            {
-                MsgBox.Show("代码生成出错，具体见输出内容");
-            }
+            return isHaveError;
         }
 
         /// <summary>

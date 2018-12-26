@@ -132,7 +132,7 @@ namespace ToolManager.Module
             // 寻找模块中的所有窗口和模块初始化类型
             var moduleInterfaceType = typeof(IModule);
             Type moduleInitType = null;
-            var assemblyObj = LoadDirDll(moduleInfo.ModulePath, logObj);
+            var assemblyObj = Assembly.LoadFrom(moduleInfo.ModulePath);
             foreach (var typeItem in assemblyObj.ExportedTypes)
             {
                 // 找到所有的窗口
