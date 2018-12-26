@@ -244,30 +244,6 @@
     <Compile Include="T4TemplateEngineHost\HostBase.cs" />
     <Compile Include="T4TemplateEngineHost\TableHost.cs" />
     <Compile Include="T4TemplateEngineHost\ViewHost.cs" />
-    <Compile Include="T4Template\CSharp\Global\BLL_List1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BLL_List.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="T4Template\CSharp\Global\DAL1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DAL.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="T4Template\CSharp\Global\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="T4Template\Golang\Model\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="TemplateMange\TemplateInfo.cs" />
     <Compile Include="TemplateMange\TemplateManager.cs" />
   </ItemGroup>
