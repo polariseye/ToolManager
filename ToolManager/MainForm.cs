@@ -140,7 +140,7 @@ namespace ToolManager
             openFile.InitialDirectory = Application.ExecutablePath;
             openFile.Filter = "dll files(*.dll)|*.dll";
             openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = true;
+            openFile.RestoreDirectory = false;
 
             var logObj = Singleton.Container.Resolve<IOutput>();
             try
@@ -148,6 +148,13 @@ namespace ToolManager
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
                     var name = Path.GetFileNameWithoutExtension(openFile.FileName);
+                    var targetPath = Path.GetDirectoryName(openFile.FileName).ToLower().TrimEnd(new char[] { '/', '\\' });
+                    var currentPath = AppDomain.CurrentDomain.BaseDirectory.ToLower().TrimEnd(new char[] { '/', '\\' });
+                    if (targetPath != currentPath)
+                    {
+                        MsgBox.Show("只能导入当前目录的文件");
+                    }
+
                     var formList = ModuleManager.Register(name, openFile.FileName, "", logObj, this);
                     if (formList.Count > 0)
                     {
