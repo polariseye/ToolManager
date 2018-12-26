@@ -372,6 +372,10 @@ namespace CodeGenerate
                 this.DoBuild(arg.TableList, arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
                 MsgBox.Show("生成成功", "提示");
             }
+            catch (Exception e1)
+            {
+                MsgBox.ShowExceptionDialog(e1, "生成出错");
+            }
             finally
             {
                 this.BeginInvoke(new Action(() =>
@@ -652,7 +656,11 @@ namespace CodeGenerate
                         isHaveError = true;
                         logObj.PrintLine($"Table:{table.Name}  TemplateFile:{templateItem.FilePath} {Environment.NewLine} error:{errMsg}");
                     }
-                    this.progressBar1.Value += 1;
+
+                    this.Invoke(new Action(() =>
+                    {
+                        this.progressBar1.Value += 1;
+                    }));
                 }
             }
 

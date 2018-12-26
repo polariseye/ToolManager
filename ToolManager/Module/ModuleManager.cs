@@ -126,7 +126,7 @@ namespace ToolManager.Module
         /// <param name="moduleInfo">模块信息</param>
         /// <returns></returns>
         private static List<FormInfo> LoadModule(ModuleInfo moduleInfo, IOutput logObj, IWindowContainer windowContainer)
-        {
+        {            
             var result = new List<FormInfo>();
 
             // 寻找模块中的所有窗口和模块初始化类型
