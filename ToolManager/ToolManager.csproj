@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -142,10 +142,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeGenerate\CodeGenerate.csproj">
-      <Project>{e5c76f21-e453-457c-89ca-1573a71365c7}</Project>
-      <Name>CodeGenerate</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ToolManager.Infrustructure\ToolManager.Infrustructure.csproj">
       <Project>{e0487645-2c9c-4956-b39a-f4ac6d0628e2}</Project>
       <Name>ToolManager.Infrustructure</Name>
