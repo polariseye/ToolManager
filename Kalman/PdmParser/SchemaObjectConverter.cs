@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.SchemaObject;
 using System.Data;
 using Kalman.Utilities;
 

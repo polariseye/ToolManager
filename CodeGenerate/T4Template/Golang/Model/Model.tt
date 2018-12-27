@@ -1,10 +1,10 @@
 ﻿<#@ template language="C#" hostSpecific="true" debug="false" #>
 <#@ import namespace="Kalman" #>
 <#@ import namespace="Kalman.Extensions" #>
-<#@ import namespace="Kalman.Data" #>
-<#@ import namespace="Kalman.Data.SchemaObject" #>
-<#@ import namespace="Kalman.Data.DbSchemaProvider" #>
-<#@ import namespace="Kalman.Data.DbProvider" #>
+<#@ import namespace="CodeGenerate.Data" #>
+<#@ import namespace="CodeGenerate.Data.SchemaObject" #>
+<#@ import namespace="CodeGenerate.Data.DbSchemaProvider" #>
+<#@ import namespace="CodeGenerate.Data.DbProvider" #>
 <#@ import namespace="Kalman.Utilities" #>
 <#@ import namespace="CodeGenerate.T4TemplateEngineHost" #>
 <#@ import namespace="System" #>

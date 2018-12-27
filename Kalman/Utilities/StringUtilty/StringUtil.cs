@@ -1,4 +1,4 @@
-﻿using Kalman.Data.SchemaObject;
+﻿using CodeGenerate.Data.SchemaObject;
 using Kalman.Security;
 using System;
 using System.Collections.Generic;

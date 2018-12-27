@@ -4,10 +4,11 @@ using System.Windows.Forms;
 
 namespace CodeGenerate
 {
-    using Kalman.Database;
     using ToolManager.Infrustructure;
     using Autofac;
     using ToolManager.Utility.Alert;
+    using CodeGenerate.Config;
+    using CodeGenerate.DbConnConfig;
 
     public partial class DatabaseSettingForm : Form
     {

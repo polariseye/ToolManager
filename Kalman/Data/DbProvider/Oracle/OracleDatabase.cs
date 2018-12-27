@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common; 
 using System.Globalization;
-using Kalman.Data.DbSchemaProvider;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.DbSchemaProvider;
+using CodeGenerate.Data.SchemaObject;
 using Oracle.ManagedDataAccess.Client;
 
-namespace Kalman.Data.DbProvider
+namespace CodeGenerate.Data.DbProvider
 {
 	public class OracleDatabase : Database
 	{

@@ -6,7 +6,7 @@ using System.Data;
 using System.Collections.Specialized;
 using System.Collections;
 using Kalman.Resources;
-using Kalman.Data;
+using CodeGenerate.Data;
 
 namespace Kalman
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
-using Kalman.Data.DbProvider;
+using CodeGenerate.Data.DbProvider;
 using Kalman.Utilities;
 using System.Data.Common;
 using System.Data;
@@ -11,7 +11,7 @@ using System.Data.OleDb;
 using System.Reflection;
 using Kalman.Database;
 
-namespace Kalman.Data
+namespace CodeGenerate.Data
 {
     /// <summary>
     /// 数据库工厂

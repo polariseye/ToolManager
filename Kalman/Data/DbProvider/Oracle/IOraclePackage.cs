@@ -1,4 +1,4 @@
-﻿namespace Kalman.Data.DbProvider
+﻿namespace CodeGenerate.Data.DbProvider
 {
 	/// <summary>
 	/// Represents the description of an oracle package mapping.

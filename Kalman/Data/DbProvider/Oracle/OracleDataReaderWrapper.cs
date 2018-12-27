@@ -4,7 +4,7 @@ using System.Collections;
 using System.Data; 
 using System.Globalization;
 
-namespace Kalman.Data.DbProvider
+namespace CodeGenerate.Data.DbProvider
 {
     /// <summary>
     /// 对OracleDataReader对象的包装

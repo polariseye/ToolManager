@@ -9,12 +9,12 @@ using System.Data.OleDb;
 using System.Globalization;
 using System.Transactions;
 using Kalman.Utilities;
-using Kalman.Data.DbSchemaProvider;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.DbSchemaProvider;
+using CodeGenerate.Data.SchemaObject;
 using Kalman.Mapping;
 using Kalman.Extensions;
 
-namespace Kalman.Data
+namespace CodeGenerate.Data
 {
     /// <summary>
     /// 抽象数据库类

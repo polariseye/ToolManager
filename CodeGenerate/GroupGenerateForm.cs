@@ -1,29 +1,25 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CodeGenerate
 {
     using Autofac;
     using CodeGenerate.Config;
+    using CodeGenerate.Data;
+    using CodeGenerate.Data.DbProvider;
+    using CodeGenerate.Data.SchemaObject;
+    using CodeGenerate.DbConnConfig;
     using CodeGenerate.T4TemplateEngineHost;
     using CodeGenerate.TemplateMange;
-    using Kalman.Data;
-    using Kalman.Data.DbProvider;
-    using Kalman.Data.SchemaObject;
-    using Kalman.Database;
-    using Kalman.Utilities;
     using Microsoft.VisualStudio.TextTemplating;
     using MySql.Data.MySqlClient;
-    using System.CodeDom.Compiler;
-    using System.Diagnostics;
-    using System.IO;
     using ToolManager.Infrustructure;
     using ToolManager.Utility.Alert;
 

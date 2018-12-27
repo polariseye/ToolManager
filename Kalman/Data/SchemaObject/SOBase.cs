@@ -6,7 +6,7 @@ using Kalman.Collections;
 using System.Runtime.Serialization;
 using Kalman.Utilities;
 
-namespace Kalman.Data.SchemaObject
+namespace CodeGenerate.Data.SchemaObject
 {
     /// <summary>
     /// 架构对象基类

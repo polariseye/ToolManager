@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.SchemaObject;
 using System.Data;
 using System.Data.Common;
 using Kalman.Utilities;
 
-namespace Kalman.Data
+namespace CodeGenerate.Data
 {
     public abstract class DbSchema : IDbSchema
     {

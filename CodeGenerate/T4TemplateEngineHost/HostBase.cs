@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kalman.Utilities;
+using ToolManager.Utility;
 
 namespace CodeGenerate.T4TemplateEngineHost
 {
@@ -17,7 +17,7 @@ namespace CodeGenerate.T4TemplateEngineHost
 
         public HostBase()
         {
-            AddAssemblyLocation(typeof(Kalman.Data.DbSchema).Assembly.Location);    //Kalman.dll
+            AddAssemblyLocation(typeof(CodeGenerate.Data.DbSchema).Assembly.Location);    //Kalman.dll
             AddAssemblyLocation(typeof(HostBase).Assembly.Location);    //Kalman.Studio.exe
 
             AddAssemblyLocation(typeof(System.AppDomain).Assembly.Location);    //mscorlib.dll
@@ -28,10 +28,10 @@ namespace CodeGenerate.T4TemplateEngineHost
             /*
             AddNamespace("Kalman");
             AddNamespace("Kalman.Extensions");
-            AddNamespace("Kalman.Data");
-            AddNamespace("Kalman.Data.SchemaObject");
-            AddNamespace("Kalman.Data.DbSchemaProvider");
-            AddNamespace("Kalman.Data.DbProvider");
+            AddNamespace("CodeGenerate.Data");
+            AddNamespace("CodeGenerate.Data.SchemaObject");
+            AddNamespace("CodeGenerate.Data.DbSchemaProvider");
+            AddNamespace("CodeGenerate.Data.DbProvider");
             AddNamespace("Kalman.Utilities");
 
             AddNamespace("Kalman.Studio.T4TemplateEngineHost");

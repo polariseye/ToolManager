@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace Kalman.Data.SchemaObject
+namespace CodeGenerate.Data.SchemaObject
 {
     /// <summary>
     /// 列架构对象

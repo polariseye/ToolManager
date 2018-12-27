@@ -5,10 +5,10 @@ using System.Text;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.Common;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.SchemaObject;
 using Kalman.Utilities;
 
-namespace Kalman.Data.DbSchemaProvider
+namespace CodeGenerate.Data.DbSchemaProvider
 {
     public class OleDbSchema : DbSchema
     {

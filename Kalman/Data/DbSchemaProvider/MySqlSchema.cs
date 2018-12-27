@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.SchemaObject;
 using System.Data.Common;
 using System.Data;
 using Kalman.Utilities;
 
 /* MySql元数据信息架构参考：http://dev.mysql.com/doc/refman/5.1/zh/information-schema.html */
 
-namespace Kalman.Data.DbSchemaProvider
+namespace CodeGenerate.Data.DbSchemaProvider
 {
     public class MySqlSchema : DbSchema
     {

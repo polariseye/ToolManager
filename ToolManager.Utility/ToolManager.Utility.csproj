@@ -39,8 +39,10 @@
       <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -58,10 +60,42 @@
       <DependentUpon>ErrorInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Alert\MsgBox.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="ByteUtil.cs" />
+    <Compile Include="CheckUtil.cs" />
+    <Compile Include="CollectionUtil.cs" />
+    <Compile Include="ConnectionStringUtil.cs" />
+    <Compile Include="ConvertUtil.cs" />
+    <Compile Include="CurrencyUtil.cs" />
+    <Compile Include="DatetimeUtil.cs" />
+    <Compile Include="Extensions\ByteExt.cs" />
+    <Compile Include="Extensions\CollectionExt.cs" />
+    <Compile Include="Extensions\DataExt.cs" />
+    <Compile Include="Extensions\ObjectExt.cs" />
+    <Compile Include="Extensions\StringExtension\StringExt.CodeBuilder.cs" />
+    <Compile Include="Extensions\StringExtension\StringExt.cs" />
+    <Compile Include="Extensions\StringExtension\StringExt.Format.cs" />
+    <Compile Include="Extensions\StringExtension\StringExt.Html.cs" />
+    <Compile Include="Extensions\TypeExt.cs" />
+    <Compile Include="IOUtil.cs" />
     <Compile Include="LiteDbHelper\BsonHelper.cs" />
     <Compile Include="LiteDbHelper\LiteDBHelper.cs" />
+    <Compile Include="LunarDateUtil.cs" />
+    <Compile Include="NetUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomUtil.cs" />
+    <Compile Include="ReflectUtil.cs" />
+    <Compile Include="RegexHelper\RegexConst.cs" />
+    <Compile Include="RegexHelper\RegexValidate.cs" />
+    <Compile Include="Security\Enums\AsymmetricAlgorithmType.cs" />
+    <Compile Include="Security\Enums\HashAlgorithmType.cs" />
+    <Compile Include="Security\Enums\SymmetricAlgorithmType.cs" />
+    <Compile Include="Security\HashCryto.cs" />
+    <Compile Include="Security\SymmetricCryto.cs" />
+    <Compile Include="SpellUtil.cs" />
+    <Compile Include="StringUtilty\StringUtil.CodeBuilder.cs" />
+    <Compile Include="StringUtilty\StringUtil.cs" />
+    <Compile Include="StringUtilty\StringUtil.Html.cs" />
+    <Compile Include="TypeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ToolManager.Infrustructure\ToolManager.Infrustructure.csproj">

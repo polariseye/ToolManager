@@ -6,7 +6,7 @@ using System.Data.Common;
 using System.Data;
 using Kalman.Extensions;
 
-namespace Kalman.Data.SchemaObject
+namespace CodeGenerate.Data.SchemaObject
 {
     /// <summary>
     /// 表架构对象

@@ -37,6 +37,9 @@
     <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="EmitMapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmitMapper.1.0.0\lib\EmitMapper.dll</HintPath>
+    </Reference>
     <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
       <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
     </Reference>
@@ -105,6 +108,7 @@
     <Reference Include="System.Composition.TypedParts, Version=1.0.31.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Composition.TypedParts.1.0.31\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
       <Private>True</Private>
@@ -171,6 +175,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
@@ -213,6 +218,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\CachingMechanism.cs" />
+    <Compile Include="Database\Common\DataReaderWrapper.cs" />
+    <Compile Include="Database\Mapping\DataReaderToObjectMapper.cs" />
+    <Compile Include="Database\Mapping\MapExt.cs" />
+    <Compile Include="Database\Mapping\ObjectsChangeTracker.cs" />
+    <Compile Include="DbConnConfig\DbConn.cs" />
+    <Compile Include="DbConnConfig\DbConnDAL.cs" />
+    <Compile Include="Resources\Data.Designer.cs">
+      <DependentUpon>Data.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\DatabaseFactory.cs" />
+    <Compile Include="Database\DatabaseType.cs" />
+    <Compile Include="Database\DataType.cs" />
+    <Compile Include="Database\DbProvider\DB2\DB2Database.cs" />
+    <Compile Include="Database\DbProvider\Firebird\FirebirdDatabase.cs" />
+    <Compile Include="Database\DbProvider\MySql\MySqlDatabase.cs" />
+    <Compile Include="Database\DbProvider\Odbc\OdbcDatabase.cs" />
+    <Compile Include="Database\DbProvider\OleDb\OleDbDatabase.cs" />
+    <Compile Include="Database\DbProvider\SQLite\SQLiteDatabase.cs" />
+    <Compile Include="Database\DbProvider\Sql\SqlServerDatabase.cs" />
+    <Compile Include="Database\DbSchema.cs" />
+    <Compile Include="Database\DbSchemaFactory.cs" />
+    <Compile Include="Database\DbSchemaProvider\DB2Schema.cs" />
+    <Compile Include="Database\DbSchemaProvider\MySqlSchema.cs" />
+    <Compile Include="Database\DbSchemaProvider\OleDbSchema.cs" />
+    <Compile Include="Database\DbSchemaProvider\OracleSchema.cs" />
+    <Compile Include="Database\DbSchemaProvider\SQLiteSchema.cs" />
+    <Compile Include="Database\DbSchemaProvider\SqlServerSchema.cs" />
+    <Compile Include="Database\IDbSchema.cs" />
+    <Compile Include="Database\ParameterCache.cs" />
+    <Compile Include="Database\SchemaObject\SOBase.cs" />
+    <Compile Include="Database\SchemaObject\SOColumn.cs" />
+    <Compile Include="Database\SchemaObject\SOCommand.cs" />
+    <Compile Include="Database\SchemaObject\SOCommandParameter.cs" />
+    <Compile Include="Database\SchemaObject\SODatabase.cs" />
+    <Compile Include="Database\SchemaObject\SOIndex.cs" />
+    <Compile Include="Database\SchemaObject\SOSchemaBase.cs" />
+    <Compile Include="Database\SchemaObject\SOTable.cs" />
+    <Compile Include="Database\SchemaObject\SOTableViewBase.cs" />
+    <Compile Include="Database\SchemaObject\SOView.cs" />
+    <Compile Include="Database\TransactionScopeConnections.cs" />
+    <Compile Include="Database\UpdateBehavior.cs" />
     <Compile Include="Config\GenerateConfigBLL.cs" />
     <Compile Include="Config\GenerateConfigDAL.cs" />
     <Compile Include="Config\TemplateParamConfig.cs" />
@@ -247,6 +297,7 @@
     <Compile Include="TemplateMange\TemplateManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\config.xml" />
     <Content Include="T4Template\CSharp\Dynamic\BLL_List.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLL_List1.cs</LastGenOutput>
@@ -290,10 +341,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kalman\Kalman.csproj">
-      <Project>{65fed08b-d2b2-4b49-9257-3de1954d1675}</Project>
-      <Name>Kalman</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ToolManager.Infrustructure\ToolManager.Infrustructure.csproj">
       <Project>{e0487645-2c9c-4956-b39a-f4ac6d0628e2}</Project>
       <Name>ToolManager.Infrustructure</Name>
@@ -310,6 +357,11 @@
     <EmbeddedResource Include="DatabaseSettingForm.resx">
       <DependentUpon>DatabaseSettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Data.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Data.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GroupGenerateForm.resx">
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,6 +374,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.1\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Database\DbMapping\" />
     <Folder Include="T4Template\CSharp\Model\" />
     <Folder Include="T4Template\CSharp\Player\" />
   </ItemGroup>

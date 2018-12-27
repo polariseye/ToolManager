@@ -387,14 +387,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\DbProvider\DB2\vssver2.scc" />
-    <None Include="Data\DbProvider\Firebird\vssver2.scc" />
-    <None Include="Data\DbProvider\MySql\vssver2.scc" />
-    <None Include="Data\DbProvider\Odbc\vssver2.scc" />
-    <None Include="Data\DbProvider\OleDb\vssver2.scc" />
-    <None Include="Data\DbProvider\Oracle\vssver2.scc" />
-    <None Include="Data\DbProvider\SQLite\vssver2.scc" />
-    <None Include="Data\DbProvider\Sql\vssver2.scc" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

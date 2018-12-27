@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.VisualStudio.TextTemplating;
 using System.IO;
 using System.CodeDom.Compiler;
-using Kalman.Utilities;
-using Kalman.Data.SchemaObject;
+using ToolManager.Utility;
+using CodeGenerate.Data.SchemaObject;
 
 namespace CodeGenerate.T4TemplateEngineHost
 {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kalman.Utilities;
-using Kalman.Data.SchemaObject;
+using CodeGenerate.Data.SchemaObject;
 using System.Data;
 using System.Collections;
 
-namespace Kalman.Data.DbSchemaProvider
+namespace CodeGenerate.Data.DbSchemaProvider
 {
     /// <summary>
     /// SqlServerSchema

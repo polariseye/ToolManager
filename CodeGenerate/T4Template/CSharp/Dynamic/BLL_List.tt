@@ -1,0 +1,39 @@
+﻿<#@ template language="C#" hostSpecific="true" debug="false"  #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.Common" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.Specialized" #>
+<#@ import namespace="ToolManager.Utility.Extensions" #>
+<#@ import namespace="CodeGenerate.Data" #>
+<#@ import namespace="CodeGenerate.Data.SchemaObject" #>
+<#@ import namespace="CodeGenerate.Data.DbSchemaProvider" #>
+<#@ import namespace="CodeGenerate.Data.DbProvider" #>
+<#@ import namespace="ToolManager.Utility" #>
+<#@ import namespace="CodeGenerate.T4TemplateEngineHost" #>
+<# 
+	TableHost host = (TableHost)(Host);
+	SOTable table = host.Table;
+	List<SOColumn> colList = host.ColumnList;
+	string nameSpace = host.GetString("NameSpace");
+	string authorName = host.GetString("Author");
+	if(string.IsNullOrEmpty(nameSpace))nameSpace = "Entity";
+
+    String className = String.Format("Dynamic{0}BLL", CSharpHostHelper.GetCamelCaseName(table.Name.Substring(2,table.Name.Length-2)));
+
+    // 设置输出文件名
+    host.OutputFileName = className + ".cs";
+#>
+//***********************************************************************************
+// 文件名称：<#= className #>BLL.cs
+// 功能描述：<#= table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ") #>
+// 数据表：<#= table.Name #>
+// 作者：<#= authorName #>
+// 日期：<#= DateTime.Now.ToDateTimeString() #>
+// 修改记录：
+//***********************************************************************************
