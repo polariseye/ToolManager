@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Plugn.CodeGenerate.DbConnConfig
+namespace Plugn.CodeGenerate.DbConn
 {
     using LiteDB;
     using Plugn.CodeGenerate.Config;
@@ -14,7 +14,7 @@ namespace Plugn.CodeGenerate.DbConnConfig
     /// <summary>
     /// DbConn DAL
     /// </summary>
-    public class DbConnDAL
+    public class DbConnConfigDAL
     {
         static string TABLE_NAME = "DbConns"; //table name
 
@@ -23,13 +23,13 @@ namespace Plugn.CodeGenerate.DbConnConfig
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public int Insert(DbConn model)
+        public int Insert(DbConnConfig model)
         {
             // Open database (or create if not exits)
             using (var db = new LiteDatabase(LocalConfig .SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
                 model.IsActive = true;
 
                 var value = col.Insert(model);
@@ -42,9 +42,9 @@ namespace Plugn.CodeGenerate.DbConnConfig
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Update(DbConn model)
+        public bool Update(DbConnConfig model)
         {
-            return LiteDBHelper<DbConn>.Update(LocalConfig.SettingDataFileName, model, TABLE_NAME);
+            return LiteDBHelper<DbConnConfig>.Update(LocalConfig.SettingDataFileName, model, TABLE_NAME);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Plugn.CodeGenerate.DbConnConfig
             using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
 
                 return col.Exists(x => x.Name == name);
             }
@@ -76,7 +76,7 @@ namespace Plugn.CodeGenerate.DbConnConfig
             using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
 
                 return col.Delete(x => x.Name == name);
             }
@@ -87,13 +87,13 @@ namespace Plugn.CodeGenerate.DbConnConfig
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public DbConn FindOne(string name)
+        public DbConnConfig FindOne(string name)
         {
             // Open database (or create if not exits)
             using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
 
                 return col.FindOne(x => x.Name == name);
             }
@@ -103,13 +103,13 @@ namespace Plugn.CodeGenerate.DbConnConfig
         /// Find all list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DbConn> FindAll()
+        public IEnumerable<DbConnConfig> FindAll()
         {
             // Open database (or create if not exits)
             using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
 
                 return col.FindAll();
             }
@@ -125,7 +125,7 @@ namespace Plugn.CodeGenerate.DbConnConfig
             using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
 
                 return col.Count();
             }
@@ -140,7 +140,7 @@ namespace Plugn.CodeGenerate.DbConnConfig
             using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
             {
                 // Get DbConnection collection
-                var col = db.GetCollection<DbConn>(TABLE_NAME);
+                var col = db.GetCollection<DbConnConfig>(TABLE_NAME);
 
                 if (col.Count() == 0)
                 {

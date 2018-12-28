@@ -12,7 +12,7 @@ namespace Plugn.CodeGenerate.Data
 {
     using DbProvider;
     using ToolManager.Utility;
-    using DbConnConfig;
+    using DbConn;
 
     /// <summary>
     /// 数据库工厂
@@ -34,7 +34,7 @@ namespace Plugn.CodeGenerate.Data
         public static Database Create(string connectionStringName)
         {
             CheckUtil.ArgumentNotNullOrEmpty(connectionStringName, "connectionStringName");
-            DbConnDAL dal = new DbConnDAL();
+            DbConnConfigDAL dal = new DbConnConfigDAL();
 
             var model = dal.FindOne(connectionStringName);
 

@@ -56,6 +56,9 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnSetArg = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbRuleList = new System.Windows.Forms.ComboBox();
+            this.btnSetRule = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(453, 109);
+            this.label2.Location = new System.Drawing.Point(453, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 6;
@@ -111,7 +114,7 @@
             // 
             this.cmbTemplateGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTemplateGroup.FormattingEnabled = true;
-            this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 105);
+            this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 103);
             this.cmbTemplateGroup.Name = "cmbTemplateGroup";
             this.cmbTemplateGroup.Size = new System.Drawing.Size(137, 20);
             this.cmbTemplateGroup.TabIndex = 7;
@@ -139,7 +142,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(453, 177);
+            this.label4.Location = new System.Drawing.Point(453, 199);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 11;
@@ -147,7 +150,7 @@
             // 
             // txtSavePath
             // 
-            this.txtSavePath.Location = new System.Drawing.Point(518, 159);
+            this.txtSavePath.Location = new System.Drawing.Point(518, 181);
             this.txtSavePath.Name = "txtSavePath";
             this.txtSavePath.Size = new System.Drawing.Size(192, 21);
             this.txtSavePath.TabIndex = 12;
@@ -166,7 +169,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(12, 51);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(425, 289);
+            this.groupBox1.Size = new System.Drawing.Size(425, 308);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "要生成的表";
@@ -214,7 +217,7 @@
             this.listBox2.MinimumSize = new System.Drawing.Size(180, 196);
             this.listBox2.Name = "listBox2";
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox2.Size = new System.Drawing.Size(180, 220);
+            this.listBox2.Size = new System.Drawing.Size(180, 232);
             this.listBox2.TabIndex = 23;
             this.listBox2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox2_MouseDoubleClick);
             // 
@@ -239,7 +242,7 @@
             this.listBox1.MinimumSize = new System.Drawing.Size(180, 196);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(180, 220);
+            this.listBox1.Size = new System.Drawing.Size(180, 232);
             this.listBox1.TabIndex = 21;
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
@@ -261,7 +264,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(455, 214);
+            this.btnGenerate.Location = new System.Drawing.Point(455, 234);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(255, 97);
             this.btnGenerate.TabIndex = 10;
@@ -273,7 +276,7 @@
             // 
             this.cmbTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTemplate.FormattingEnabled = true;
-            this.cmbTemplate.Location = new System.Drawing.Point(518, 132);
+            this.cmbTemplate.Location = new System.Drawing.Point(518, 128);
             this.cmbTemplate.Name = "cmbTemplate";
             this.cmbTemplate.Size = new System.Drawing.Size(192, 20);
             this.cmbTemplate.TabIndex = 19;
@@ -282,7 +285,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(453, 136);
+            this.label7.Location = new System.Drawing.Point(453, 132);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 12);
             this.label7.TabIndex = 18;
@@ -290,7 +293,7 @@
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(518, 185);
+            this.btnSelectFile.Location = new System.Drawing.Point(518, 205);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(92, 23);
             this.btnSelectFile.TabIndex = 20;
@@ -304,14 +307,14 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(455, 312);
+            this.progressBar1.Location = new System.Drawing.Point(455, 332);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(255, 23);
             this.progressBar1.TabIndex = 21;
             // 
             // btnOpenFolder
             // 
-            this.btnOpenFolder.Location = new System.Drawing.Point(616, 185);
+            this.btnOpenFolder.Location = new System.Drawing.Point(616, 205);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(94, 23);
             this.btnOpenFolder.TabIndex = 22;
@@ -321,7 +324,7 @@
             // 
             // btnSetArg
             // 
-            this.btnSetArg.Location = new System.Drawing.Point(656, 104);
+            this.btnSetArg.Location = new System.Drawing.Point(656, 102);
             this.btnSetArg.Name = "btnSetArg";
             this.btnSetArg.Size = new System.Drawing.Size(54, 23);
             this.btnSetArg.TabIndex = 23;
@@ -329,11 +332,42 @@
             this.btnSetArg.UseVisualStyleBackColor = true;
             this.btnSetArg.Click += new System.EventHandler(this.btnSetArg_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(453, 157);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 12);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "命名规则:";
+            // 
+            // cmbRuleList
+            // 
+            this.cmbRuleList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRuleList.FormattingEnabled = true;
+            this.cmbRuleList.Location = new System.Drawing.Point(518, 153);
+            this.cmbRuleList.Name = "cmbRuleList";
+            this.cmbRuleList.Size = new System.Drawing.Size(137, 20);
+            this.cmbRuleList.TabIndex = 25;
+            // 
+            // btnSetRule
+            // 
+            this.btnSetRule.Location = new System.Drawing.Point(656, 152);
+            this.btnSetRule.Name = "btnSetRule";
+            this.btnSetRule.Size = new System.Drawing.Size(54, 23);
+            this.btnSetRule.TabIndex = 26;
+            this.btnSetRule.Text = "配置";
+            this.btnSetRule.UseVisualStyleBackColor = true;
+            this.btnSetRule.Click += new System.EventHandler(this.btnSetRule_Click);
+            // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(722, 358);
+            this.ClientSize = new System.Drawing.Size(722, 377);
+            this.Controls.Add(this.btnSetRule);
+            this.Controls.Add(this.cmbRuleList);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnSetArg);
             this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.progressBar1);
@@ -392,5 +426,8 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.Button btnSetArg;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbRuleList;
+        private System.Windows.Forms.Button btnSetRule;
     }
 }

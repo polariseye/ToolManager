@@ -15,13 +15,15 @@ namespace CodeGenerate
     using Plugn.CodeGenerate.Data;
     using Plugn.CodeGenerate.Data.DbProvider;
     using Plugn.CodeGenerate.Data.SchemaObject;
-    using Plugn.CodeGenerate.DbConnConfig;
+    using Plugn.CodeGenerate.DbConn;
     using Plugn.CodeGenerate.T4TemplateEngineHost;
     using Plugn.CodeGenerate.TemplateMange;
     using Microsoft.VisualStudio.TextTemplating;
     using MySql.Data.MySqlClient;
     using ToolManager.Infrustructure;
     using ToolManager.Utility.Alert;
+    using Plugn.CodeGenerate;
+    using Plugn.CodeGenerate.Config.NameRule;
 
     [FormAttribute("代码生成", "按模板组生成代码")]
     public partial class GroupGenerateForm : BaseForm
@@ -50,6 +52,11 @@ namespace CodeGenerate
         /// 配置对象业务处理类
         /// </summary>
         private GenerateConfigBLL configBllObj = new GenerateConfigBLL();
+
+        /// <summary>
+        /// 规则配置对象
+        /// </summary>
+        private NameRuleConfigBLL nameRuleConfigBLLObj = new NameRuleConfigBLL();
 
         /// <summary>
         /// 构造函数
@@ -439,6 +446,22 @@ namespace CodeGenerate
             configBllObj.Refresh();
         }
 
+        /// <summary>
+        /// 规则配置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSetRule_Click(object sender, EventArgs e)
+        {
+            var frm = new SetNameRuleForm();
+            frm.ShowDialog();
+
+            this.nameRuleConfigBLLObj.Refresh();
+
+            this.cmbRuleList.Items.Clear();
+            this.cmbRuleList.Items.AddRange(this.nameRuleConfigBLLObj.GetData().Select(tmp => tmp.Name).ToArray());
+        }
+
         #endregion  事件处理
 
         #region 连接处理
@@ -448,7 +471,7 @@ namespace CodeGenerate
         /// </summary>
         private void LoadConnection()
         {
-            var dal = new DbConnDAL();
+            var dal = new DbConnConfigDAL();
             var connList = dal.FindAll().ToList();
 
             cmbConnectionList.Items.Clear();
@@ -479,7 +502,7 @@ namespace CodeGenerate
         {
             // 加载数据库
             nowConnectionName = connectionName;
-            var dal = new DbConnDAL();
+            var dal = new DbConnConfigDAL();
             var model = dal.FindOne(connectionName);
 
             this.nowDbSchema = DbSchemaFactory.Create(new MySqlDatabase(model.ConnectionString, MySqlClientFactory.Instance));
@@ -738,5 +761,6 @@ namespace CodeGenerate
         }
 
         #endregion 代码生成
+
     }
 }

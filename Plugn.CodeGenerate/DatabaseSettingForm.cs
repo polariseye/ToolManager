@@ -8,11 +8,11 @@ namespace CodeGenerate
     using Autofac;
     using ToolManager.Utility.Alert;
     using Plugn.CodeGenerate.Config;
-    using Plugn.CodeGenerate.DbConnConfig;
+    using Plugn.CodeGenerate.DbConn;
 
     public partial class DatabaseSettingForm : Form
     {
-        DbConnDAL dal = new DbConnDAL();
+        DbConnConfigDAL dal = new DbConnConfigDAL();
         bool ConnectStringChanged = false;
 
         public DatabaseSettingForm()
@@ -62,7 +62,7 @@ namespace CodeGenerate
                 var model = dal.FindOne(connectName);
                 if (model == null)
                 {
-                    model = new DbConn();
+                    model = new DbConnConfig();
                     model.ConnectionString = connectString;
                     model.Name = connectName;
                     model.ProviderName = providerName;

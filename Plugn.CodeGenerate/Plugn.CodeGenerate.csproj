@@ -218,14 +218,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\LocalConfig.cs" />
+    <Compile Include="Config\Generate\LocalConfig.cs" />
     <Compile Include="Database\CachingMechanism.cs" />
     <Compile Include="Database\Common\DataReaderWrapper.cs" />
     <Compile Include="Database\Mapping\DataReaderToObjectMapper.cs" />
     <Compile Include="Database\Mapping\MapExt.cs" />
     <Compile Include="Database\Mapping\ObjectsChangeTracker.cs" />
-    <Compile Include="DbConnConfig\DbConn.cs" />
-    <Compile Include="DbConnConfig\DbConnDAL.cs" />
+    <Compile Include="Config\DbConn\DbConnConfig.cs" />
+    <Compile Include="Config\DbConn\DbConnConfigDAL.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Resources\Data.Designer.cs">
       <DependentUpon>Data.resx</DependentUpon>
@@ -265,16 +265,16 @@
     <Compile Include="Database\SchemaObject\SOView.cs" />
     <Compile Include="Database\TransactionScopeConnections.cs" />
     <Compile Include="Database\UpdateBehavior.cs" />
-    <Compile Include="Config\GenerateConfigBLL.cs" />
-    <Compile Include="Config\GenerateConfigDAL.cs" />
-    <Compile Include="Config\TemplateParamConfig.cs" />
+    <Compile Include="Config\Generate\GenerateConfigBLL.cs" />
+    <Compile Include="Config\Generate\GenerateConfigDAL.cs" />
+    <Compile Include="Config\Generate\TemplateParamConfig.cs" />
     <Compile Include="DatabaseSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DatabaseSettingForm.designer.cs">
       <DependentUpon>DatabaseSettingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Config\GenerateConfig.cs" />
+    <Compile Include="Config\Generate\GenerateConfig.cs" />
     <Compile Include="GroupGenerateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +282,13 @@
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Config\RuleConfig\RuleConfig.cs" />
+    <Compile Include="SetNameRuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetNameRuleForm.Designer.cs">
+      <DependentUpon>SetNameRuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetTemplateParamForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GroupGenerateForm.resx">
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetNameRuleForm.resx">
+      <DependentUpon>SetNameRuleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetTemplateParamForm.resx">
       <DependentUpon>SetTemplateParamForm.cs</DependentUpon>

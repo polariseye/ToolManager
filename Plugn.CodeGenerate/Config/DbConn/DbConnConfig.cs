@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Plugn.CodeGenerate.DbConnConfig
+namespace Plugn.CodeGenerate.DbConn
 {
     /// <summary>
     /// 数据库连接
     /// </summary>
-    public class DbConn
+    public class DbConnConfig
     {
         /// <summary>
         /// 数据库连接ID
