@@ -55,11 +55,23 @@ namespace ToolManager.Module
         /// 获取所有模块
         /// </summary>
         /// <returns></returns>
-        public static List<AssemblyInfo> GetAllModule()
+        public static List<AssemblyInfo> GetAllAssemblyInfo()
         {
             lock (lockObj)
             {
                 return new List<AssemblyInfo>(moduleInfos);
+            }
+        }
+
+        /// <summary>
+        /// 获取所有模块
+        /// </summary>
+        /// <returns></returns>
+        public static List<ModuleInfo> GetAllModule()
+        {
+            lock (lockObj)
+            {
+                return new List<ModuleInfo>(moduleInfos.Select(tmp => tmp.ModuleInfo));
             }
         }
 
@@ -126,7 +138,7 @@ namespace ToolManager.Module
         /// <param name="moduleInfo">模块信息</param>
         /// <returns></returns>
         private static List<FormInfo> LoadModule(ModuleInfo moduleInfo, IOutput logObj, IWindowContainer windowContainer)
-        {            
+        {
             var result = new List<FormInfo>();
 
             // 寻找模块中的所有窗口和模块初始化类型

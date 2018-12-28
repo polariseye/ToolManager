@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TextTemplating;
 using System.IO;
 using System.CodeDom.Compiler;
-using Plugn.CodeGenerate.Data.SchemaObject;
+using System.Reflection;
 
 namespace Plugn.CodeGenerate.T4TemplateEngineHost
 {
+    using Microsoft.VisualStudio.TextTemplating;
+    using Plugn.CodeGenerate.Data.SchemaObject;
+
     /// <summary>
     /// T4模板处理引擎，提供数据库的架构数据
     /// </summary>
@@ -112,9 +114,21 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         public AppDomain ProvideTemplatingAppDomain(string content)
         {
             //This host will provide a new application domain each time the engine processes a text template.
-            //该主机将提供一个新的应用程序域每次引擎处理文本模板。
-            return AppDomain.CreateDomain("Generation App Domain");
 
+            // 该主机将提供一个新的应用程序域每次引擎处理文本模板。
+            //setup.ApplicationBase = Assembly.GetExecutingAssembly().CodeBase;
+            AppDomainSetup setup = new AppDomainSetup();
+            setup.ApplicationName = "Generation App Domain";
+            Uri a = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+
+            var nowPath = Path.GetDirectoryName(a.LocalPath);
+            setup.ApplicationBase = nowPath;
+            setup.PrivateBinPath = setup.ApplicationBase;
+            //setup.CachePath = setup.ApplicationBase;
+            //setup.ShadowCopyFiles = "true";
+            //setup.ShadowCopyDirectories = setup.ApplicationBase;
+
+            var nowDomain = AppDomain.CreateDomain("Generation App Domain", AppDomain.CurrentDomain.Evidence, setup);
             //This could be changed to return the current appdomain, but new 
             //assemblies are loaded into this AppDomain on a regular basis.
             //If the AppDomain lasts too long, it will grow indefintely, 
@@ -125,6 +139,7 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
 
             //This could be customized based on the contents of the text 
             //template, which are provided as a parameter for that purpose.
+            return nowDomain;
         }
 
         /// <summary>

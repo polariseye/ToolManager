@@ -37,7 +37,7 @@ namespace ToolManager
         /// <param name="e"></param>
         private void ModuleSettingWindow_Load(object sender, EventArgs e)
         {
-            var moduleList = ModuleManager.GetAllModule().Select(tmp => new ShownInfo(tmp)).ToList();
+            var moduleList = ModuleManager.GetAllAssemblyInfo().Select(tmp => new ShownInfo(tmp)).ToList();
             this.moduleGrid.DataSource = new BindingList<ShownInfo>(moduleList);
         }
 

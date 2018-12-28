@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace ToolManager
 {
     using Autofac;
-    using System.IO;
+    using System.Globalization;
     using ToolManager.Infrustructure;
     using ToolManager.Module;
     using ToolManager.Utility.Alert;
@@ -46,7 +42,107 @@ namespace ToolManager
 
             // 初始化
             ModuleManager.Init(outputWindow, this);
+
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
+
+        /// <summary>
+        /// 寻找找不到的dll
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        private System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            AssemblyName nameInfo = new AssemblyName(args.Name);
+            var fileName = nameInfo.Name + ".dll";
+
+            // 从当前位置查找
+            Assembly result = null;
+            if ((result = LoadAssembly(AppDomain.CurrentDomain.BaseDirectory, fileName)) != null)
+            {
+                return result;
+            }
+            // 从语言包加载
+            result = LoadAssemblyByCulture(AppDomain.CurrentDomain.BaseDirectory, fileName, nameInfo.CultureInfo);
+            if (result != null)
+            {
+                return result;
+            }
+
+            // 从父程序集加载
+            if (args.RequestingAssembly != null)
+            {
+                if ((result = LoadAssembly(args.RequestingAssembly.CodeBase, fileName)) != null)
+                {
+                    return result;
+                }
+                // 从语言包加载
+                result = LoadAssemblyByCulture(args.RequestingAssembly.CodeBase, fileName, nameInfo.CultureInfo);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            // 从模块列表加载
+            var moduleList = ModuleManager.GetAllAssemblyInfo();
+            foreach (var moduleItem in moduleList)
+            {
+                var searchPath = Path.GetDirectoryName(moduleItem.ModuleInfo.ModulePath);
+                if ((result = LoadAssembly(searchPath, fileName)) != null)
+                {
+                    return result;
+                }
+                // 从语言包加载
+                result = LoadAssemblyByCulture(searchPath, fileName, nameInfo.CultureInfo);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            // 未找到需要加载的文件(则加载对应的语言包文件)
+            System.Diagnostics.Debug.WriteLine($"未找到文件:{args.Name}");
+            throw new FileNotFoundException($"File Not Found :{args.Name}");
+        }
+
+        /// <summary>
+        /// 加载程序集
+        /// </summary>
+        /// <param name="dirPath"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private Assembly LoadAssembly(String dirPath, String fileName)
+        {
+            var searchPath = Path.Combine(dirPath, fileName);
+            if (File.Exists(searchPath))
+            {
+                return Assembly.LoadFrom(searchPath);
+            }
+
+            return null;
+        }
+
+        private Assembly LoadAssemblyByCulture(String dirPath, String fileName, CultureInfo cultureInfo)
+        {
+            while (true)
+            {
+                if (cultureInfo == null || String.IsNullOrWhiteSpace(cultureInfo.Name))
+                {
+                    return null;
+                }
+
+                var searchPath = Path.Combine(dirPath, cultureInfo.Name, fileName);
+                if (File.Exists(searchPath))
+                {
+                    return Assembly.LoadFrom(searchPath);
+                }
+
+                cultureInfo = cultureInfo.Parent;
+            }
+        }
+
 
         protected override void OnLoad(EventArgs e)
         {
@@ -150,7 +246,7 @@ namespace ToolManager
                     var name = Path.GetFileNameWithoutExtension(openFile.FileName);
                     var targetPath = Path.GetDirectoryName(openFile.FileName).ToLower().TrimEnd(new char[] { '/', '\\' });
                     var currentPath = AppDomain.CurrentDomain.BaseDirectory.ToLower().TrimEnd(new char[] { '/', '\\' });
-                    if (targetPath != currentPath)
+                    if (targetPath.Contains(currentPath))
                     {
                         MsgBox.Show("只能导入当前目录的文件");
                         return;

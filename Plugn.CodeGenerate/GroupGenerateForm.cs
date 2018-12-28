@@ -449,7 +449,7 @@ namespace CodeGenerate
         private void LoadConnection()
         {
             var dal = new DbConnDAL();
-            var connList = dal.FindAll();
+            var connList = dal.FindAll().ToList();
 
             cmbConnectionList.Items.Clear();
             foreach (var item in connList)
@@ -457,11 +457,11 @@ namespace CodeGenerate
                 cmbConnectionList.Items.Add(item.Name);
             }
 
-            // 加载连接数据
-            var nowConn = connList.FirstOrDefault(tmp => tmp.Name == nowConnectionName);
-            if (nowConn != null)
+            var tmpIndex = connList.FindIndex(tmp => tmp.Name == nowConnectionName);
+            if (tmpIndex >= 0)
             {
-                LoadTable(nowConn.Name);
+                cmbConnectionList.SelectedIndex = tmpIndex;
+                LoadTable(connList[tmpIndex].Name);
             }
             else
             {

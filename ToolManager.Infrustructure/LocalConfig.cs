@@ -41,5 +41,17 @@ namespace ToolManager.Infrustructure
                 return result;
             }
         }
+
+        /// <summary>
+        /// 获取插件目录
+        /// </summary>
+        public static String PlugnPath
+        {
+            get
+            {
+                var result = Path.Combine(SettingPath, "Plugn");
+                return result;
+            }
+        }
     }
 }
