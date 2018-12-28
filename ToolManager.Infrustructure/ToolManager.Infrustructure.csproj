@@ -56,7 +56,6 @@
     <Compile Include="IModule.cs" />
     <Compile Include="IOutput.cs" />
     <Compile Include="IWindowContainer.cs" />
-    <Compile Include="LocalConfig.cs" />
     <Compile Include="Singleton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

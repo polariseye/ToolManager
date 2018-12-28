@@ -9,10 +9,10 @@ namespace ToolManager.Utility.LiteDbHelper
 
     public static class LiteDBHelper<T> where T : new()
     {
-        public static int Insert(T model, string tableName)
+        public static int Insert(String dbFileName, T model, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection<T>(tableName);
@@ -23,10 +23,10 @@ namespace ToolManager.Utility.LiteDbHelper
         }
 
 
-        public static bool Update(T model, string tableName)
+        public static bool Update(String dbFileName, T model, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection<T>(tableName);
@@ -36,10 +36,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static bool Delete(int docId, string tableName)
+        public static bool Delete(String dbFileName, int docId, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection(tableName);
@@ -48,10 +48,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static T FindOne(Query query, string tableName)
+        public static T FindOne(String dbFileName, Query query, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection(tableName);
@@ -60,10 +60,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static bool Exists(Query query, string tableName)
+        public static bool Exists(String dbFileName, Query query, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection(tableName);
@@ -72,10 +72,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static BsonDocument FindBsonById(int docId, string tableName)
+        public static BsonDocument FindBsonById(String dbFileName, int docId, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection(tableName);
@@ -84,10 +84,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static T FindById(int docId, string tableName)
+        public static T FindById(String dbFileName, int docId, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection(tableName);
@@ -96,10 +96,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static IEnumerable<BsonDocument> FindBsonAll(string tableName)
+        public static IEnumerable<BsonDocument> FindBsonAll(String dbFileName, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection(tableName);
@@ -108,10 +108,10 @@ namespace ToolManager.Utility.LiteDbHelper
             }
         }
 
-        public static IEnumerable<T> FindAll(string tableName)
+        public static IEnumerable<T> FindAll(String dbFileName, string tableName)
         {
             // Open data file (or create if not exits)
-            using (var db = new LiteDatabase(LocalConfig.SettingDataFileName))
+            using (var db = new LiteDatabase(dbFileName))
             {
                 // Get a collection (or create, if not exits)
                 var col = db.GetCollection<T>(tableName);

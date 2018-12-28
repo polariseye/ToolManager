@@ -42,7 +42,7 @@ namespace Plugn.CodeGenerate.Config
         /// <returns></returns>
         public bool Update(GenerateConfig model)
         {
-            return LiteDBHelper<GenerateConfig>.Update(model, TABLE_NAME);
+            return LiteDBHelper<GenerateConfig>.Update(LocalConfig.SettingDataFileName, model, TABLE_NAME);
         }
 
         /// <summary>

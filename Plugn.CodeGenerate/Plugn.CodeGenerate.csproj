@@ -218,6 +218,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\LocalConfig.cs" />
     <Compile Include="Database\CachingMechanism.cs" />
     <Compile Include="Database\Common\DataReaderWrapper.cs" />
     <Compile Include="Database\Mapping\DataReaderToObjectMapper.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Database\Mapping\ObjectsChangeTracker.cs" />
     <Compile Include="DbConnConfig\DbConn.cs" />
     <Compile Include="DbConnConfig\DbConnDAL.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Resources\Data.Designer.cs">
       <DependentUpon>Data.resx</DependentUpon>
       <AutoGen>True</AutoGen>

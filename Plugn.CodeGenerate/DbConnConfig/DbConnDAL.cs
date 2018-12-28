@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Plugn.CodeGenerate.DbConnConfig
 {
     using LiteDB;
+    using Plugn.CodeGenerate.Config;
     using ToolManager.Infrustructure;
     using ToolManager.Utility.LiteDbHelper;
 
@@ -43,7 +44,7 @@ namespace Plugn.CodeGenerate.DbConnConfig
         /// <returns></returns>
         public bool Update(DbConn model)
         {
-            return LiteDBHelper<DbConn>.Update(model, TABLE_NAME);
+            return LiteDBHelper<DbConn>.Update(LocalConfig.SettingDataFileName, model, TABLE_NAME);
         }
 
         /// <summary>

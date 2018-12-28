@@ -80,6 +80,7 @@
     <Compile Include="DummySolutionExplorer.designer.cs">
       <DependentUpon>DummySolutionExplorer.cs</DependentUpon>
     </Compile>
+    <Compile Include="LocalConfig.cs" />
     <Compile Include="MainForm.Container.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Form</SubType>

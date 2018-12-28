@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeGenerate
 {
+    using System.Configuration;
     using System.Reflection;
     using ToolManager.Infrustructure;
 
@@ -16,8 +17,11 @@ namespace CodeGenerate
     {
         public void Init(IOutput logObj, IWindowContainer windowContainer)
         {
-            //// var path = Assembly.GetExecutingAssembly().Location + ".config";
-            //// System.Configuration.ConfigurationManager.OpenExeConfiguration(path);
+            //string configPath = System.Reflection.Assembly.GetExecutingAssembly().Location.ToString() + ".config";
+            //ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap()
+            //{
+            //    ExeConfigFilename = configPath
+            //}, ConfigurationUserLevel.None);
         }
     }
 }

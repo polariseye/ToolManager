@@ -42,7 +42,7 @@ namespace ToolManager.Module
         /// <returns></returns>
         public bool Update(ModuleInfo model)
         {
-            return LiteDBHelper<ModuleInfo>.Update(model, TABLE_NAME);
+            return LiteDBHelper<ModuleInfo>.Update(LocalConfig.SettingDataFileName, model, TABLE_NAME);
         }
 
         /// <summary>
