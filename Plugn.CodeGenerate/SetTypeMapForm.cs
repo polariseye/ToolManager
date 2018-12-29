@@ -49,8 +49,8 @@ namespace Plugn.CodeGenerate
         /// <param name="e"></param>
         private void SetTemplateParamForm_Load(object sender, EventArgs e)
         {
-            var mapList = configBllObj.GetList(this.Langugage);
-            if (mapList.Count > 0)
+            var mapList = configBllObj.GetList(this.Langugage, false);
+            if (mapList != null && mapList.Count > 0)
             {
                 typeMapList = mapList.Select(tmp => tmp.Clone()).ToList();
             }
@@ -71,7 +71,7 @@ namespace Plugn.CodeGenerate
                 return;
             }
 
-            if (typeMapList.Select(tmp => tmp.DbType.ToLower()).Distinct().Count() != this.typeMapList.Count)
+            if (typeMapList.Select(tmp => tmp.DbType.ToLower() + "_" + tmp.Length).Distinct().Count() != this.typeMapList.Count)
             {
                 MsgBox.Show("存在重复的配置项", "提示");
                 return;
