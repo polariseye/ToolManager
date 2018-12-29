@@ -59,7 +59,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbRuleList = new System.Windows.Forms.ComboBox();
             this.btnSetRule = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSetTypeMap = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -361,21 +361,22 @@
             this.btnSetRule.UseVisualStyleBackColor = true;
             this.btnSetRule.Click += new System.EventHandler(this.btnSetRule_Click);
             // 
-            // button1
+            // btnSetTypeMap
             // 
-            this.button1.Location = new System.Drawing.Point(642, 77);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 23);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "类型映射";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSetTypeMap.Location = new System.Drawing.Point(642, 77);
+            this.btnSetTypeMap.Name = "btnSetTypeMap";
+            this.btnSetTypeMap.Size = new System.Drawing.Size(68, 23);
+            this.btnSetTypeMap.TabIndex = 27;
+            this.btnSetTypeMap.Text = "类型映射";
+            this.btnSetTypeMap.UseVisualStyleBackColor = true;
+            this.btnSetTypeMap.Click += new System.EventHandler(this.btnSetTypeMap_Click);
             // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 377);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSetTypeMap);
             this.Controls.Add(this.btnSetRule);
             this.Controls.Add(this.cmbRuleList);
             this.Controls.Add(this.label5);
@@ -440,6 +441,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbRuleList;
         private System.Windows.Forms.Button btnSetRule;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSetTypeMap;
     }
 }

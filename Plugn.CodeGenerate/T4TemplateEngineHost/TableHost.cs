@@ -9,6 +9,7 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
 {
     using Microsoft.VisualStudio.TextTemplating;
     using Plugn.CodeGenerate.Config.NameRule;
+    using Plugn.CodeGenerate.Config.TypeMap;
     using Plugn.CodeGenerate.Data.SchemaObject;
 
     /// <summary>
@@ -18,29 +19,60 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
     public class TableHost : HostBase, ITextTemplatingEngineHost
     {
         /// <summary>
+        /// 命名规则配置对象
+        /// </summary>
+        private NameRuleConfig nameRuleConfig;
+
+        /// <summary>
+        /// 类型映射配置列表
+        /// </summary>
+        private List<TypeMapConfig> typeMapConfigList;
+
+        /// <summary>
+        /// 列信息
+        /// </summary>
+        List<SOColumn> columnList;
+
+        /// <summary>
         /// 表信息
         /// </summary>
         public SOTable Table { get; set; }
 
-        List<SOColumn> _ColumnList;
+        /// <summary>
+        /// 列信息
+        /// </summary>
         public List<SOColumn> ColumnList
         {
             get
             {
-                if (_ColumnList == null) return Table.ColumnList;
-                return _ColumnList;
+                if (columnList == null) return Table.ColumnList;
+                return columnList;
             }
-            set { _ColumnList = value; }
+            set { columnList = value; }
         }
 
         /// <summary>
-        /// 命名规则配置对象
+        /// 输出的文件名
         /// </summary>
-        public NameRuleConfig NameRuleConfig { get; set; } = new NameRuleConfig();
+        public String OutputFileName { get; set; }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="nameRuleConfig"></param>
+        /// <param name="typeMapConfigList"></param>
+        /// <param name="table"></param>
+        public TableHost(NameRuleConfig nameRuleConfig, List<TypeMapConfig> typeMapConfigList, SOTable table)
+        {
+            this.nameRuleConfig = nameRuleConfig;
+            this.typeMapConfigList = typeMapConfigList;
+            this.Table = table;
+        }
 
         #region ITextTemplatingEngineHost
 
         CompilerErrorCollection _ErrorCollection;
+
         /// <summary>
         /// 模板引擎主机处理模板时错误信息集合
         /// </summary>
@@ -49,17 +81,15 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
             get { return _ErrorCollection; }
         }
 
-        string _FileExtention = ".cs";
         /// <summary>
         /// 文件扩展名
         /// </summary>
-        public string FileExtention { get { return _FileExtention; } set { _FileExtention = value; } }
+        public string FileExtention { get; set; } = ".cs";
 
-        Encoding _FileEncoding = Encoding.UTF8;
         /// <summary>
         /// 文件编码
         /// </summary>
-        public Encoding FileEncoding { get { return _FileEncoding; } }
+        public Encoding FileEncoding { get; private set; } = Encoding.UTF8;
 
         #endregion
 
@@ -304,7 +334,7 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         /// <param name="extension">扩展名，比如".txt"</param>
         public void SetFileExtension(string extension)
         {
-            _FileExtention = extension;
+            this.FileExtention = extension;
         }
 
         /// <summary>
@@ -314,7 +344,7 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         /// <param name="fromOutputDirective"></param>
         public void SetOutputEncoding(Encoding encoding, bool fromOutputDirective)
         {
-            _FileEncoding = encoding;
+            this.FileEncoding = encoding;
         }
 
         /// <summary>
@@ -350,11 +380,31 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
             set;
         }
 
-        /// <summary>
-        /// 输出的文件名
-        /// </summary>
-        public String OutputFileName { get; set; }
-
         #endregion
+
+        #region 本地功能函数
+
+        /// <summary>
+        /// 按照规则格式化名字
+        /// </summary>
+        /// <param name="obj">规则对象</param>
+        /// <param name="val">结果名字</param>
+        /// <returns></returns>
+        public String FormatName(String val)
+        {
+            return NameRuleConfigBLL.FormatName(this.nameRuleConfig, val);
+        }
+
+        /// <summary>
+        /// 获取指定语言的类型字符串
+        /// </summary>
+        /// <param name="colItem"></param>
+        /// <returns></returns>
+        public String GetTypeString(SOColumn colItem)
+        {
+            return TypeMapConfigBLL.ConvertToLanguageType(this.typeMapConfigList, colItem.NativeType, colItem.Length);
+        }
+
+        #endregion 本地功能函数
     }
 }

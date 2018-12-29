@@ -223,6 +223,9 @@
     <Compile Include="Config\NameRule\ReplaceItem.cs" />
     <Compile Include="Config\NameRule\NameRuleConfigBLL.cs" />
     <Compile Include="Config\NameRule\NameRuleConfigDAL.cs" />
+    <Compile Include="Config\TypeMap\TypeMapConfigBLL.cs" />
+    <Compile Include="Config\TypeMap\TypeMapConfigDAL.cs" />
+    <Compile Include="Config\TypeMap\TypeMapConfig.cs" />
     <Compile Include="Database\CachingMechanism.cs" />
     <Compile Include="Database\Common\DataReaderWrapper.cs" />
     <Compile Include="Database\Mapping\DataReaderToObjectMapper.cs" />
@@ -309,7 +312,7 @@
     <Compile Include="T4TemplateEngineHost\DatabaseHost.cs" />
     <Compile Include="T4TemplateEngineHost\DefaultHost.cs" />
     <Compile Include="T4TemplateEngineHost\HostBase.cs" />
-    <Compile Include="T4TemplateEngineHost\NameRuleConfigExt.cs" />
+    <Compile Include="T4TemplateEngineHost\Host.Extend.cs" />
     <Compile Include="T4TemplateEngineHost\TableHost.cs" />
     <Compile Include="T4TemplateEngineHost\ViewHost.cs" />
     <Compile Include="TemplateMange\TemplateInfo.cs" />
@@ -389,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SetTemplateParamForm.resx">
       <DependentUpon>SetTemplateParamForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetTypeMapForm.resx">
+      <DependentUpon>SetTypeMapForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

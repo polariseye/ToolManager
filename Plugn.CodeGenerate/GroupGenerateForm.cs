@@ -24,6 +24,7 @@ namespace CodeGenerate
     using ToolManager.Utility.Alert;
     using Plugn.CodeGenerate;
     using Plugn.CodeGenerate.Config.NameRule;
+    using Plugn.CodeGenerate.Config.TypeMap;
 
     [FormAttribute("代码生成", "按模板组生成代码")]
     public partial class GroupGenerateForm : BaseForm
@@ -57,6 +58,11 @@ namespace CodeGenerate
         /// 规则配置对象
         /// </summary>
         private NameRuleConfigBLL nameRuleConfigBLLObj = new NameRuleConfigBLL();
+
+        /// <summary>
+        /// 类型映射处理
+        /// </summary>
+        private TypeMapConfigBLL typeMapConfigBLLObj = new TypeMapConfigBLL();
 
         /// <summary>
         /// 构造函数
@@ -323,6 +329,24 @@ namespace CodeGenerate
                 SavePath = savePath
             };
 
+            // 设置命名规则
+            if (String.IsNullOrWhiteSpace(this.cmbRuleList.SelectedText))
+            {
+                MsgBox.Show("请选择命名规则列表");
+                return;
+            }
+            arg.NameRuleConfig = this.nameRuleConfigBLLObj.GetItem(this.cmbRuleList.Text);
+
+            // 设置类型转换列表
+            var typeMapList = typeMapConfigBLLObj.GetList(language, false);
+            if (typeMapList == null || typeMapList.Count <= 0)
+            {
+                MsgBox.Show("请配置类型映射列表");
+                return;
+            }
+            arg.TypeMapConfigList = typeMapList;
+
+
             this.UseWaitCursor = true;
             this.Enabled = false;
             this.progressBar1.Minimum = 0;
@@ -357,6 +381,16 @@ namespace CodeGenerate
             public List<SOTable> TableList { get; set; }
 
             /// <summary>
+            /// 类型映射配置列表
+            /// </summary>
+            public List<TypeMapConfig> TypeMapConfigList { get; set; }
+
+            /// <summary>
+            /// 命名配置对象
+            /// </summary>
+            public NameRuleConfig NameRuleConfig { get; set; }
+
+            /// <summary>
             /// 保存路径
             /// </summary>
             public String SavePath { get; set; }
@@ -372,7 +406,7 @@ namespace CodeGenerate
             try
             {
                 var arg = e.Argument as GenerateInfo;
-                Boolean isError = this.DoBuild(arg.TableList, arg.Language, arg.GroupName, arg.TemplateInfos, arg.SavePath);
+                Boolean isError = this.DoBuild(arg);
                 if (isError)
                 {
                     MsgBox.Show("代码生成出错，具体见输出内容");
@@ -460,6 +494,26 @@ namespace CodeGenerate
 
             this.cmbRuleList.Items.Clear();
             this.cmbRuleList.Items.AddRange(this.nameRuleConfigBLLObj.GetData().Select(tmp => tmp.Name).ToArray());
+        }
+
+        /// <summary>
+        /// 类型映射配置处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSetTypeMap_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(this.cmbLanguage.Text))
+            {
+                MsgBox.Show("语言不能为空");
+                return;
+            }
+
+            // 展示配置窗口
+            var frm = new SetTypeMapForm(this.cmbLanguage.Text.Trim());
+            frm.ShowDialog();
+
+            typeMapConfigBLLObj.Refresh();
         }
 
         #endregion  事件处理
@@ -672,17 +726,17 @@ namespace CodeGenerate
         /// <summary>
         /// 生成处理
         /// </summary>
-        private Boolean DoBuild(List<SOTable> tableList, String language, String groupName, List<TemplateInfo> templateList, String savePath)
+        private Boolean DoBuild(GenerateInfo generateParam)
         {
             var logObj = Singleton.Container.Resolve<IOutput>();
             Boolean isHaveError = false;
 
             //遍历选中的表，一张表对应生成一个代码文件
-            foreach (SOTable table in tableList)
+            foreach (SOTable table in generateParam.TableList)
             {
-                foreach (var templateItem in templateList)
+                foreach (var templateItem in generateParam.TemplateInfos)
                 {
-                    var errMsg = BuildTable(table, templateItem, savePath);
+                    var errMsg = BuildTable(table, generateParam.NameRuleConfig, generateParam.TypeMapConfigList, templateItem, generateParam.SavePath);
                     if (String.IsNullOrWhiteSpace(errMsg) == false)
                     {
                         isHaveError = true;
@@ -705,7 +759,7 @@ namespace CodeGenerate
         /// <param name="table">表对象</param>
         /// <param name="templateItem">模板列表</param>
         /// <param name="outputPath">保存到的目标位置</param>
-        private String BuildTable(SOTable table, TemplateInfo templateItem, String outputPath)
+        private String BuildTable(SOTable table, NameRuleConfig nameRuleConfig, List<TypeMapConfig> typeMapConfigList, TemplateInfo templateItem, String outputPath)
         {
             List<SOColumn> columnList = table.ColumnList;//可能传入的是从PDObject对象转换过来的SODatabase对象
 
@@ -715,7 +769,7 @@ namespace CodeGenerate
             }
 
             //生成代码文件
-            TableHost host = new TableHost();
+            TableHost host = new TableHost(nameRuleConfig, typeMapConfigList, table);
             host.Table = table;
             host.ColumnList = columnList;
             host.TemplateFile = templateItem.FilePath;
@@ -761,6 +815,5 @@ namespace CodeGenerate
         }
 
         #endregion 代码生成
-
     }
 }

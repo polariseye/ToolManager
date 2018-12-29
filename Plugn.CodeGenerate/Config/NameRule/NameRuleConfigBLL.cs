@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Plugn.CodeGenerate.Config.NameRule
 {
+    using ToolManager.Utility;
+
     public class NameRuleConfigBLL
     {
         private List<NameRuleConfig> data;
@@ -117,6 +119,67 @@ namespace Plugn.CodeGenerate.Config.NameRule
         {
             dalObj.Delete(id);
             this.data.RemoveAll(tmp => tmp.Id == id);
+        }
+
+        /// <summary>
+        /// 按照规则格式化名字
+        /// </summary>
+        /// <param name="obj">规则对象</param>
+        /// <param name="val">结果名字</param>
+        /// <returns></returns>
+        public static String FormatName(NameRuleConfig obj, String val)
+        {
+            if (obj == null || String.IsNullOrEmpty(val))
+            {
+                return val;
+            }
+
+            // 前缀处理
+            if (obj.PrefixList != null && obj.PrefixList.Count > 0)
+            {
+                foreach (var item in obj.PrefixList)
+                {
+                    if (val.StartsWith(item.OriginValue))
+                    {
+                        val = item.NewValue + val.Substring(item.OriginValue.Length);
+                        break;
+                    }
+                }
+            }
+
+            // 后缀处理
+            if (obj.StuffixList != null && obj.StuffixList.Count > 0)
+            {
+                foreach (var item in obj.StuffixList)
+                {
+                    if (val.EndsWith(item.OriginValue))
+                    {
+                        val = val.Substring(0, val.Length - item.OriginValue.Length) + item.NewValue;
+                        break;
+                    }
+                }
+            }
+
+            // 转换为正式的名字
+            if (String.IsNullOrWhiteSpace(obj.Seperator) == false)
+            {
+                val = StringUtil.ToPascalName(val, obj.Seperator);
+            }
+            //// 首字母大小写处理
+            if (String.IsNullOrWhiteSpace(val) == false)
+            {
+                switch (obj.FirstCharHandleType)
+                {
+                    case FirstCharHandleType.FirstCharLower:
+                        val = StringUtil.InitialToLower(val);
+                        break;
+                    case FirstCharHandleType.FirstCharUp:
+                        val = StringUtil.InitialToUpper(val);
+                        break;
+                }
+            }
+
+            return val;
         }
     }
 }

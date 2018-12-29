@@ -8,6 +8,8 @@ using System.Text;
 namespace Plugn.CodeGenerate.T4TemplateEngineHost
 {
     using Microsoft.VisualStudio.TextTemplating;
+    using Plugn.CodeGenerate.Config.NameRule;
+    using Plugn.CodeGenerate.Config.TypeMap;
     using Plugn.CodeGenerate.Data.SchemaObject;
 
     /// <summary>
@@ -17,6 +19,16 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
     public class DatabaseHost : HostBase, ITextTemplatingEngineHost
     {
         public SODatabase Database { get; set; }
+
+        /// <summary>
+        /// 命名规则配置对象
+        /// </summary>
+        private NameRuleConfig nameRuleConfig;
+
+        /// <summary>
+        /// 类型映射配置列表
+        /// </summary>
+        private List<TypeMapConfig> typeMapConfigList;
 
         #region ITextTemplatingEngineHost
 
@@ -299,5 +311,30 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         }
 
         #endregion
+
+        #region 本地功能函数
+
+        /// <summary>
+        /// 按照规则格式化名字
+        /// </summary>
+        /// <param name="obj">规则对象</param>
+        /// <param name="val">结果名字</param>
+        /// <returns></returns>
+        public String FormatName(String val)
+        {
+            return NameRuleConfigBLL.FormatName(this.nameRuleConfig, val);
+        }
+
+        /// <summary>
+        /// 获取指定语言的类型字符串
+        /// </summary>
+        /// <param name="colItem"></param>
+        /// <returns></returns>
+        public String GetTypeString(SOColumn colItem)
+        {
+            return TypeMapConfigBLL.ConvertToLanguageType(this.typeMapConfigList, colItem.NativeType, colItem.Length);
+        }
+
+        #endregion 本地功能函数
     }
 }
