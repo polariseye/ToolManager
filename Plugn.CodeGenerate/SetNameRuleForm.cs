@@ -113,6 +113,19 @@ namespace Plugn.CodeGenerate
                 return;
             }
 
+            var prefixList = ((BindingList<ReplaceItem>)this.gridPrefix.DataSource).ToList();
+            var stuffixList = ((BindingList<ReplaceItem>)this.gridSuffix.DataSource).ToList();
+            if (prefixList.Select(tmp => tmp.OriginValue.Trim()).Distinct().Count() != prefixList.Count)
+            {
+                MsgBox.Show("存在重复的前缀参数配置项", "提示");
+                return;
+            }
+            if (stuffixList.Select(tmp => tmp.OriginValue.Trim()).Distinct().Count() != stuffixList.Count)
+            {
+                MsgBox.Show("存在重复的后缀参数配置项", "提示");
+                return;
+            }
+
             var oldName = this.nowConfigItem.Name;
             this.nowConfigItem.Name = ruleName;
             this.nowConfigItem.Seperator = txtSeperator.Text.Trim();
@@ -125,8 +138,8 @@ namespace Plugn.CodeGenerate
                 this.nowConfigItem.FirstCharHandleType = FirstCharHandleType.FirstCharUp;
             }
 
-            this.nowConfigItem.PrefixList = ((BindingList<ReplaceItem>)this.gridPrefix.DataSource).ToList();
-            this.nowConfigItem.StuffixList = ((BindingList<ReplaceItem>)this.gridSuffix.DataSource).ToList();
+            this.nowConfigItem.PrefixList = prefixList;
+            this.nowConfigItem.StuffixList = stuffixList;
 
             // 更新项
             this.bllObj.Save(this.nowConfigItem);
@@ -157,6 +170,18 @@ namespace Plugn.CodeGenerate
                 return;
             }
 
+            var prefixList = ((BindingList<ReplaceItem>)this.gridPrefix.DataSource).ToList();
+            var stuffixList = ((BindingList<ReplaceItem>)this.gridSuffix.DataSource).ToList();
+            if (prefixList.Select(tmp => tmp.OriginValue.Trim()).Distinct().Count() != prefixList.Count)
+            {
+                MsgBox.Show("存在重复的前缀参数配置项", "提示");
+                return;
+            }
+            if (stuffixList.Select(tmp => tmp.OriginValue.Trim()).Distinct().Count() != stuffixList.Count)
+            {
+                MsgBox.Show("存在重复的后缀参数配置项", "提示");
+                return;
+            }
 
             this.nowConfigItem = new NameRuleConfig();
             this.nowConfigItem.Id = GetNextId();
@@ -171,8 +196,8 @@ namespace Plugn.CodeGenerate
                 this.nowConfigItem.FirstCharHandleType = FirstCharHandleType.FirstCharUp;
             }
 
-            this.nowConfigItem.PrefixList = ((BindingList<ReplaceItem>)this.gridPrefix.DataSource).ToList();
-            this.nowConfigItem.StuffixList = ((BindingList<ReplaceItem>)this.gridSuffix.DataSource).ToList();
+            this.nowConfigItem.PrefixList = prefixList;
+            this.nowConfigItem.StuffixList = stuffixList;
 
             // 添加项
             this.bllObj.Insert(this.nowConfigItem);

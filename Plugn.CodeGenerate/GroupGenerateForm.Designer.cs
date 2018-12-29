@@ -59,6 +59,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbRuleList = new System.Windows.Forms.ComboBox();
             this.btnSetRule = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,7 +117,7 @@
             this.cmbTemplateGroup.FormattingEnabled = true;
             this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 103);
             this.cmbTemplateGroup.Name = "cmbTemplateGroup";
-            this.cmbTemplateGroup.Size = new System.Drawing.Size(137, 20);
+            this.cmbTemplateGroup.Size = new System.Drawing.Size(132, 20);
             this.cmbTemplateGroup.TabIndex = 7;
             this.cmbTemplateGroup.SelectedIndexChanged += new System.EventHandler(this.cmbTemplateGroup_SelectedIndexChanged);
             // 
@@ -126,7 +127,7 @@
             this.cmbLanguage.FormattingEnabled = true;
             this.cmbLanguage.Location = new System.Drawing.Point(518, 78);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(192, 20);
+            this.cmbLanguage.Size = new System.Drawing.Size(118, 20);
             this.cmbLanguage.TabIndex = 9;
             this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
             // 
@@ -347,7 +348,7 @@
             this.cmbRuleList.FormattingEnabled = true;
             this.cmbRuleList.Location = new System.Drawing.Point(518, 153);
             this.cmbRuleList.Name = "cmbRuleList";
-            this.cmbRuleList.Size = new System.Drawing.Size(137, 20);
+            this.cmbRuleList.Size = new System.Drawing.Size(132, 20);
             this.cmbRuleList.TabIndex = 25;
             // 
             // btnSetRule
@@ -360,11 +361,21 @@
             this.btnSetRule.UseVisualStyleBackColor = true;
             this.btnSetRule.Click += new System.EventHandler(this.btnSetRule_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(642, 77);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(68, 23);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "类型映射";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 377);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSetRule);
             this.Controls.Add(this.cmbRuleList);
             this.Controls.Add(this.label5);
@@ -429,5 +440,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbRuleList;
         private System.Windows.Forms.Button btnSetRule;
+        private System.Windows.Forms.Button button1;
     }
 }
