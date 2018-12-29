@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace Plugn.CodeGenerate.T4TemplateEngineHost
 {
     using Microsoft.VisualStudio.TextTemplating;
     using Plugn.CodeGenerate.Data.SchemaObject;
-    using ToolManager.Utility;
 
     /// <summary>
     /// T4模板处理引擎，提供数据库存储过程的架构数据

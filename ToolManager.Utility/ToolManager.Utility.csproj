@@ -66,10 +66,11 @@
     <Compile Include="ConnectionStringUtil.cs" />
     <Compile Include="ConvertUtil.cs" />
     <Compile Include="CurrencyUtil.cs" />
-    <Compile Include="DatetimeUtil.cs" />
+    <Compile Include="DateTimeUtil.cs" />
     <Compile Include="Extensions\ByteExt.cs" />
     <Compile Include="Extensions\CollectionExt.cs" />
     <Compile Include="Extensions\DataExt.cs" />
+    <Compile Include="Extensions\DateTimeExt.cs" />
     <Compile Include="Extensions\ObjectExt.cs" />
     <Compile Include="Extensions\StringExtension\StringExt.CodeBuilder.cs" />
     <Compile Include="Extensions\StringExtension\StringExt.cs" />

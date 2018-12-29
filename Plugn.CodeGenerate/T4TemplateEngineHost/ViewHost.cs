@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TextTemplating;
-using System.IO;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace Plugn.CodeGenerate.T4TemplateEngineHost
 {
-    using ToolManager.Utility;
+    using Microsoft.VisualStudio.TextTemplating;
+    using Plugn.CodeGenerate.Config.NameRule;
     using Plugn.CodeGenerate.Data.SchemaObject;
 
     /// <summary>
@@ -33,6 +32,11 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
             }
             set { _ColumnList = value; }
         }
+
+        /// <summary>
+        /// 命名规则配置对象
+        /// </summary>
+        public NameRuleConfig NameRuleConfig { get; set; } = new NameRuleConfig();
 
         #region ITextTemplatingEngineHost
 

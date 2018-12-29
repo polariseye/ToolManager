@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ToolManager.Utility
 {
-    public sealed class DatetimeUtil
+    public sealed class DateTimeUtil
     {
         /// <summary>
         /// 当前系统时间转换为Unix时间戳
@@ -34,7 +34,7 @@ namespace ToolManager.Utility
         /// </summary>
         /// <param name="unixTimeStamp">Unix时间戳</param>
         /// <returns></returns>
-        public static  DateTime GetFromUnixTime(Int64 unixTime)
+        public static DateTime GetFromUnixTime(Int64 unixTime)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             long lTime = long.Parse(unixTime + "0000000");
@@ -71,5 +71,24 @@ namespace ToolManager.Utility
             return string.Empty;
         }
 
+        /// <summary>
+        /// 转换为时间字符串
+        /// </summary>
+        /// <param name="dt">日期</param>
+        /// <returns></returns>
+        public static String ToDateTimeString(DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        /// <summary>
+        /// 转换为日期字符串
+        /// </summary>
+        /// <param name="dt">日期</param>
+        /// <returns></returns>
+        public static String ToDateString(DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd");
+        }
     }
 }

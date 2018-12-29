@@ -193,5 +193,16 @@ namespace ToolManager.Utility.Extensions
         {
             return StringUtil.Base64Decode(s, encoding);
         }
+
+        /// <summary>
+        /// 字符串重复count次
+        /// </summary>
+        /// <param name="val">需要重复的字符串</param>
+        /// <param name="count">需要重复的次数</param>
+        /// <returns></returns>
+        public static String RepeatString(this String val, Int32 count)
+        {
+            return StringUtil.GetRepeatString(val, count);
+        }
     }
 }

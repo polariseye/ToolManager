@@ -107,6 +107,12 @@ namespace ToolManager.Utility
             return s;
         }
 
+        /// <summary>
+        /// 转换为pascal的命名
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public static string ToPascalName(string s, string separator)
         {
             string[] ss = s.Split(separator.ToCharArray());

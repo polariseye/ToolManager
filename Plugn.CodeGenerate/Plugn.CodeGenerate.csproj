@@ -300,7 +300,6 @@
       <DependentUpon>SetTemplateParamForm.cs</DependentUpon>
     </Compile>
     <Compile Include="T4TemplateEngineHost\CommandHost.cs" />
-    <Compile Include="T4TemplateEngineHost\CSharpHostHelper.cs" />
     <Compile Include="T4TemplateEngineHost\DatabaseHost.cs" />
     <Compile Include="T4TemplateEngineHost\DefaultHost.cs" />
     <Compile Include="T4TemplateEngineHost\HostBase.cs" />

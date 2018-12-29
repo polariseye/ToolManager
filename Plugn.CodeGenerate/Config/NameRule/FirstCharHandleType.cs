@@ -12,6 +12,11 @@ namespace Plugn.CodeGenerate.Config.NameRule
     public enum FirstCharHandleType
     {
         /// <summary>
+        /// 不做处理
+        /// </summary>
+        NoHandle,
+
+        /// <summary>
         /// 首字母小写
         /// </summary>
         FirstCharLower,
