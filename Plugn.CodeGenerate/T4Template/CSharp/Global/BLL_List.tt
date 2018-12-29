@@ -24,7 +24,7 @@
 	string authorName = host.GetString("Author");
 	if(string.IsNullOrEmpty(nameSpace))nameSpace = "Entity";
 
-    String className = String.Format("Global{0}BLL", CSharpHostHelper.GetCamelCaseName(table.Name.Substring(2,table.Name.Length-2)));
+    String className = String.Format("{0}BLL", host.NameRuleConfig.FormatName(table.Name));
 
     // 设置输出文件名
     host.OutputFileName = className + ".cs";

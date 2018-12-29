@@ -303,8 +303,14 @@
     <Compile Include="T4TemplateEngineHost\DatabaseHost.cs" />
     <Compile Include="T4TemplateEngineHost\DefaultHost.cs" />
     <Compile Include="T4TemplateEngineHost\HostBase.cs" />
+    <Compile Include="T4TemplateEngineHost\NameRuleConfigExt.cs" />
     <Compile Include="T4TemplateEngineHost\TableHost.cs" />
     <Compile Include="T4TemplateEngineHost\ViewHost.cs" />
+    <Compile Include="T4Template\CSharp\Dynamic\BLL_List1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BLL_List.tt</DependentUpon>
+    </Compile>
     <Compile Include="TemplateMange\TemplateInfo.cs" />
     <Compile Include="TemplateMange\TemplateManager.cs" />
   </ItemGroup>
