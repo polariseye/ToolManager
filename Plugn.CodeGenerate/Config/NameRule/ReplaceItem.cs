@@ -22,6 +22,15 @@ namespace Plugn.CodeGenerate.Config.NameRule
         public String NewValue { get; set; }
 
         /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public ReplaceItem()
+        {
+            this.OriginValue = String.Empty;
+            this.NewValue = String.Empty;
+        }
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="originValue"></param>

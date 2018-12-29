@@ -31,6 +31,8 @@ namespace Plugn.CodeGenerate
         public SetNameRuleForm()
         {
             InitializeComponent();
+            this.gridPrefix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>());
+            this.gridSuffix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>());
 
             this.LoadRuleList();
         }
@@ -44,7 +46,7 @@ namespace Plugn.CodeGenerate
         /// <param name="e"></param>
         private void cbRuleName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var ruleName = cbRuleName.SelectedText;
+            var ruleName = cbRuleName.Text;
             if (String.IsNullOrEmpty(ruleName))
             {
                 this.nowConfigItem = null;
@@ -111,6 +113,7 @@ namespace Plugn.CodeGenerate
                 return;
             }
 
+            var oldName = this.nowConfigItem.Name;
             this.nowConfigItem.Name = ruleName;
             this.nowConfigItem.Seperator = txtSeperator.Text.Trim();
             if (this.rdioFirstLower.Checked)
@@ -127,6 +130,9 @@ namespace Plugn.CodeGenerate
 
             // 更新项
             this.bllObj.Save(this.nowConfigItem);
+
+            this.cbRuleName.Items.Remove(oldName);
+            this.cbRuleName.Items.Insert(this.cbRuleName.SelectedIndex, ruleName);
         }
 
         /// <summary>
@@ -151,7 +157,6 @@ namespace Plugn.CodeGenerate
                 return;
             }
 
-            var tmpOldItem = this.nowConfigItem;
 
             this.nowConfigItem = new NameRuleConfig();
             this.nowConfigItem.Id = GetNextId();
@@ -172,10 +177,8 @@ namespace Plugn.CodeGenerate
             // 添加项
             this.bllObj.Insert(this.nowConfigItem);
 
-            if (tmpOldItem != null)
-            {
-                this.cbRuleName.Items.Add(tmpOldItem.Name);
-            }
+            this.cbRuleName.Items.Add(this.nowConfigItem.Name);
+            this.cbRuleName.SelectedItem = this.nowConfigItem.Name;
         }
 
         #endregion 事件处理
@@ -200,8 +203,8 @@ namespace Plugn.CodeGenerate
         private void Clear()
         {
             this.txtSeperator.Text = "";
-            this.gridPrefix.DataSource = null;
-            this.gridSuffix.DataSource = null;
+            this.gridPrefix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>());
+            this.gridSuffix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>());
             this.rdoFirstUpper.Checked = true;
         }
 
@@ -220,8 +223,8 @@ namespace Plugn.CodeGenerate
                 this.rdoFirstUpper.Checked = true;
             }
 
-            this.gridPrefix.DataSource = new BindingList<ReplaceItem>(configItem.PrefixList);
-            this.gridSuffix.DataSource = new BindingList<ReplaceItem>(configItem.StuffixList);
+            this.gridPrefix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>(configItem.PrefixList));
+            this.gridSuffix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>(configItem.StuffixList));
         }
 
         /// <summary>

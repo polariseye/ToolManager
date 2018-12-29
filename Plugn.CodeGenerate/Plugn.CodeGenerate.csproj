@@ -218,7 +218,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\Generate\LocalConfig.cs" />
+    <Compile Include="Config\LocalConfig.cs" />
+    <Compile Include="Config\NameRule\FirstCharHandleType.cs" />
+    <Compile Include="Config\NameRule\ReplaceItem.cs" />
+    <Compile Include="Config\NameRule\NameRuleConfigBLL.cs" />
+    <Compile Include="Config\NameRule\NameRuleConfigDAL.cs" />
     <Compile Include="Database\CachingMechanism.cs" />
     <Compile Include="Database\Common\DataReaderWrapper.cs" />
     <Compile Include="Database\Mapping\DataReaderToObjectMapper.cs" />
@@ -282,7 +286,7 @@
       <DependentUpon>GroupGenerateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Config\RuleConfig\RuleConfig.cs" />
+    <Compile Include="Config\NameRule\NameRuleConfig.cs" />
     <Compile Include="SetNameRuleForm.cs">
       <SubType>Form</SubType>
     </Compile>

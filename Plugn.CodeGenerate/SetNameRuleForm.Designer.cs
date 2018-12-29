@@ -30,27 +30,27 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gridPrefix = new System.Windows.Forms.DataGridView();
+            this.colPreFix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPreReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gridSuffix = new System.Windows.Forms.DataGridView();
+            this.colSuffix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSuffixReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.l = new System.Windows.Forms.Label();
             this.txtSeperator = new System.Windows.Forms.TextBox();
             this.rdioFirstLower = new System.Windows.Forms.RadioButton();
             this.rdoFirstUpper = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gridPrefix = new System.Windows.Forms.DataGridView();
-            this.gridSuffix = new System.Windows.Forms.DataGridView();
-            this.colPreFix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPreReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSuffix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSuffixReplace = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDelete = new System.Windows.Forms.Button();
             this.cbRuleName = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPrefix)).BeginInit();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSuffix)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -74,6 +74,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "前缀替换";
             // 
+            // gridPrefix
+            // 
+            this.gridPrefix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridPrefix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPreFix,
+            this.colPreReplace});
+            this.gridPrefix.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridPrefix.Location = new System.Drawing.Point(3, 17);
+            this.gridPrefix.Name = "gridPrefix";
+            this.gridPrefix.RowTemplate.Height = 23;
+            this.gridPrefix.Size = new System.Drawing.Size(248, 395);
+            this.gridPrefix.TabIndex = 0;
+            // 
+            // colPreFix
+            // 
+            this.colPreFix.DataPropertyName = "OriginValue";
+            this.colPreFix.HeaderText = "前缀";
+            this.colPreFix.Name = "colPreFix";
+            // 
+            // colPreReplace
+            // 
+            this.colPreReplace.DataPropertyName = "NewValue";
+            this.colPreReplace.HeaderText = "替换为";
+            this.colPreReplace.Name = "colPreReplace";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.gridSuffix);
@@ -83,6 +108,31 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "后缀替换";
+            // 
+            // gridSuffix
+            // 
+            this.gridSuffix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridSuffix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSuffix,
+            this.colSuffixReplace});
+            this.gridSuffix.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridSuffix.Location = new System.Drawing.Point(3, 17);
+            this.gridSuffix.Name = "gridSuffix";
+            this.gridSuffix.RowTemplate.Height = 23;
+            this.gridSuffix.Size = new System.Drawing.Size(248, 395);
+            this.gridSuffix.TabIndex = 0;
+            // 
+            // colSuffix
+            // 
+            this.colSuffix.DataPropertyName = "OriginValue";
+            this.colSuffix.HeaderText = "后缀";
+            this.colSuffix.Name = "colSuffix";
+            // 
+            // colSuffixReplace
+            // 
+            this.colSuffixReplace.DataPropertyName = "NewValue";
+            this.colSuffixReplace.HeaderText = "替换为";
+            this.colSuffixReplace.Name = "colSuffixReplace";
             // 
             // btnSubmit
             // 
@@ -141,52 +191,6 @@
             this.panel1.Size = new System.Drawing.Size(185, 21);
             this.panel1.TabIndex = 12;
             // 
-            // gridPrefix
-            // 
-            this.gridPrefix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridPrefix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colPreFix,
-            this.colPreReplace});
-            this.gridPrefix.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridPrefix.Location = new System.Drawing.Point(3, 17);
-            this.gridPrefix.Name = "gridPrefix";
-            this.gridPrefix.RowTemplate.Height = 23;
-            this.gridPrefix.Size = new System.Drawing.Size(248, 395);
-            this.gridPrefix.TabIndex = 0;
-            // 
-            // gridSuffix
-            // 
-            this.gridSuffix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridSuffix.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSuffix,
-            this.colSuffixReplace});
-            this.gridSuffix.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridSuffix.Location = new System.Drawing.Point(3, 17);
-            this.gridSuffix.Name = "gridSuffix";
-            this.gridSuffix.RowTemplate.Height = 23;
-            this.gridSuffix.Size = new System.Drawing.Size(248, 395);
-            this.gridSuffix.TabIndex = 0;
-            // 
-            // colPreFix
-            // 
-            this.colPreFix.HeaderText = "前缀";
-            this.colPreFix.Name = "colPreFix";
-            // 
-            // colPreReplace
-            // 
-            this.colPreReplace.HeaderText = "替换为";
-            this.colPreReplace.Name = "colPreReplace";
-            // 
-            // colSuffix
-            // 
-            this.colSuffix.HeaderText = "后缀";
-            this.colSuffix.Name = "colSuffix";
-            // 
-            // colSuffixReplace
-            // 
-            this.colSuffixReplace.HeaderText = "替换为";
-            this.colSuffixReplace.Name = "colSuffixReplace";
-            // 
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -235,13 +239,14 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Name = "SetNameRuleForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "命名规则配置";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridPrefix)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridSuffix)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridPrefix)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridSuffix)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,14 +263,14 @@
         private System.Windows.Forms.RadioButton rdioFirstLower;
         private System.Windows.Forms.RadioButton rdoFirstUpper;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView gridPrefix;
         private System.Windows.Forms.DataGridView gridSuffix;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ComboBox cbRuleName;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.DataGridView gridPrefix;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPreFix;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPreReplace;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSuffix;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSuffixReplace;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.ComboBox cbRuleName;
-        private System.Windows.Forms.Button btnAdd;
     }
 }
