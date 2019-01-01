@@ -36,10 +36,12 @@ namespace Plugn.CodeGenerate
         /// <param name="language">编程语言</param>
         public SetTypeMapForm(String language)
         {
-            this.Langugage = language;
+            this.Langugage = language.ToLower();
             InitializeComponent();
 
             this.lbLanguage.Text = this.Langugage;
+
+            this.typeMapGrid.AutoGenerateColumns = false;
         }
 
         /// <summary>

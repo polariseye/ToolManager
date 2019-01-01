@@ -63,6 +63,8 @@ namespace CodeGenerate
             }
 
             paramList = new BindingList<ParamItem>(paramConfigData.ParamData);
+
+            this.paramGrid.AutoGenerateColumns = false;
         }
 
         /// <summary>

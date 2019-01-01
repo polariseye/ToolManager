@@ -36,9 +36,9 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.colParamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colParamValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            paramGrid = new System.Windows.Forms.DataGridView();
+            this.paramGrid = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(paramGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paramGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +80,7 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.lbLanguage);
@@ -118,20 +118,20 @@
             // 
             // paramGrid
             // 
-            paramGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.paramGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            paramGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            paramGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.paramGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paramGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colParamName,
             this.colParamValue});
-            paramGrid.Location = new System.Drawing.Point(12, 51);
-            paramGrid.Name = "paramGrid";
-            paramGrid.RowTemplate.Height = 23;
-            paramGrid.Size = new System.Drawing.Size(343, 252);
-            paramGrid.TabIndex = 0;
-            paramGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.paramGrid_CellEndEdit);
-            paramGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.paramGrid_CellValueChanged);
+            this.paramGrid.Location = new System.Drawing.Point(12, 51);
+            this.paramGrid.Name = "paramGrid";
+            this.paramGrid.RowTemplate.Height = 23;
+            this.paramGrid.Size = new System.Drawing.Size(343, 252);
+            this.paramGrid.TabIndex = 0;
+            this.paramGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.paramGrid_CellEndEdit);
+            this.paramGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.paramGrid_CellValueChanged);
             // 
             // SetTemplateParamForm
             // 
@@ -140,20 +140,19 @@
             this.ClientSize = new System.Drawing.Size(367, 335);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(paramGrid);
+            this.Controls.Add(this.paramGrid);
             this.Name = "SetTemplateParamForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "模板参数设置";
             this.Load += new System.EventHandler(this.SetTemplateParamForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(paramGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paramGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView paramGrid;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbLanguage;
         private System.Windows.Forms.Label lbTemplateGroup;
@@ -162,5 +161,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn colParamName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colParamValue;
+        private System.Windows.Forms.DataGridView paramGrid;
     }
 }

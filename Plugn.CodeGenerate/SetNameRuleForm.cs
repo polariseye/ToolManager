@@ -35,6 +35,9 @@ namespace Plugn.CodeGenerate
             this.gridSuffix.DataSource = new BindingList<ReplaceItem>(new List<ReplaceItem>());
 
             this.LoadRuleList();
+
+            this.gridPrefix.AutoGenerateColumns = false;
+            this.gridSuffix.AutoGenerateColumns = false;
         }
 
         #region 事件处理

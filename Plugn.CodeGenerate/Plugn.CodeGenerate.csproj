@@ -362,7 +362,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="setting.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
