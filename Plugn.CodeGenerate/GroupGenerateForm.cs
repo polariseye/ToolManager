@@ -65,6 +65,16 @@ namespace CodeGenerate
         private TypeMapConfigBLL typeMapConfigBLLObj = new TypeMapConfigBLL();
 
         /// <summary>
+        /// 已被选中的项
+        /// </summary>
+        private List<SOTable> selectedTableList = new List<SOTable>();
+
+        /// <summary>
+        /// 没有被选中的项
+        /// </summary>
+        private List<SOTable> unSelectedTableList = new List<SOTable>();
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         public GroupGenerateForm()
@@ -520,6 +530,17 @@ namespace CodeGenerate
             typeMapConfigBLLObj.Refresh();
         }
 
+        /// <summary>
+        /// 表格筛选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            Filter(listBox1, unSelectedTableList);
+            Filter(listBox2, selectedTableList);
+        }
+
         #endregion  事件处理
 
         #region 连接处理
@@ -549,6 +570,8 @@ namespace CodeGenerate
                 //清理相关数据
                 this.listBox1.Items.Clear();
                 this.listBox2.Items.Clear();
+                this.unSelectedTableList.Clear();
+                this.selectedTableList.Clear();
             }
         }
 
@@ -577,9 +600,12 @@ namespace CodeGenerate
             // 加载表
             this.listBox1.Items.Clear();
             this.listBox2.Items.Clear();
+            this.unSelectedTableList.Clear();
+            this.selectedTableList.Clear();
             foreach (SOTable t in nowDb.TableList)
             {
                 listBox1.Items.Add(t);
+                unSelectedTableList.Add(t);
             }
         }
 
@@ -590,8 +616,14 @@ namespace CodeGenerate
         {
             if (listBox1.Items.Count > 0)
             {
-                listBox2.Items.AddRange(listBox1.Items);
-                listBox1.Items.Clear();
+                foreach (SOTable item in listBox1.Items)
+                {
+                    selectedTableList.Add(item);
+                    unSelectedTableList.Remove(item);
+                }
+
+                Filter(listBox1, unSelectedTableList);
+                Filter(listBox2, selectedTableList);
             }
         }
 
@@ -600,14 +632,14 @@ namespace CodeGenerate
         /// </summary>
         private void SelectOne()
         {
-            object[] items = new object[listBox1.SelectedItems.Count];
-            listBox1.SelectedItems.CopyTo(items, 0);
-            listBox2.Items.AddRange(items);
-
-            foreach (var item in items)
+            foreach (SOTable item in listBox1.SelectedItems)
             {
-                listBox1.Items.Remove(item);
+                selectedTableList.Add(item);
+                unSelectedTableList.Remove(item);
             }
+
+            Filter(listBox1, unSelectedTableList);
+            Filter(listBox2, selectedTableList);
         }
 
         /// <summary>
@@ -615,14 +647,14 @@ namespace CodeGenerate
         /// </summary>
         private void RemoveOne()
         {
-            object[] items = new object[listBox2.SelectedItems.Count];
-            listBox2.SelectedItems.CopyTo(items, 0);
-            listBox1.Items.AddRange(items);
-
-            foreach (var item in items)
+            foreach (SOTable item in listBox2.SelectedItems)
             {
-                listBox2.Items.Remove(item);
+                unSelectedTableList.Add(item);
+                selectedTableList.Remove(item);
             }
+
+            Filter(listBox1, unSelectedTableList);
+            Filter(listBox2, selectedTableList);
         }
 
         /// <summary>
@@ -632,9 +664,38 @@ namespace CodeGenerate
         {
             if (listBox2.Items.Count > 0)
             {
-                listBox1.Items.AddRange(listBox2.Items);
-                listBox2.Items.Clear();
+                foreach (SOTable item in listBox2.Items)
+                {
+                    unSelectedTableList.Add(item);
+                    selectedTableList.Remove(item);
+                }
+
+                Filter(listBox1, unSelectedTableList);
+                Filter(listBox2, selectedTableList);
             }
+        }
+
+        /// <summary>
+        /// 数据项过滤
+        /// </summary>
+        /// <param name="listBoxItem"></param>
+        private void Filter(ListBox listBoxItem, List<SOTable> allItems)
+        {
+            var filterString = txtFilter.Text;
+
+            listBoxItem.SuspendLayout();
+            listBoxItem.Items.Clear();
+            if (String.IsNullOrWhiteSpace(filterString))
+            {
+                listBoxItem.Items.AddRange(allItems.OrderBy(tmp => tmp.Name).ToArray());
+            }
+            else
+            {
+                filterString = filterString.ToLower();
+                listBoxItem.Items.AddRange(allItems.Where(tmp => tmp.Name.ToLower().Contains(filterString)).OrderBy(tmp => tmp.Name).ToArray());
+            }
+
+            listBoxItem.ResumeLayout();
         }
 
         #endregion
