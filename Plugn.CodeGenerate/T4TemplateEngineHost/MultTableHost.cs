@@ -13,21 +13,11 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
     using Plugn.CodeGenerate.Data.SchemaObject;
 
     /// <summary>
-    /// T4模板处理引擎，提供数据库的架构数据
+    /// T4模板处理引擎，提供数据多库表的架构数据
     /// </summary>
-    [Serializable]
-    public class DatabaseHost : HostBase, ITextTemplatingEngineHost
+    //[Serializable]
+    public class MultTableHost : HostBase, ITextTemplatingEngineHost
     {
-        /// <summary>
-        /// 数据库对象
-        /// </summary>
-        public SODatabase Database { get; private set; }
-
-        /// <summary>
-        /// 输出的文件名
-        /// </summary>
-        public String OutputFileName { get; set; }
-
         /// <summary>
         /// 命名规则配置对象
         /// </summary>
@@ -39,21 +29,32 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         private List<TypeMapConfig> typeMapConfigList;
 
         /// <summary>
+        /// 表信息
+        /// </summary>
+        public List<SOTable> TableList { get; set; }
+
+        /// <summary>
+        /// 输出的文件名
+        /// </summary>
+        public String OutputFileName { get; set; }
+
+        /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="database"></param>
         /// <param name="nameRuleConfig"></param>
         /// <param name="typeMapConfigList"></param>
-        public DatabaseHost(SODatabase database, NameRuleConfig nameRuleConfig, List<TypeMapConfig> typeMapConfigList)
+        /// <param name="tableList"></param>
+        public MultTableHost(NameRuleConfig nameRuleConfig, List<TypeMapConfig> typeMapConfigList, List<SOTable> tableList)
         {
-            this.Database = database;
             this.nameRuleConfig = nameRuleConfig;
             this.typeMapConfigList = typeMapConfigList;
+            this.TableList = tableList;
         }
 
         #region ITextTemplatingEngineHost
 
         CompilerErrorCollection _ErrorCollection;
+
         /// <summary>
         /// 模板引擎主机处理模板时错误信息集合
         /// </summary>
@@ -62,17 +63,15 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
             get { return _ErrorCollection; }
         }
 
-        string _FileExtention = ".cs";
         /// <summary>
         /// 文件扩展名
         /// </summary>
-        public string FileExtention { get { return _FileExtention; } }
+        public string FileExtention { get; set; } = ".cs";
 
-        Encoding _FileEncoding = Encoding.UTF8;
         /// <summary>
         /// 文件编码
         /// </summary>
-        public Encoding FileEncoding { get { return _FileEncoding; } }
+        public Encoding FileEncoding { get; private set; } = Encoding.UTF8;
 
         #endregion
 
@@ -114,11 +113,18 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
             content = System.String.Empty;
             location = System.String.Empty;
 
+            //If the argument is the fully qualified path of an existing file,  
+            //then we are done.  
+            //----------------------------------------------------------------  
             if (File.Exists(requestFileName))
             {
                 content = File.ReadAllText(requestFileName);
                 return true;
             }
+            //This can be customized to search specific paths for the file.  
+            //This can be customized to accept paths to search as command line  
+            //arguments.  
+            //----------------------------------------------------------------  
             else
             {
                 return false;
@@ -184,18 +190,31 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         public string ResolveAssemblyReference(string assemblyReference)
         {
             //完全路径
+            //If the argument is the fully qualified path of an existing file,  
+            //then we are done. (This does not do any work.)  
+            //----------------------------------------------------------------  
             if (File.Exists(assemblyReference))
             {
                 return assemblyReference;
             }
 
             //和模板文件在同一目录
+            //Maybe the assembly is in the same folder as the text template that   
+            //called the directive.  
+            //----------------------------------------------------------------  
             string candidate = Path.Combine(Path.GetDirectoryName(this.TemplateFile), assemblyReference);
             if (File.Exists(candidate))
             {
                 return candidate;
             }
 
+            //This can be customized to search specific paths for the file  
+            //or to search the GAC.  
+            //----------------------------------------------------------------  
+            //This can be customized to accept paths to search as command line  
+            //arguments.  
+            //----------------------------------------------------------------  
+            //If we cannot do better, return the original file name.  
             //不属于前两种情况的话，返回空字符串
             return string.Empty;
         }
@@ -219,7 +238,6 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
 
             //This can be customized to search specific paths for the file
             //or to search the GAC
-
             //If the directive processor cannot be found, throw an error.
             throw new Exception("没有找到指令处理器");
         }
@@ -261,11 +279,20 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         /// <returns></returns>
         public string ResolvePath(string path)
         {
-            if (path == null) throw new ArgumentNullException("the path cannot be null");
+            if (path == null)
+            {
+                throw new ArgumentNullException("the path cannot be null");
+            }
 
             //正确的完整路径
+            //If the argument is the fully qualified path of an existing file,  
+            //then we are done  
+            //----------------------------------------------------------------
             if (File.Exists(path)) return path;
 
+            //Maybe the file is in the same folder as the text template that   
+            //called the directive.  
+            //----------------------------------------------------------------
             //跟模板文件在同一目录
             string candidate = Path.Combine(Path.GetDirectoryName(this.TemplateFile), path);
             if (File.Exists(candidate))
@@ -273,6 +300,10 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
                 return candidate;
             }
 
+            //Look more places.  
+            //----------------------------------------------------------------  
+            //More code can go here...  
+            //If we cannot do better, return the original file name.  
             //todo: 这里还可以执行更多的解析文件路径操作
 
             //若前面的解析操作无效，则返回原始路径
@@ -285,7 +316,7 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         /// <param name="extension">扩展名，比如".txt"</param>
         public void SetFileExtension(string extension)
         {
-            _FileExtention = extension;
+            this.FileExtention = extension;
         }
 
         /// <summary>
@@ -295,7 +326,7 @@ namespace Plugn.CodeGenerate.T4TemplateEngineHost
         /// <param name="fromOutputDirective"></param>
         public void SetOutputEncoding(Encoding encoding, bool fromOutputDirective)
         {
-            _FileEncoding = encoding;
+            this.FileEncoding = encoding;
         }
 
         /// <summary>

@@ -313,44 +313,87 @@
     <Compile Include="T4TemplateEngineHost\DefaultHost.cs" />
     <Compile Include="T4TemplateEngineHost\HostBase.cs" />
     <Compile Include="T4TemplateEngineHost\Host.Extend.cs" />
+    <Compile Include="T4TemplateEngineHost\MultTableHost.cs" />
     <Compile Include="T4TemplateEngineHost\TableHost.cs" />
     <Compile Include="T4TemplateEngineHost\ViewHost.cs" />
+    <Compile Include="T4TemplateGenerate\DatabaseGenerate.cs" />
+    <Compile Include="T4TemplateGenerate\GenerateBase.cs" />
+    <Compile Include="T4TemplateGenerate\MultTableGenerate.cs" />
+    <Compile Include="T4TemplateGenerate\SingleTableGenerate.cs" />
+    <Compile Include="T4Template\SingleTableHost\CSharp\Dynamic\BLL_List1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BLL_List.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4Template\SingleTableHost\CSharp\Dynamic\DAL1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4Template\SingleTableHost\CSharp\Dynamic\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4Template\SingleTableHost\CSharp\Global\BLL_List1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BLL_List.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4Template\SingleTableHost\CSharp\Global\DAL1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4Template\SingleTableHost\CSharp\Global\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4Template\SingleTableHost\Golang\Model\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="TemplateMange\TemplateInfo.cs" />
     <Compile Include="TemplateMange\TemplateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\config.xml" />
-    <Content Include="T4Template\CSharp\Dynamic\BLL_List.tt">
+    <Content Include="T4Template\DatabaseHost\readme.txt" />
+    <Content Include="T4Template\MultTableHost\readme.txt" />
+    <Content Include="T4Template\readme.txt" />
+    <Content Include="T4Template\SingleTableHost\CSharp\Dynamic\BLL_List.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLL_List1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="T4Template\CSharp\Dynamic\DAL.tt">
+    <Content Include="T4Template\SingleTableHost\CSharp\Dynamic\DAL.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DAL1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="T4Template\CSharp\Dynamic\Model.tt">
+    <Content Include="T4Template\SingleTableHost\CSharp\Dynamic\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="T4Template\CSharp\Global\BLL_List.tt">
+    <Content Include="T4Template\SingleTableHost\CSharp\Global\BLL_List.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BLL_List1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="T4Template\CSharp\Global\DAL.tt">
+    <Content Include="T4Template\SingleTableHost\CSharp\Global\DAL.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DAL1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="T4Template\CSharp\Global\Model.tt">
+    <Content Include="T4Template\SingleTableHost\CSharp\Global\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="T4Template\Golang\Model\Model.tt">
+    <Content Include="T4Template\SingleTableHost\Golang\Model\Model.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -406,8 +449,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database\DbMapping\" />
-    <Folder Include="T4Template\CSharp\Model\" />
-    <Folder Include="T4Template\CSharp\Player\" />
+    <Folder Include="T4Template\SingleTableHost\CSharp\Model\" />
+    <Folder Include="T4Template\SingleTableHost\CSharp\Player\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.2\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.2\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />

@@ -31,30 +31,37 @@ namespace Plugn.CodeGenerate.TemplateMange
         public void Init()
         {
             var result = new List<TemplateInfo>();
-            var languateDirList = Directory.GetDirectories(this.templateDir);
-
-            foreach (var languateDir in languateDirList)
+            foreach (var hostDir in Directory.GetDirectories(this.templateDir))
             {
-                var language = Path.GetFileNameWithoutExtension(languateDir);
-
-                foreach (var groupPath in Directory.GetDirectories(languateDir))
+                var hostName = Path.GetFileNameWithoutExtension(hostDir);
+                var languateDirList = Directory.GetDirectories(hostDir);
+                foreach (var languateDir in languateDirList)
                 {
-                    var groupName = Path.GetFileNameWithoutExtension(groupPath);
+                    var language = Path.GetFileNameWithoutExtension(languateDir);
+                    foreach (var groupPath in Directory.GetDirectories(languateDir))
+                    {
+                        var groupName = Path.GetFileNameWithoutExtension(groupPath);
 
-                    result.AddRange(LoadLanguageGroup(groupPath, language, groupName));
+                        result.AddRange(LoadLanguageGroup(groupPath, hostName, language, groupName));
+                    }
                 }
             }
 
             this.templateInfos = result;
         }
 
+        public List<String> GetHostNameList()
+        {
+            return templateInfos.Select(tmp => tmp.HostName).Distinct().ToList();
+        }
+
         /// <summary>
         /// 获取语言列表
         /// </summary>
         /// <returns>语言列表</returns>
-        public List<String> GetLanguageList()
+        public List<String> GetLanguageList(String hostName)
         {
-            return templateInfos.Select(tmp => tmp.Language).Distinct().ToList();
+            return templateInfos.Where(tmp => tmp.HostName == hostName).Select(tmp => tmp.Language).Distinct().ToList();
         }
 
         /// <summary>
@@ -121,10 +128,11 @@ namespace Plugn.CodeGenerate.TemplateMange
         /// 加载模板组
         /// </summary>
         /// <param name="groupPath">组所在路径</param>
+        /// <param name="hostName">宿主名</param>
         /// <param name="language">语言</param>
         /// <param name="groupName">组名</param>
         /// <returns></returns>
-        private List<TemplateInfo> LoadLanguageGroup(String groupPath, String language, String groupName)
+        private List<TemplateInfo> LoadLanguageGroup(String groupPath, String hostName, String language, String groupName)
         {
             var result = new List<TemplateInfo>();
 
@@ -132,7 +140,7 @@ namespace Plugn.CodeGenerate.TemplateMange
             foreach (var item in fileList)
             {
                 var templateName = Path.GetFileNameWithoutExtension(item);
-                result.Add(new TemplateInfo(language, groupName, templateName, item));
+                result.Add(new TemplateInfo(hostName, language, groupName, templateName, item));
             }
 
             return result;

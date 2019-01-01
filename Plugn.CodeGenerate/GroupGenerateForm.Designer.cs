@@ -61,7 +61,7 @@
             this.btnSetRule = new System.Windows.Forms.Button();
             this.btnSetTypeMap = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.cmbHostType = new System.Windows.Forms.ComboBox();
+            this.cmbHostName = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +107,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(453, 95);
+            this.label2.Location = new System.Drawing.Point(453, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 6;
@@ -117,7 +117,7 @@
             // 
             this.cmbTemplateGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTemplateGroup.FormattingEnabled = true;
-            this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 91);
+            this.cmbTemplateGroup.Location = new System.Drawing.Point(518, 113);
             this.cmbTemplateGroup.Name = "cmbTemplateGroup";
             this.cmbTemplateGroup.Size = new System.Drawing.Size(132, 20);
             this.cmbTemplateGroup.TabIndex = 7;
@@ -127,7 +127,7 @@
             // 
             this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(518, 67);
+            this.cmbLanguage.Location = new System.Drawing.Point(518, 89);
             this.cmbLanguage.Name = "cmbLanguage";
             this.cmbLanguage.Size = new System.Drawing.Size(118, 20);
             this.cmbLanguage.TabIndex = 9;
@@ -136,7 +136,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(453, 71);
+            this.label3.Location = new System.Drawing.Point(453, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 8;
@@ -280,7 +280,7 @@
             // 
             this.cmbTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTemplate.FormattingEnabled = true;
-            this.cmbTemplate.Location = new System.Drawing.Point(518, 115);
+            this.cmbTemplate.Location = new System.Drawing.Point(518, 137);
             this.cmbTemplate.Name = "cmbTemplate";
             this.cmbTemplate.Size = new System.Drawing.Size(192, 20);
             this.cmbTemplate.TabIndex = 19;
@@ -289,7 +289,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(453, 119);
+            this.label7.Location = new System.Drawing.Point(453, 141);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 12);
             this.label7.TabIndex = 18;
@@ -328,7 +328,7 @@
             // 
             // btnSetArg
             // 
-            this.btnSetArg.Location = new System.Drawing.Point(656, 90);
+            this.btnSetArg.Location = new System.Drawing.Point(656, 112);
             this.btnSetArg.Name = "btnSetArg";
             this.btnSetArg.Size = new System.Drawing.Size(54, 23);
             this.btnSetArg.TabIndex = 23;
@@ -339,7 +339,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(453, 143);
+            this.label5.Location = new System.Drawing.Point(453, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 12);
             this.label5.TabIndex = 24;
@@ -349,14 +349,14 @@
             // 
             this.cmbRuleList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRuleList.FormattingEnabled = true;
-            this.cmbRuleList.Location = new System.Drawing.Point(518, 139);
+            this.cmbRuleList.Location = new System.Drawing.Point(518, 161);
             this.cmbRuleList.Name = "cmbRuleList";
             this.cmbRuleList.Size = new System.Drawing.Size(132, 20);
             this.cmbRuleList.TabIndex = 25;
             // 
             // btnSetRule
             // 
-            this.btnSetRule.Location = new System.Drawing.Point(656, 138);
+            this.btnSetRule.Location = new System.Drawing.Point(656, 160);
             this.btnSetRule.Name = "btnSetRule";
             this.btnSetRule.Size = new System.Drawing.Size(54, 23);
             this.btnSetRule.TabIndex = 26;
@@ -366,7 +366,7 @@
             // 
             // btnSetTypeMap
             // 
-            this.btnSetTypeMap.Location = new System.Drawing.Point(642, 66);
+            this.btnSetTypeMap.Location = new System.Drawing.Point(642, 88);
             this.btnSetTypeMap.Name = "btnSetTypeMap";
             this.btnSetTypeMap.Size = new System.Drawing.Size(68, 23);
             this.btnSetTypeMap.TabIndex = 27;
@@ -377,27 +377,28 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(453, 167);
+            this.label8.Location = new System.Drawing.Point(453, 67);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 12);
             this.label8.TabIndex = 28;
-            this.label8.Text = "宿主类型:";
+            this.label8.Text = "模板宿主:";
             // 
-            // cmbHostType
+            // cmbHostName
             // 
-            this.cmbHostType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbHostType.FormattingEnabled = true;
-            this.cmbHostType.Location = new System.Drawing.Point(518, 163);
-            this.cmbHostType.Name = "cmbHostType";
-            this.cmbHostType.Size = new System.Drawing.Size(192, 20);
-            this.cmbHostType.TabIndex = 29;
+            this.cmbHostName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHostName.FormattingEnabled = true;
+            this.cmbHostName.Location = new System.Drawing.Point(518, 63);
+            this.cmbHostName.Name = "cmbHostName";
+            this.cmbHostName.Size = new System.Drawing.Size(192, 20);
+            this.cmbHostName.TabIndex = 29;
+            this.cmbHostName.SelectedIndexChanged += new System.EventHandler(this.cmbHostName_SelectedIndexChanged);
             // 
             // GroupGenerateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(722, 404);
-            this.Controls.Add(this.cmbHostType);
+            this.Controls.Add(this.cmbHostName);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnSetTypeMap);
             this.Controls.Add(this.btnSetRule);
@@ -466,6 +467,6 @@
         private System.Windows.Forms.Button btnSetRule;
         private System.Windows.Forms.Button btnSetTypeMap;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbHostType;
+        private System.Windows.Forms.ComboBox cmbHostName;
     }
 }

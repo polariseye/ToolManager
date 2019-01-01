@@ -12,6 +12,11 @@ namespace Plugn.CodeGenerate.TemplateMange
     public class TemplateInfo
     {
         /// <summary>
+        /// 使用的宿主名
+        /// </summary>
+        public String HostName { get; set; }
+
+        /// <summary>
         /// 语言名
         /// </summary>
         public String Language { get; set; }
@@ -34,11 +39,13 @@ namespace Plugn.CodeGenerate.TemplateMange
         /// <summary>
         /// 构造函数
         /// </summary>
+        /// <param name="filePath">宿主名</param>
         /// <param name="language">语言名</param>
         /// <param name="groupName">组名</param>
         /// <param name="templateName">模板名</param>
-        public TemplateInfo(string language, String groupName, String templateName,String filePath)
+        public TemplateInfo(String hostName, string language, String groupName, String templateName, String filePath)
         {
+            this.HostName = hostName;
             this.Language = language;
             this.GroupName = groupName;
             this.TemplateName = templateName;

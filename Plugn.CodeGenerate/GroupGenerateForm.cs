@@ -25,6 +25,7 @@ namespace CodeGenerate
     using Plugn.CodeGenerate;
     using Plugn.CodeGenerate.Config.NameRule;
     using Plugn.CodeGenerate.Config.TypeMap;
+    using Plugn.CodeGenerate.T4TemplateGenerate;
 
     [FormAttribute("代码生成", "按模板组生成代码")]
     public partial class GroupGenerateForm : BaseForm
@@ -102,7 +103,7 @@ namespace CodeGenerate
 
             LoadConnection();
 
-            this.LoadLanguage();
+            this.LoadHostName();
 
             // 添加规则列表
             this.cmbRuleList.Items.Clear();
@@ -229,6 +230,28 @@ namespace CodeGenerate
         }
 
         /// <summary>
+        /// 模板宿主名
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbHostName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var hostName = this.cmbHostName.SelectedItem.ToString();
+            if (String.IsNullOrWhiteSpace(hostName))
+            {
+                MsgBox.Show("请选择模板宿主名", "提示");
+                return;
+            }
+
+            var languageList = this.LoadLanguage(hostName);
+            if (languageList.Count > 0)
+            {
+                this.cmbLanguage.SelectedIndex = 0;
+            }
+
+        }
+
+        /// <summary>
         /// 语言下拉框
         /// </summary>
         /// <param name="sender"></param>
@@ -243,7 +266,10 @@ namespace CodeGenerate
             }
 
             var groupList = this.LoadGroup(language);
-            this.cmbTemplateGroup.SelectedIndex = 0;
+            if (groupList.Count > 0)
+            {
+                this.cmbTemplateGroup.SelectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -308,15 +334,17 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            var hostName = cmbHostName.Text;
+            if (String.IsNullOrWhiteSpace(hostName))
+            {
+                MsgBox.Show("请选择宿主类型");
+                return;
+            }
+
             var tableList = new List<SOTable>();
             foreach (var item in listBox2.Items)
             {
                 tableList.Add((SOTable)item);
-            }
-            if (tableList.Count <= 0)
-            {
-                MsgBox.Show("请先选择要生成的表");
-                return;
             }
 
             String language, groupName;
@@ -336,36 +364,20 @@ namespace CodeGenerate
 
             var arg = new GenerateInfo()
             {
+                HostName = hostName,
                 Language = language,
                 GroupName = groupName,
                 TemplateInfos = templateList,
                 TableList = tableList,
-                SavePath = savePath
+                SavePath = savePath,
+                NameRuleConfig = this.nameRuleConfigBLLObj.GetItem(this.cmbRuleList.Text),
+                TypeMapConfigList = typeMapConfigBLLObj.GetList(language, false),
             };
-
-            // 设置命名规则
-            if (String.IsNullOrWhiteSpace(this.cmbRuleList.Text))
-            {
-                MsgBox.Show("请选择命名规则列表");
-                return;
-            }
-            arg.NameRuleConfig = this.nameRuleConfigBLLObj.GetItem(this.cmbRuleList.Text);
-
-            // 设置类型转换列表
-            var typeMapList = typeMapConfigBLLObj.GetList(language, false);
-            if (typeMapList == null || typeMapList.Count <= 0)
-            {
-                MsgBox.Show("请配置类型映射列表");
-                return;
-            }
-            arg.TypeMapConfigList = typeMapList;
-
 
             this.UseWaitCursor = true;
             this.Enabled = false;
             this.progressBar1.Minimum = 0;
             this.progressBar1.Value = 0;
-            this.progressBar1.Maximum = templateList.Count * arg.TableList.Count;
             this.backgroundWorker1.RunWorkerAsync(arg);
         }
 
@@ -374,6 +386,11 @@ namespace CodeGenerate
         /// </summary>
         class GenerateInfo
         {
+            /// <summary>
+            /// 宿主类型
+            /// </summary>
+            public String HostName { get; set; }
+
             /// <summary>
             /// 语言
             /// </summary>
@@ -417,10 +434,48 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            GenerateBase generageObj = null;
             try
             {
                 var arg = e.Argument as GenerateInfo;
-                Boolean isError = this.DoBuild(arg);
+
+                var paramList = this.configBllObj.GetParamConfigItem(arg.Language, arg.GroupName, false);
+                List<ParamItem> paramData = paramList == null ? new List<ParamItem>() : paramList.ParamData;
+
+                switch (arg.HostName)
+                {
+                    case "SingleTableHost":
+                        generageObj = new SingleTableGenerate(this.nowDb, arg.TableList, arg.TemplateInfos, arg.TypeMapConfigList, arg.NameRuleConfig, paramData, arg.SavePath);
+                        break;
+                    case "MultTableHost":
+                        generageObj = new MultTableGenerate(this.nowDb, arg.TableList, arg.TemplateInfos, arg.TypeMapConfigList, arg.NameRuleConfig, paramData, arg.SavePath);
+                        break;
+                    case "DatabaseHost":
+                        generageObj = new DatabaseGenerate(this.nowDb, arg.TableList, arg.TemplateInfos, arg.TypeMapConfigList, arg.NameRuleConfig, paramData, arg.SavePath);
+                        break;
+                    default:
+                        MsgBox.Show("未知的模板宿主:" + arg.HostName);
+                        return;
+                }
+
+                // check
+                var errMsg = generageObj.CheckParam();
+                if (String.IsNullOrWhiteSpace(errMsg) == false)
+                {
+                    MsgBox.Show(errMsg);
+                    return;
+                }
+
+                // 设置需要生成的总数量
+                var totalCount = generageObj.GetGenenrateTotalCount();
+                this.Invoke(new Action(() =>
+                   {
+                       this.progressBar1.Maximum = totalCount;
+                   }));
+
+                generageObj.OnFinishOneGenerateEvent += GenerageObj_OnFinishOneGenerateEvent;
+
+                Boolean isError = generageObj.Generate();
                 if (isError)
                 {
                     MsgBox.Show("代码生成出错，具体见输出内容");
@@ -441,7 +496,36 @@ namespace CodeGenerate
                     this.UseWaitCursor = false;
                     this.Enabled = true;
                 }));
+
+                // 注销事件
+                if (generageObj != null)
+                {
+                    generageObj.OnFinishOneGenerateEvent -= GenerageObj_OnFinishOneGenerateEvent;
+                }
             }
+        }
+
+        /// <summary>
+        /// 完成一次生成的事件处理
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="errMsg"></param>
+        private void GenerageObj_OnFinishOneGenerateEvent(string filePath, string errMsg)
+        {
+            var logObj = Singleton.Container.Resolve<IOutput>();
+            if (String.IsNullOrWhiteSpace(errMsg) == false)
+            {
+                logObj.PrintFormatLine($"生成出错： TargetFileName:{filePath} ErrMsg:{errMsg}");
+            }
+            else
+            {
+                logObj.PrintFormatLine($"生成成功： TargetFileName:{filePath}");
+            }
+
+            this.Invoke(new Action(() =>
+            {
+                this.progressBar1.Value += 1;
+            }));
         }
 
         /// <summary>
@@ -467,6 +551,13 @@ namespace CodeGenerate
         /// <param name="e"></param>
         private void btnSetArg_Click(object sender, EventArgs e)
         {
+            var hostName = this.cmbHostName.Text;
+            if (String.IsNullOrWhiteSpace(hostName))
+            {
+                MsgBox.Show("请选择模板宿主");
+                return;
+            }
+
             if (this.cmbLanguage.SelectedItem == null)
             {
                 MsgBox.Show("请选择模块项");
@@ -487,7 +578,7 @@ namespace CodeGenerate
                 return;
             }
 
-            SetTemplateParamForm setForm = new SetTemplateParamForm(language, groupName);
+            SetTemplateParamForm setForm = new SetTemplateParamForm(hostName, language, groupName);
             setForm.ShowDialog();
 
             // 刷新配置
@@ -705,9 +796,25 @@ namespace CodeGenerate
         /// <summary>
         /// 加载语言
         /// </summary>
-        private List<String> LoadLanguage()
+        private List<String> LoadHostName()
         {
-            var languageList = this.templateManager.GetLanguageList();
+            var hostNameList = this.templateManager.GetHostNameList();
+
+            this.cmbHostName.Items.Clear();
+            foreach (var item in hostNameList)
+            {
+                this.cmbHostName.Items.Add(item);
+            }
+
+            return hostNameList;
+        }
+
+        /// <summary>
+        /// 加载语言
+        /// </summary>
+        private List<String> LoadLanguage(String hostName)
+        {
+            var languageList = this.templateManager.GetLanguageList(hostName);
 
             this.cmbLanguage.Items.Clear();
             foreach (var item in languageList)
@@ -785,100 +892,5 @@ namespace CodeGenerate
         }
 
         #endregion
-
-        #region 代码生成
-
-        /// <summary>
-        /// 生成处理
-        /// </summary>
-        private Boolean DoBuild(GenerateInfo generateParam)
-        {
-            var logObj = Singleton.Container.Resolve<IOutput>();
-            Boolean isHaveError = false;
-
-            //遍历选中的表，一张表对应生成一个代码文件
-            foreach (SOTable table in generateParam.TableList)
-            {
-                foreach (var templateItem in generateParam.TemplateInfos)
-                {
-                    var errMsg = BuildTable(table, generateParam.NameRuleConfig, generateParam.TypeMapConfigList, templateItem, generateParam.SavePath);
-                    if (String.IsNullOrWhiteSpace(errMsg) == false)
-                    {
-                        isHaveError = true;
-                        logObj.PrintLine($"Table:{table.Name}  TemplateFile:{templateItem.FilePath} {Environment.NewLine} error:{errMsg}");
-                    }
-
-                    this.Invoke(new Action(() =>
-                    {
-                        this.progressBar1.Value += 1;
-                    }));
-                }
-            }
-
-            return isHaveError;
-        }
-
-        /// <summary>
-        /// 生成一个表
-        /// </summary>
-        /// <param name="table">表对象</param>
-        /// <param name="templateItem">模板列表</param>
-        /// <param name="outputPath">保存到的目标位置</param>
-        private String BuildTable(SOTable table, NameRuleConfig nameRuleConfig, List<TypeMapConfig> typeMapConfigList, TemplateInfo templateItem, String outputPath)
-        {
-            List<SOColumn> columnList = table.ColumnList;//可能传入的是从PDObject对象转换过来的SODatabase对象
-
-            if (columnList == null || columnList.Count == 0)
-            {
-                columnList = this.nowDbSchema.GetTableColumnList(table);
-            }
-
-            //生成代码文件
-            TableHost host = new TableHost(nameRuleConfig, typeMapConfigList, table);
-            host.Table = table;
-            host.ColumnList = columnList;
-            host.TemplateFile = templateItem.FilePath;
-
-            // 额外参数追加
-            var paramList = this.configBllObj.GetParamConfigItem(templateItem.Language, templateItem.GroupName, false);
-            if (paramList != null && paramList.ParamData.Count > 0)
-            {
-                foreach (var item in paramList.ParamData)
-                {
-                    host.SetValue(item.ParamName, item.ParamValue);
-                }
-            }
-
-            Engine engine = new Engine();
-            string templateContent = File.ReadAllText(templateItem.FilePath);
-            var outputContent = engine.ProcessTemplate(templateContent, host);
-            string outputFile = Path.Combine(outputPath, string.Format("{0}{1}", table.Name, host.FileExtention));
-            if (String.IsNullOrWhiteSpace(host.OutputFileName) == false)
-            {
-                outputFile = Path.Combine(outputPath, host.OutputFileName);
-            }
-
-            StringBuilder sb = new StringBuilder();
-            if (host.ErrorCollection != null && host.ErrorCollection.HasErrors)
-            {
-                foreach (CompilerError err in host.ErrorCollection)
-                {
-                    sb.AppendLine(err.ToString());
-                }
-
-                return sb.ToString();
-            }
-
-            if (Directory.Exists(outputPath) == false)
-            {
-                Directory.CreateDirectory(outputPath);
-            }
-
-            File.WriteAllText(outputFile, outputContent, Encoding.UTF8);
-
-            return String.Empty;
-        }
-
-        #endregion 代码生成
     }
 }

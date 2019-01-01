@@ -37,6 +37,8 @@
             this.colParamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colParamValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paramGrid = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbHostName = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paramGrid)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(112, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 1;
@@ -53,7 +55,7 @@
             // lbLanguage
             // 
             this.lbLanguage.AutoSize = true;
-            this.lbLanguage.Location = new System.Drawing.Point(47, 0);
+            this.lbLanguage.Location = new System.Drawing.Point(156, 0);
             this.lbLanguage.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.lbLanguage.Name = "lbLanguage";
             this.lbLanguage.Size = new System.Drawing.Size(41, 12);
@@ -63,7 +65,7 @@
             // lbTemplateGroup
             // 
             this.lbTemplateGroup.AutoSize = true;
-            this.lbTemplateGroup.Location = new System.Drawing.Point(153, 0);
+            this.lbTemplateGroup.Location = new System.Drawing.Point(262, 0);
             this.lbTemplateGroup.Name = "lbTemplateGroup";
             this.lbTemplateGroup.Size = new System.Drawing.Size(41, 12);
             this.lbTemplateGroup.TabIndex = 4;
@@ -72,7 +74,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(94, 0);
+            this.label4.Location = new System.Drawing.Point(203, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 3;
@@ -82,6 +84,8 @@
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.lbHostName);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.lbLanguage);
             this.flowLayoutPanel1.Controls.Add(this.label4);
@@ -133,6 +137,25 @@
             this.paramGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.paramGrid_CellEndEdit);
             this.paramGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.paramGrid_CellValueChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "宿主：";
+            // 
+            // lbHostName
+            // 
+            this.lbHostName.AutoSize = true;
+            this.lbHostName.Location = new System.Drawing.Point(47, 0);
+            this.lbHostName.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.lbHostName.Name = "lbHostName";
+            this.lbHostName.Size = new System.Drawing.Size(59, 12);
+            this.lbHostName.TabIndex = 6;
+            this.lbHostName.Text = "TableHost";
+            // 
             // SetTemplateParamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -162,5 +185,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colParamName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colParamValue;
         private System.Windows.Forms.DataGridView paramGrid;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbHostName;
     }
 }

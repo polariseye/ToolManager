@@ -15,6 +15,11 @@ namespace CodeGenerate
     public partial class SetTemplateParamForm : Form
     {
         /// <summary>
+        /// 宿主名
+        /// </summary>
+        public String HostName { get; set; }
+
+        /// <summary>
         /// 语言名
         /// </summary>
         public String Langugage { get; private set; }
@@ -42,14 +47,17 @@ namespace CodeGenerate
         /// <summary>
         /// 构造函数
         /// </summary>
+        /// <param name="hostName">宿主名</param>
         /// <param name="language">编程语言</param>
         /// <param name="templateGroupName">模板组名</param>
-        public SetTemplateParamForm(String language, String templateGroupName)
+        public SetTemplateParamForm(String hostName, String language, String templateGroupName)
         {
+            this.HostName = hostName;
             this.Langugage = language;
             this.TemplateGroupName = templateGroupName;
             InitializeComponent();
 
+            this.lbHostName.Text = hostName;
             this.lbLanguage.Text = this.Langugage;
             this.lbTemplateGroup.Text = this.TemplateGroupName;
 
@@ -57,6 +65,7 @@ namespace CodeGenerate
             if (paramConfigData == null)
             {
                 paramConfigData = new TemplateParamConfig();
+                paramConfigData.HostName = this.HostName;
                 paramConfigData.Language = language;
                 paramConfigData.TemplateGroupName = templateGroupName;
                 paramConfigData.ParamData = new List<ParamItem>();
@@ -99,7 +108,7 @@ namespace CodeGenerate
             try
             {
                 paramConfigData.ParamData = paramList.ToList();
-                var resultIndex = configBllObj.GetData().TemplateParamConfigData.FindIndex(tmp => tmp.Language == this.Langugage && tmp.TemplateGroupName == this.TemplateGroupName);
+                var resultIndex = configBllObj.GetData().TemplateParamConfigData.FindIndex(tmp => tmp.HostName.ToLower() == this.HostName.ToLower() && tmp.Language.ToLower() == this.Langugage.ToLower() && tmp.TemplateGroupName.ToLower() == this.TemplateGroupName.ToLower());
                 if (resultIndex < 0)
                 {
                     configBllObj.GetData().TemplateParamConfigData.Add(paramConfigData);

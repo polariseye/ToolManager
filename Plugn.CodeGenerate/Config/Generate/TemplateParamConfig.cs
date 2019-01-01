@@ -17,6 +17,11 @@ namespace Plugn.CodeGenerate.Config
         public Int32 Id { get; set; }
 
         /// <summary>
+        /// 宿主名
+        /// </summary>
+        public String HostName { get; set; }
+
+        /// <summary>
         /// 语言
         /// </summary>
         public String Language { get; set; }
