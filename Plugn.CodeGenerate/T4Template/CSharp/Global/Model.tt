@@ -25,7 +25,7 @@
 	string authorName = host.GetString("Author");
 	if(string.IsNullOrEmpty(nameSpace))nameSpace = "Entity";
 
-    String className = String.Format("{0}Model", host.NameRuleConfig.FormatName(table.Name));
+    String className = String.Format("{0}Model", host.FormatName(table.Name));
 
     // 设置输出文件名
     host.OutputFileName = className + ".cs";
@@ -45,7 +45,7 @@ using System.Data;
 namespace <#= nameSpace #>
 {
     /// <summary>
-    /// 充值日志
+    /// <#=table.Comment == "" ? table.Name : table.Comment.Replace("\r\n"," ")#>
     /// </summary>
     public class <#= className#>
     {
@@ -55,7 +55,7 @@ namespace <#= nameSpace #>
         /// <summary>
         /// <#= c.Comment == "" ? c.Name : c.Comment.Replace("\r\n"," ") #>
         /// </summary>
-        public <#= TypeUtil.DbType2CSharpTypeString(c.DataType) #> <#= c.Name #> { get; set; }		
+        public <#= host.GetTypeString(c) #> <#= c.Name #> { get; set; }		
 <# } #>
 
         #endregion
@@ -68,7 +68,7 @@ namespace <#= nameSpace #>
 <#foreach(SOColumn item in colList) {#>
         /// <param name="<#=item.Name.FirstLower() #>"><#=item.Comment #></param>
 <#}#>
-        public <#= className#>(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
+        public <#= className#>(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp), tmp.Name.FirstLower())))#>)
         {
 <#foreach(SOColumn item in colList) {#>
             this.<#=item.Name#> = <#=item.Name.FirstLower()#>;
@@ -82,7 +82,7 @@ namespace <#= nameSpace #>
         public <#= className#>(DataRow dr)
         {
 <#foreach(SOColumn item in colList) {#>
-            this.<#=item.Name#> = Convert.To<#=TypeUtil.DbType2CSharpTypeString(item.DataType)#>(dr[GamePropertyName.<#=item.Name#>]);
+            this.<#=item.Name#> = Convert.To<#=host.GetTypeString(item)#>(dr[GamePropertyName.<#=item.Name#>]);
 <#}#>
         }
 
@@ -96,7 +96,7 @@ namespace <#= nameSpace #>
 <#foreach(SOColumn item in colList) {#>
         /// <param name="<#=item.Name.FirstLower() #>"><#=item.Comment #></param>
 <#}#>
-        public void ConstructObject(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",TypeUtil.DbType2CSharpTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
+        public void ConstructObject(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
         {
 <#foreach(SOColumn item in colList) {#>
             this.<#=item.Name#> = <#=item.Name.FirstLower()#>;

@@ -22,8 +22,8 @@
 	SOTable table = host.Table;
 	List<SOColumn> colList = host.ColumnList;
     int maxColumnNameLength=colList.Max(tmp=>tmp.Name.Length);
-    string className = CSharpHostHelper.GetCamelCaseName(table.Name);
-    string nameSpace = CSharpHostHelper.FirstLower(className);
+    String className = String.Format("{0}Model", host.FormatName(table.Name));
+    string nameSpace = className.FirstLower();
     
     // 设置输出文件名
     host.OutputFileName=className + ".go";
@@ -38,7 +38,7 @@ type <#=className#> struct {
 <# foreach (SOColumn c in colList){ #>
 
         // <#= c.Comment == "" ? c.Name : c.Comment.Replace("\r\n"," ") #>
-        <#= c.Name #> <#= TypeUtil.DbType2GolangTypeString(c.DataType) #> `gorm:"Column:<#=c.Name #><#=c.PrimaryKey?";PRIMARY_KEY":"" #>"`
+        <#= c.Name #> <#= host.GetTypeString(c) #> `gorm:"Column:<#=c.Name #><#=c.PrimaryKey?";PRIMARY_KEY":"" #>"`
 <# } #>
 }
 
@@ -56,10 +56,10 @@ func New<#=className#>() *<#=className#> {
 <#foreach(SOColumn item in colList) {#>
 // <#=item.Name.FirstLower() #>:<#=item.Comment #>
 <#}#>
-func New<#=className#>2(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",tmp.Name.FirstLower(),TypeUtil.DbType2GolangTypeString(tmp.DataType))))#>) *<#=className#> {
+func New<#=className#>2(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",tmp.Name.FirstLower(),host.GetTypeString(tmp))))#>) *<#=className#> {
 	return &<#=className#>{
 <#foreach(SOColumn item in colList) {#>
-		<#=item.Name#>: <#=CSharpHostHelper.GetRepeatString(" ", maxColumnNameLength-item.Name.Length)#><#=item.Name.FirstLower()#>,
+		<#=item.Name#>: <#=StringUtil.GetRepeatString(" ", maxColumnNameLength-item.Name.Length)#><#=item.Name.FirstLower()#>,
 <#}#>
 	}
 }

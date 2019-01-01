@@ -171,10 +171,10 @@ namespace Plugn.CodeGenerate.Config.NameRule
                 switch (obj.FirstCharHandleType)
                 {
                     case FirstCharHandleType.FirstCharLower:
-                        val = StringUtil.InitialToLower(val);
+                        val = StringUtil.FirstLower(val);
                         break;
                     case FirstCharHandleType.FirstCharUp:
-                        val = StringUtil.InitialToUpper(val);
+                        val = StringUtil.FirstUpper(val);
                         break;
                 }
             }

@@ -30,7 +30,7 @@ namespace ToolManager.Utility
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string InitialToUpper(string s)
+        public static string FirstUpper(string s)
         {
             if (string.IsNullOrEmpty(s)) return s;
             return string.Concat(s.Substring(0, 1).ToUpper(), s.Substring(1));
@@ -41,7 +41,7 @@ namespace ToolManager.Utility
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string InitialToLower(string s)
+        public static string FirstLower(string s)
         {
             return string.Concat(s.Substring(0, 1).ToLower(), s.Substring(1));
         }
@@ -58,7 +58,7 @@ namespace ToolManager.Utility
 
             foreach (string item in ss)
             {
-                sb.Append(InitialToUpper(item));
+                sb.Append(FirstUpper(item));
             }
 
             return sb.ToString();

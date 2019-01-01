@@ -15,9 +15,9 @@ namespace ToolManager.Utility.Extensions
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string InitialToUpper(this string s)
+        public static string FirstUpper(this string s)
         {
-            return StringUtil.InitialToUpper(s);
+            return StringUtil.FirstUpper(s);
         }
 
         /// <summary>
@@ -25,9 +25,9 @@ namespace ToolManager.Utility.Extensions
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string InitialToLower(this string s)
+        public static string FirstLower(this string s)
         {
-            return StringUtil.InitialToLower(s);
+            return StringUtil.FirstLower(s);
         }
 
         /// <summary>

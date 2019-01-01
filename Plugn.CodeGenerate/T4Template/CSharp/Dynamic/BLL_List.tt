@@ -24,7 +24,7 @@
 	string authorName = host.GetString("Author");
 	if(string.IsNullOrEmpty(nameSpace))nameSpace = "Entity";
 
-    String className = String.Format("{0}BLL", host.NameRuleConfig.FormatName(table.Name));
+    String className = String.Format("{0}BLL", host.FormatName(table.Name));
 
     // 设置输出文件名
     host.OutputFileName = className + ".cs";
