@@ -246,7 +246,7 @@ namespace ToolManager
                     var name = Path.GetFileNameWithoutExtension(openFile.FileName);
                     var targetPath = Path.GetDirectoryName(openFile.FileName).ToLower().TrimEnd(new char[] { '/', '\\' });
                     var currentPath = AppDomain.CurrentDomain.BaseDirectory.ToLower().TrimEnd(new char[] { '/', '\\' });
-                    if (targetPath.Contains(currentPath))
+                    if (targetPath.Contains(currentPath) == false)
                     {
                         MsgBox.Show("只能导入当前目录的文件");
                         return;
