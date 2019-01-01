@@ -87,7 +87,7 @@ namespace Plugn.CodeGenerate
                 }
 
                 // 保存数据
-                configBllObj.UpdateAll(this.Langugage, this.typeMapList.Select(tmp => tmp.Clone()).ToList());
+                configBllObj.UpdateAll(tmpLanguage, this.typeMapList.Select(tmp => tmp.Clone()).ToList());
 
                 this.Close();
             }

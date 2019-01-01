@@ -93,6 +93,10 @@ namespace CodeGenerate
             LoadConnection();
 
             this.LoadLanguage();
+
+            // 添加规则列表
+            this.cmbRuleList.Items.Clear();
+            this.cmbRuleList.Items.AddRange(this.nameRuleConfigBLLObj.GetData().Select(tmp => tmp.Name).ToArray());
         }
 
         /// <summary>
@@ -330,7 +334,7 @@ namespace CodeGenerate
             };
 
             // 设置命名规则
-            if (String.IsNullOrWhiteSpace(this.cmbRuleList.SelectedText))
+            if (String.IsNullOrWhiteSpace(this.cmbRuleList.Text))
             {
                 MsgBox.Show("请选择命名规则列表");
                 return;

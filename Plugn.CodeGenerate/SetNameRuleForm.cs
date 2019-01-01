@@ -82,6 +82,8 @@ namespace Plugn.CodeGenerate
             this.Clear();
 
             this.cbRuleName.Items.RemoveAt(this.cbRuleName.SelectedIndex);
+
+            MsgBox.Show("删除成功");
         }
 
         /// <summary>
@@ -145,7 +147,16 @@ namespace Plugn.CodeGenerate
             this.bllObj.Save(this.nowConfigItem);
 
             this.cbRuleName.Items.Remove(oldName);
-            this.cbRuleName.Items.Insert(this.cbRuleName.SelectedIndex, ruleName);
+            if (this.cbRuleName.Items.Count >= 0 && this.cbRuleName.SelectedIndex > 0)
+            {
+                this.cbRuleName.Items.Insert(this.cbRuleName.SelectedIndex, ruleName);
+            }
+            else
+            {
+                this.cbRuleName.Items.Add(ruleName);
+            }
+
+            MsgBox.Show("更新成功");
         }
 
         /// <summary>
@@ -204,6 +215,8 @@ namespace Plugn.CodeGenerate
 
             this.cbRuleName.Items.Add(this.nowConfigItem.Name);
             this.cbRuleName.SelectedItem = this.nowConfigItem.Name;
+
+            MsgBox.Show("添加成功");
         }
 
         #endregion 事件处理

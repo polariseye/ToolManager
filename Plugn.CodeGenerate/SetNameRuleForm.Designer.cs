@@ -140,7 +140,7 @@
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(62, 23);
             this.btnSubmit.TabIndex = 6;
-            this.btnSubmit.Text = "保存";
+            this.btnSubmit.Text = "更新";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
