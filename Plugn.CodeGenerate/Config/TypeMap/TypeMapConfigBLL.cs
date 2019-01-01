@@ -182,7 +182,7 @@ namespace Plugn.CodeGenerate.Config.TypeMap
             }
 
             // 先找类型匹配的项
-            var tmpDbType = dbType.ToLower();
+            var tmpDbType = dbType.ToUpper();
             var validList = typeMapConfigList.Where(tmp => tmp.DbType == tmpDbType).ToList();
             if (validList.Count <= 0)
             {

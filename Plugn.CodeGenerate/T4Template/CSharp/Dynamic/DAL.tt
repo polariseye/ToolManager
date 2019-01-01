@@ -124,7 +124,7 @@ namespace <#= nameSpace #>
         /// <param name="<#=item.Name.FirstLower() #>"><#=item.Comment #></param>
 <#}#>
         /// <returns>受影响的行数</returns>
-        public static Int32 InsertInfo(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
+        public static Int32 InsertInfo(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp), tmp.Name.FirstLower())))#>)
         {
             //构造参数
             MySqlParameter[] paramList = new MySqlParameter[]
@@ -144,7 +144,7 @@ namespace <#= nameSpace #>
         /// <param name="<#=item.Name.FirstLower() #>"><#=item.Comment #></param>
 <#}#>
         /// <returns>受影响的行数</returns>
-        public static Int32 UpdateInfo(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
+        public static Int32 UpdateInfo(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp), tmp.Name.FirstLower())))#>)
         {
             //构造参数
             MySqlParameter[] paramList = new MySqlParameter[]
@@ -164,7 +164,7 @@ namespace <#= nameSpace #>
         /// <param name="<#=item.Name.FirstLower() #>"><#=item.Comment #></param>
 <#}#>
         /// <returns>受影响的行数</returns>
-        public static Int32 DeleteInfo(<#=String.Join(", ", colList.Where(tmp=>tmp.PrimaryKey).Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
+        public static Int32 DeleteInfo(<#=String.Join(", ", colList.Where(tmp=>tmp.PrimaryKey).Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp), tmp.Name.FirstLower())))#>)
         {
             //构造参数
             MySqlParameter[] paramList = new MySqlParameter[]

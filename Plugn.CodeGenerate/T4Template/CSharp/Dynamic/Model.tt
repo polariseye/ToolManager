@@ -96,7 +96,7 @@ namespace <#= nameSpace #>
 <#foreach(SOColumn item in colList) {#>
         /// <param name="<#=item.Name.FirstLower() #>"><#=item.Comment #></param>
 <#}#>
-        public void ConstructObject(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp.DataType), tmp.Name.FirstLower())))#>)
+        public void ConstructObject(<#=String.Join(", ", colList.Select(tmp=>String.Format("{0} {1}",host.GetTypeString(tmp), tmp.Name.FirstLower())))#>)
         {
 <#foreach(SOColumn item in colList) {#>
             this.<#=item.Name#> = <#=item.Name.FirstLower()#>;
