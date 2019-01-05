@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Plugn.CodeGenerate.Config.NameRule
 {
     using ToolManager.Utility;
+    using ToolManager.Utility.Extensions;
 
     public class NameRuleConfigBLL
     {
@@ -135,26 +136,30 @@ namespace Plugn.CodeGenerate.Config.NameRule
             }
 
             // 前缀处理
+            var prefix = String.Empty;
             if (obj.PrefixList != null && obj.PrefixList.Count > 0)
             {
                 foreach (var item in obj.PrefixList)
                 {
                     if (val.StartsWith(item.OriginValue))
                     {
-                        val = item.NewValue + val.Substring(item.OriginValue.Length);
+                        prefix = item.NewValue;
+                        val = val.Substring(item.OriginValue.Length);
                         break;
                     }
                 }
             }
 
             // 后缀处理
+            var stuffix = String.Empty;
             if (obj.StuffixList != null && obj.StuffixList.Count > 0)
             {
                 foreach (var item in obj.StuffixList)
                 {
                     if (val.EndsWith(item.OriginValue))
                     {
-                        val = val.Substring(0, val.Length - item.OriginValue.Length) + item.NewValue;
+                        stuffix = item.NewValue;
+                        val = val.Substring(0, val.Length - item.OriginValue.Length);
                         break;
                     }
                 }
@@ -165,6 +170,8 @@ namespace Plugn.CodeGenerate.Config.NameRule
             {
                 val = StringUtil.ToPascalName(val, obj.Seperator);
             }
+            val = $"{prefix.FirstUpper()}{val}{stuffix.FirstUpper()}";
+
             //// 首字母大小写处理
             if (String.IsNullOrWhiteSpace(val) == false)
             {

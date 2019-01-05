@@ -32,7 +32,11 @@ namespace ToolManager.Utility
         /// <returns></returns>
         public static string FirstUpper(string s)
         {
-            if (string.IsNullOrEmpty(s)) return s;
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                return s;
+            }
+
             return string.Concat(s.Substring(0, 1).ToUpper(), s.Substring(1));
         }
 
@@ -43,6 +47,11 @@ namespace ToolManager.Utility
         /// <returns></returns>
         public static string FirstLower(string s)
         {
+            if (String.IsNullOrWhiteSpace(s))
+            {
+                return s;
+            }
+
             return string.Concat(s.Substring(0, 1).ToLower(), s.Substring(1));
         }
 
@@ -130,8 +139,6 @@ namespace ToolManager.Utility
             }
             return sb.ToString();
         }
-
-
 
         #endregion
     }
