@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,6 +81,18 @@
     <Compile Include="DummySolutionExplorer.designer.cs">
       <DependentUpon>DummySolutionExplorer.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExeWindow.Designer.cs">
+      <DependentUpon>ExeWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportWindow.Designer.cs">
+      <DependentUpon>ImportWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocalConfig.cs" />
     <Compile Include="MainForm.Container.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -112,6 +125,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DummySolutionExplorer.resx">
       <DependentUpon>DummySolutionExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExeWindow.resx">
+      <DependentUpon>ExeWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportWindow.resx">
+      <DependentUpon>ImportWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

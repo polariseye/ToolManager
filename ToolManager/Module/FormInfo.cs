@@ -28,5 +28,10 @@ namespace ToolManager.Module
         /// 窗口的类型
         /// </summary>
         public Type FormType { get; set; }
+
+        /// <summary>
+        /// 模块信息
+        /// </summary>
+        public ModuleInfo ModuleInfo { get; set; }
     }
 }

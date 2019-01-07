@@ -17,6 +17,11 @@ namespace ToolManager.Module
         public int Id { get; set; }
 
         /// <summary>
+        /// 模块类型
+        /// </summary>
+        public ModuleTypeEnum ModuleType { get; set; }
+
+        /// <summary>
         /// 模块存储位置
         /// </summary>
         public String ModulePath { get; set; }
@@ -30,5 +35,21 @@ namespace ToolManager.Module
         /// 描述信息
         /// </summary>
         public String Description { get; set; }
+    }
+
+    /// <summary>
+    /// 模块类型枚举
+    /// </summary>
+    public enum ModuleTypeEnum
+    {
+        /// <summary>
+        /// 内部组件
+        /// </summary>
+        DllModule,
+
+        /// <summary>
+        /// 可执行组件s
+        /// </summary>
+        ExeModule
     }
 }

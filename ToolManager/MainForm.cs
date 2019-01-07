@@ -231,37 +231,23 @@ namespace ToolManager
         /// <param name="e"></param>
         private void menuImportModule_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-
-            openFile.InitialDirectory = Application.ExecutablePath;
-            openFile.Filter = "dll files(*.dll)|*.dll";
-            openFile.FilterIndex = 1;
-            openFile.RestoreDirectory = false;
-
-            var logObj = Singleton.Container.Resolve<IOutput>();
+            ImportWindow importWindow = new ImportWindow(this.solutionExplorer);
             try
             {
-                if (openFile.ShowDialog() == DialogResult.OK)
+                if (importWindow.ShowDialog() == DialogResult.OK)
                 {
-                    var name = Path.GetFileNameWithoutExtension(openFile.FileName);
-                    var targetPath = Path.GetDirectoryName(openFile.FileName).ToLower().TrimEnd(new char[] { '/', '\\' });
-                    var currentPath = AppDomain.CurrentDomain.BaseDirectory.ToLower().TrimEnd(new char[] { '/', '\\' });
-                    if (targetPath.Contains(currentPath) == false)
-                    {
-                        MsgBox.Show("只能导入当前目录的文件");
-                        return;
-                    }
+                    return;
+                }
 
-                    var formList = ModuleManager.Register(name, openFile.FileName, "", logObj, this);
-                    if (formList.Count > 0)
-                    {
-                        this.solutionExplorer.AddNodes(formList);
-                    }
+                if (importWindow.FormInfoList.Count > 0)
+                {
+                    this.solutionExplorer.AddNodes(importWindow.FormInfoList);
                 }
             }
             catch (Exception e1)
             {
                 MsgBox.ShowErrorMessage("导入失败，错误信息:" + e1.Message);
+                return;
             }
         }
 

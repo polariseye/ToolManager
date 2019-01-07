@@ -42,7 +42,7 @@ namespace ToolManager.Module
             {
                 try
                 {
-                    LoadModule(item, logObj, windowContainer);
+                    LoadDllModule(item, logObj, windowContainer);
                 }
                 catch (Exception e1)
                 {
@@ -100,10 +100,11 @@ namespace ToolManager.Module
         /// <param name="name">模块名</param>
         /// <param name="filePath">需要注册的文件名</param>
         /// <param name="description">描述信息</param>
+        /// <param name="moduleType">模块类型</param>
         /// <param name="logObj">日志对象</param>
         /// <param name="windowContainer">窗口容器</param>
         /// <returns></returns>
-        public static List<FormInfo> Register(String name, String filePath, String description, IOutput logObj, IWindowContainer windowContainer)
+        public static List<FormInfo> RegisterDll(String name, String filePath, String description, ModuleTypeEnum moduleType, IOutput logObj, IWindowContainer windowContainer)
         {
             try
             {
@@ -117,8 +118,8 @@ namespace ToolManager.Module
                     throw new Exception($"存在重复的模块加载:{filePath}");
                 }
 
-                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, Description = description };
-                var result = LoadModule(moduleInfo, logObj, windowContainer);
+                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, ModuleType = moduleType, Description = description };
+                var result = LoadDllModule(moduleInfo, logObj, windowContainer);
 
                 // 添加到数据库
                 var dal = new ModuleInfoDAL();
@@ -137,7 +138,7 @@ namespace ToolManager.Module
         /// </summary>
         /// <param name="moduleInfo">模块信息</param>
         /// <returns></returns>
-        private static List<FormInfo> LoadModule(ModuleInfo moduleInfo, IOutput logObj, IWindowContainer windowContainer)
+        private static List<FormInfo> LoadDllModule(ModuleInfo moduleInfo, IOutput logObj, IWindowContainer windowContainer)
         {
             var result = new List<FormInfo>();
 
@@ -151,7 +152,7 @@ namespace ToolManager.Module
                 var attrItem = typeItem.GetCustomAttribute<FormAttribute>();
                 if (attrItem != null)
                 {
-                    result.Add(new FormInfo() { AttributeInfo = attrItem, FormType = typeItem });
+                    result.Add(new FormInfo() { AttributeInfo = attrItem, FormType = typeItem, ModuleInfo = moduleInfo });
                 }
 
                 // 寻找模块初始化类
@@ -184,6 +185,72 @@ namespace ToolManager.Module
                 {
                     AssemblyObj = assemblyObj,
                     FormInfoList = new List<FormInfo>(result),
+                    ModuleInfo = moduleInfo,
+                });
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 注册一个新模块
+        /// </summary>
+        /// <param name="name">模块名</param>
+        /// <param name="filePath">需要注册的文件名</param>
+        /// <param name="description">描述信息</param>
+        /// <param name="moduleType">模块类型</param>
+        /// <param name="groupTitle">组名</param>
+        /// <param name="logObj">日志对象</param>
+        /// <param name="windowContainer">窗口容器</param>
+        /// <returns></returns>
+        public static List<FormInfo> RegisterExe(String name, String filePath, String description, ModuleTypeEnum moduleType, String groupTitle, IOutput logObj, IWindowContainer windowContainer)
+        {
+            try
+            {
+                if (ExistName(name))
+                {
+                    throw new Exception($"存在重复的模块名:{name}");
+                }
+
+                if (ExistPath(filePath))
+                {
+                    throw new Exception($"存在重复的模块加载:{filePath}");
+                }
+
+                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, ModuleType = moduleType, Description = description };
+                var result = LoadExeModule(moduleInfo, groupTitle, logObj, windowContainer);
+
+                // 添加到数据库
+                var dal = new ModuleInfoDAL();
+                dal.Insert(moduleInfo);
+
+                return result;
+            }
+            catch (Exception e1)
+            {
+                throw e1;
+            }
+        }
+
+        /// <summary>
+        /// 加载可执行程序
+        /// </summary>
+        /// <param name="moduleInfo">模块对象</param>
+        /// <param name="logObj">日志对象</param>
+        /// <param name="windowContainer">容器对象</param>
+        /// <returns></returns>
+        private static List<FormInfo> LoadExeModule(ModuleInfo moduleInfo, String groupName, IOutput logObj, IWindowContainer windowContainer)
+        {
+            var result = new List<FormInfo>();
+            result.Add(new FormInfo() { AssemblyInfo = null, AttributeInfo = new FormAttribute(groupName, moduleInfo.Name), ModuleInfo = moduleInfo });
+
+            // 添加到程序集中
+            lock (lockObj)
+            {
+                moduleInfos.Add(new AssemblyInfo()
+                {
+                    AssemblyObj = null,
+                    FormInfoList = result,
                     ModuleInfo = moduleInfo,
                 });
             }
