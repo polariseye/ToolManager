@@ -172,9 +172,26 @@ namespace ToolManager
                 return;
             }
 
-            var formObj = (BaseForm)Activator.CreateInstance(formInfoObj.FormType);
-            var container = Singleton.Container.Resolve<IWindowContainer>();
-            formObj.Show(container.GetMainView());
+            switch (formInfoObj.ModuleInfo.ModuleType)
+            {
+                case ModuleTypeEnum.DllModule:
+                    {
+                        var formObj = (BaseForm)Activator.CreateInstance(formInfoObj.FormType);
+                        var container = Singleton.Container.Resolve<IWindowContainer>();
+                        formObj.Show(container.GetMainView());
+                    }
+                    break;
+                case ModuleTypeEnum.ExeModule:
+                    {
+                        var formObj = new ExeWindow(formInfoObj, formInfoObj.ModuleInfo.ModulePath);
+                        var container = Singleton.Container.Resolve<IWindowContainer>();
+                        formObj.Show(container.GetMainView());
+                    }
+                    break;
+                default:
+                    MessageBox.Show("未知的模块类型");
+                    break;
+            }
         }
 
         /// <summary>
