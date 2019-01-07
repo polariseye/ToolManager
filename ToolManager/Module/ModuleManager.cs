@@ -42,7 +42,14 @@ namespace ToolManager.Module
             {
                 try
                 {
-                    LoadDllModule(item, logObj, windowContainer);
+                    if (item.ModuleType == ModuleTypeEnum.DllModule)
+                    {
+                        LoadDllModule(item, logObj, windowContainer);
+                    }
+                    else if (item.ModuleType == ModuleTypeEnum.ExeModule)
+                    {
+                        LoadExeModule(item, item.GroupTitle, logObj, windowContainer);
+                    }
                 }
                 catch (Exception e1)
                 {
@@ -217,7 +224,7 @@ namespace ToolManager.Module
                     throw new Exception($"存在重复的模块加载:{filePath}");
                 }
 
-                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, ModuleType = moduleType, Description = description };
+                var moduleInfo = new ModuleInfo() { Name = name, ModulePath = filePath, ModuleType = moduleType, Description = description, GroupTitle = groupTitle };
                 var result = LoadExeModule(moduleInfo, groupTitle, logObj, windowContainer);
 
                 // 添加到数据库

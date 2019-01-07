@@ -32,6 +32,11 @@ namespace ToolManager.Module
         public String Name { get; set; }
 
         /// <summary>
+        /// 组名
+        /// </summary>
+        public String GroupTitle { get; set; }
+
+        /// <summary>
         /// 描述信息
         /// </summary>
         public String Description { get; set; }
