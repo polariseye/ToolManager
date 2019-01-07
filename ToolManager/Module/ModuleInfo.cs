@@ -45,11 +45,11 @@ namespace ToolManager.Module
         /// <summary>
         /// 内部组件
         /// </summary>
-        DllModule,
+        DllModule = 0,
 
         /// <summary>
         /// 可执行组件s
         /// </summary>
-        ExeModule
+        ExeModule = 1
     }
 }
